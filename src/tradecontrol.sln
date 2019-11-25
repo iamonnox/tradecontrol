@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29418.71
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{A2CF2C96-FEBE-4353-B319-D88FA5BF1FB2}"
+	ProjectSection(SolutionItems) = preProject
+		..\readme.md = ..\readme.md
+	EndProjectSection
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "scripts", "scripts\scripts.sqlproj", "{76882F5E-F463-4574-877A-12931A289B3A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{76882F5E-F463-4574-877A-12931A289B3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{76882F5E-F463-4574-877A-12931A289B3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{76882F5E-F463-4574-877A-12931A289B3A}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{76882F5E-F463-4574-877A-12931A289B3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{76882F5E-F463-4574-877A-12931A289B3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{76882F5E-F463-4574-877A-12931A289B3A}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F384B2E0-7604-4634-BA99-DC859EFC9CF5}
+	EndGlobalSection
+EndGlobal
