@@ -38,13 +38,11 @@ From this we can deduce two things:
 
 **B.** In order to identify who is the customer or supplier and what kind of order it is, we only need to know the direction of either the goods or the money from one of the parties in a binary exchange. It doesn’t matter which because the other is always the opposite polarity. In practice, the money is easier because it is a simple number, while goods and services are more complicated. In the table below, there are two organizations A and B. Only one polarity is required, shown in italic, to determine each parties order and the organization type. 
 
-+---------+---------+---------+---------+----------+------------+----------+------------+
-| A: CASH | B: CASH | A: QTY  | B: QTY  | A: ORDER | A: TYPE    | B: ORDER | B: TYPE    |
-+=========+=========+=========+=========+==========+============+==========+============+
-| *NEG*   |  POS    |   POS   |   NEG   |   PO     |  CUSTOMER  |   SO     |  SUPPLIER  |
-+---------+---------+---------+---------+----------+------------+----------+------------+
-|   POS   | *NEG*   |   NEG   |   POS   |   SO     |  SUPPLIER  |   PO     |  CUSTOMER  |
-
+ A: CASH | B: CASH | A: QTY  | B: QTY  | A: ORDER | A: TYPE    | B: ORDER | B: TYPE  
+ -- | -- | -- | -- | -- | -- | -- | --
+ *NEG*   |  POS    |   POS   |   NEG   |   PO     |  CUSTOMER  |   SO     |  SUPPLIER  
+ POS   | *NEG*   |   NEG   |   POS   |   SO     |  SUPPLIER  |   PO     |  CUSTOMER
+ 
 In row 1 the polarity of the cash for organization A is negative and so money is going from A -> B. Because there is an exchange, the Quantity for A must be positive, and Organization B must have opposite polarities. So, goods and services are passing from B -> A. Once you know that, you know the roles played by the various identities and their associated order types.
 
 
@@ -191,7 +189,7 @@ It is the recursive nature of component and material production that proliferate
 
 Looking back at **Figures 2** and **3**, we can do the same thing in the Secondary Industry. Rather than modelling vehicle structure, it could be conceived as a supply chain. Level 1 is the Assembly Plant, where everything is put together. Level 2 there are separate organizations specializing in each component, like engines. The same could be said for level 3, such as an engineering business making pistons.
 
-Many supply chains are dictated and distorted by Intellectual Property ownership, like patents. Functionally, however, multiple supply chains converge when components service more than one chain. For example, O Rings are widely used in mechanical engineering. It does not make sense for a manufacturer of washing machines to make their own O Rings. Such convergences act as a block on supply chain financing initiatives, which originated from lean thinking developed in the automotive industry during the nineties[^1]. It was an attractive idea to car manufacturers, because they could control financial allocation across all their subcontractors. For supply chain financing to work, all the available value must be concentrated in the root node, as lower levels take their share and pass on the remainder. But that is not often possible. Returning to [polarity](#cash-polarity), you could overcome the convergence problem by scheduling the entire chain. This is what the [sharpNode](tc_history.md#sharpnode) was initially designed to achieve, such that you can model the productive process both internally in [one node](https://github.com/tradecontrol/tc-nodecore) and [externally between many](https://github.com/tradecontrol/tc-network).
+Many supply chains are dictated and distorted by Intellectual Property ownership, like patents. Functionally, however, multiple supply chains converge when components service more than one chain. For example, O Rings are widely used in mechanical engineering. It does not make sense for a manufacturer of washing machines to make their own O Rings. Such convergences act as a block on supply chain financing initiatives, which originated from lean thinking developed in the automotive industry during the nineties ^1^. It was an attractive idea to car manufacturers, because they could control financial allocation across all their subcontractors. For supply chain financing to work, all the available value must be concentrated in the root node, as lower levels take their share and pass on the remainder. But that is not often possible. Returning to [polarity](#cash-polarity), you could overcome the convergence problem by scheduling the entire chain. This is what the [sharpNode](tc_history.md#sharpnode) was initially designed to achieve, such that you can model the productive process both internally in [one node](https://github.com/tradecontrol/tc-nodecore) and [externally between many](https://github.com/tradecontrol/tc-network).
 
 #### Supply and Demand
 
@@ -233,21 +231,14 @@ Tools have their own product structure and must be manufactured in the same way 
 
 From the information outputs of component production, we can describe the strata of any given technological landscape:
 
-+----------------------+--------------------------+
-| Technological Strata | Information Output       |
-+======================+==========================+
-| Material             | Abstract Potential       |
-+----------------------+--------------------------+
-| Sub-Component        | Connectivity Potential   |
-+----------------------+--------------------------+
-| System               | Connectivity Realization |
-+----------------------+--------------------------+
-| Tool                 | Deposition               |
-+----------------------+--------------------------+
-| Product              | Exposition               |
-+----------------------+--------------------------
-| Instrument           | Deposition + Exposition  |
-+----------------------+--------------------------+
+Technological Strata | Information Output
+ -- | --
+Material | Abstract Potential       
+Sub-Component | Connectivity Potential
+System | Connectivity Realization
+Tool | Deposition
+Product | Exposition
+Instrument | Deposition + Exposition
 
 Materials, sub-components and systems have already been explained. Sub-components are organised in planes of abstraction and function in terms of their interface connectivity potential. The closer the components get to the UI, the more specific that connectivity potential becomes (increasing finitude). However, no matter how rigorous the application of science and engineering, both strata generate interfaces that do not in themselves perform a useful function. To do so, they must be in the service of strata that connect to desired processes: tools, products and instruments, or certain kinds of privileged systems. These strata are deployed to either deposit information through a transforming process, producing any other technological strata; or to exposit information in unfolding user processes (its story if you like). Although the required information output for each stratum determines the nature of their respective interfaces, the method for producing each interface is the same. Information deposition is enacted through the application of tools. Therefore, to materialise any other technological strata involves virtually indistinguishable production methods. 
 
@@ -259,17 +250,12 @@ This intersection of product and tool around transformational demand is the reas
 
 As you have learnt, technological interfaces conceal the underlying structure and processes of a technological object so that a higher level of abstraction can be obtained. Component and user interfaces are technologically equivalent, except the latter intersects with a desired user process. This was demonstrated in the [car manufacturing example](#assemblages), but more formally in the [Component Definition](#componment-definition). Although the components cut out from the [MDF board](#materials) are not highly transformed, they can nevertheless service a multiplicity of designs and conceal themselves in the interfaces of their assemblages (such as a common draw front). Material interfaces, on the other hand, whilst being physical and non-abstract, are formed to offer the maximum possibility for component-based transformations (like the piece of paper or MDF board in the example). These can all be present in the Trade Control schema design and are summarised below:
 
-+-----------+-----+--------------------+------------------------------------+-------------+-------------------------------------------------------------------------------------------+
-| Interface |     | Spatial            | Temporal                           | Network     | Description                                                                               |
-+===========+=====+====================+====================================+=============+===========================================================================================+
-| Material  | MI  | Physical Structure | Physical Transformation            | Consumer    | Maximises the potential for component production                                          |
-+-----------+-----+--------------------+------------------------------------+             +-------------------------------------------------------------------------------------------+
-| Component | CI  | Abstract           | Physical + Abstract Transformation |             | Encapsulates and conceals component function to facilitate higher, user desired processes |
-+-----------+-----+                    +                                    +-------------+-------------------------------------------------------------------------------------------+
-| Tool      | TI  |                    |                                    | Production  | A CI specializing in information deposition                                               |
-+-----------+-----+---                 +------------------------------------+-------------+-------------------------------------------------------------------------------------------+
-| User      | UI  |                    | Process                            | Consumption | The same as a CI except connected to a desired user process                               |
-+-----------+-----+--------------------+------------------------------------+-------------+-------------------------------------------------------------------------------------------+
+Interface |     | Spatial | Temporal | Network | Description
+-- | -- | -- | -- | -- | --
+Material | MI  | Physical Structure | Physical Transformation | Consumer | Maximises the potential for component production
+Component | CI  | Abstract | Physical + Abstract Transformation |   | Encapsulates and conceals component function to facilitate higher, user desired processes
+Tool      | TI  | |  | Production | A CI specializing in information deposition
+User      | UI  | | Process | Consumption | The same as a CI except connected to a desired user process
 
 The complexity of technological strata is dependent upon the temporal and spatial relation to the various interfaces manifested by production, not their use: from material, component and tool to user. Therefore, technological interfaces themselves should not get more complicated over time; because a principle trajectory of engineering is the evolution of its interfaces. Interfaces may deepen in both their underlying structure (from assemblage production of the physical object resulting in more complex Workflows) and executing processes (through evolutionary design resulting in superior function), yet engineers always seek to simplify and increase their productive potential. Equally, an engineering problem-space may become increasingly difficult to resolve, wherein complexity naturally arises in the gap between technological capability and the task in hand. But that’s not about the objective assemblage, for ceaselessly, engineering seeks to perfect the service of function by simplifying its interfaces, reducing that gap to the ever elusive zero.
 
@@ -400,7 +386,7 @@ Functional projection is the reason why a technological society cannot be adequa
 
 ## Turing Test v2
 
-The Turing Test for Artificial Intelligence was invented by England's greatest computer scientist, Alan Turing [^2]. At the time it was a leap forward in understanding and has set the benchmark for AI attainment ever since. However, it takes for granted that the technology has already been produced; and this will be to a human specified UI. Because it is a user-based specification, such devices can never be more than a clever machine (an extension to our plane of abstraction).
+The Turing Test for Artificial Intelligence was invented by England's greatest computer scientist, Alan Turing ^2^. At the time it was a leap forward in understanding and has set the benchmark for AI attainment ever since. However, it takes for granted that the technology has already been produced; and this will be to a human specified UI. Because it is a user-based specification, such devices can never be more than a clever machine (an extension to our plane of abstraction).
 
 Technological Intelligence is defined by its projected interfaces. For example, physicists want to investigate the fundamental nature of a particle, so they project interfaces to facilitate that. Engineers then build their accelerator to meet those interfaces as perfectly as possible. The resulting instrument would consist of many [components](#component-definition) in a [workflow](#workflow) of awesome complexity. It is a sophisticated technological creation, but it is not intelligent because it cannot [project](#functional-projection).  However, a machine can pass the Turing Test even though designed and produced to a provided User Interface. As such, it may only be a simulation.
 
@@ -429,6 +415,7 @@ This physicist, being the best, would know that he stood at the intersecting rem
 
 ## References
 
-[^1]: The Machine that Changed the World. Womack, Jones, Roos and Carpenter 1990.
-[^2]: Computing Machinery and Intelligence. Alan Turing 1950.
+1. The Machine that Changed the World. Womack, Jones, Roos and Carpenter 1990.
+2. Computing Machinery and Intelligence. Alan Turing 1950.
+
 
