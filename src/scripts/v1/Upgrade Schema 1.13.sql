@@ -5,16 +5,10 @@
 * Description: Sql Server Upgrade Script - Encrypted Distribution Schema
 * Data Version: 1.13
 * Release Date: 28 May 2010
-* Confidential Information
 ************************************************************/
 
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
-CREATE VIEW dbo.vwCorpTaxInvoiceValue
-WITH ENCRYPTION AS
+CREATE OR ALTER VIEW dbo.vwCorpTaxInvoiceValue
+AS
 SELECT     StartOn, SUM(InvoiceValue) AS NetProfit
 FROM         dbo.vwCorpTaxInvoiceItems
 GROUP BY StartOn
@@ -23,49 +17,23 @@ SELECT     StartOn, SUM(InvoiceValue) AS NetProfit
 FROM         dbo.vwCorpTaxInvoiceTasks
 GROUP BY StartOn
 GO
-
-ALTER VIEW [dbo].[vwCorpTaxInvoiceBase]
-WITH ENCRYPTION AS
+CREATE OR ALTER VIEW [dbo].[vwCorpTaxInvoiceBase]
+AS
 SELECT     StartOn, SUM(NetProfit) AS NetProfit
 FROM         dbo.vwCorpTaxInvoiceValue
 GROUP BY StartOn
 GO
-
-SET ANSI_NULLS OFF
-GO
-SET QUOTED_IDENTIFIER OFF
-GO
-
 ALTER TABLE [dbo].[tbSystemYearPeriod] WITH NOCHECK ADD
 	[VatAdjustment] [money] NOT NULL CONSTRAINT [DF_tbSystemYearPeriod_VatAdjustment]  DEFAULT ((0))
 GO
-
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
 ALTER VIEW [dbo].[vwInvoiceVatSummary]
-WITH ENCRYPTION AS
+AS
 SELECT     StartOn, TaxCode, SUM(HomeSales) AS HomeSales, SUM(HomePurchases) AS HomePurchases, SUM(ExportSales) AS ExportSales, 
                       SUM(ExportPurchases) AS ExportPurchases, SUM(HomeSalesVat) AS HomeSalesVat, SUM(HomePurchasesVat) AS HomePurchasesVat, 
                       SUM(ExportSalesVat) AS ExportSalesVat, SUM(ExportPurchasesVat) AS ExportPurchasesVat
 FROM         dbo.vwInvoiceVatDetail
 GROUP BY StartOn, TaxCode
 GO
-
-SET ANSI_NULLS OFF
-GO
-SET QUOTED_IDENTIFIER OFF
-GO
-
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
 ALTER FUNCTION dbo.fnTaxVatTotals
 	()
 RETURNS @tbVat TABLE 
@@ -120,19 +88,8 @@ RETURNS @tbVat TABLE
 	RETURN
 	END
 GO
-
-SET ANSI_NULLS OFF
-GO
-SET QUOTED_IDENTIFIER OFF
-GO
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
 ALTER VIEW [dbo].[vwTaxVatTotals]
-WITH ENCRYPTION AS
+AS
 SELECT     TOP 100 PERCENT dbo.tbSystemYear.YearNumber, dbo.tbSystemYear.Description, dbo.tbSystemMonth.MonthName, fnTaxVatTotals.StartOn, 
                       fnTaxVatTotals.HomeSales, fnTaxVatTotals.HomePurchases, fnTaxVatTotals.ExportSales, fnTaxVatTotals.ExportPurchases, 
                       fnTaxVatTotals.HomeSalesVat, fnTaxVatTotals.HomePurchasesVat, fnTaxVatTotals.ExportSalesVat, fnTaxVatTotals.ExportPurchasesVat, 
@@ -143,20 +100,10 @@ FROM         dbo.fnTaxVatTotals() AS fnTaxVatTotals INNER JOIN
                       dbo.tbSystemYear ON dbo.tbSystemYearPeriod.YearNumber = dbo.tbSystemYear.YearNumber
 ORDER BY fnTaxVatTotals.StartOn
 GO
-
-SET ANSI_NULLS OFF
-GO
-SET QUOTED_IDENTIFIER OFF
-GO
-
-SET ANSI_NULLS ON
-SET QUOTED_IDENTIFIER ON
-GO
-
 ALTER  FUNCTION [dbo].[fnSystemVatBalance]
 	()
 RETURNS money
-WITH ENCRYPTION AS
+AS
 	BEGIN
 	declare @Balance money
 	SELECT  @Balance = SUM(HomeSalesVat - HomePurchasesVat + ExportSalesVat - ExportPurchasesVat)
@@ -172,20 +119,13 @@ WITH ENCRYPTION AS
 	RETURN isnull(@Balance, 0)
 	END
 GO
-
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
 ALTER PROCEDURE [dbo].[spTaskCopy]
 	(
 	@FromTaskCode nvarchar(20),
 	@ParentTaskCode nvarchar(20) = null,
 	@ToTaskCode nvarchar(20) = null output
 	)
-WITH ENCRYPTION AS
+AS
 declare @ActivityCode nvarchar(50)
 declare @Printed bit
 declare @ChildTaskCode nvarchar(20)
@@ -280,12 +220,6 @@ declare @StepNumber smallint
 		
 	RETURN
 GO
-
-SET ANSI_NULLS OFF
-GO
-SET QUOTED_IDENTIFIER OFF
-GO
-
 UPDATE tbProfileMenuEntry
 SET ItemText = 'Nominal Accounts'
 WHERE EntryId = 17 or EntryId = 18
@@ -297,10 +231,7 @@ WHERE EntryId = 19
 UPDATE tbProfileMenuEntry
 SET ItemText = 'Nominal Entry', Argument = 'NominalEntry'
 WHERE EntryId = 22
-
 GO
-
-
 ALTER FUNCTION [dbo].[fnTaxVatOrderTotals]
 	(@IncludeForecasts bit = 0)
 RETURNS @tbVat TABLE 
@@ -310,7 +241,7 @@ RETURNS @tbVat TABLE
 	PayIn money,
 	PayOut money
 	)
-    WITH ENCRYPTION AS
+AS
 	BEGIN
 	declare @PayOn datetime
 	declare @PayFrom datetime
@@ -356,11 +287,7 @@ RETURNS @tbVat TABLE
 	
 	RETURN
 	END
-
 GO
-
-
-
 ALTER FUNCTION [dbo].[fnTaxCorpOrderTotals]
 (@IncludeForecasts bit = 0)
 RETURNS @tbCorp TABLE 
@@ -370,7 +297,7 @@ RETURNS @tbCorp TABLE
 	NetProfit money,
 	CorporationTax money
 	)
-    WITH ENCRYPTION AS
+AS
 	BEGIN
 	declare @PayOn datetime
 	declare @PayFrom datetime
@@ -416,9 +343,7 @@ RETURNS @tbCorp TABLE
 	
 	RETURN
 	END
-
 GO
-
 ALTER FUNCTION [dbo].[fnStatementCompany]
 	(
 	@IncludeForecasts bit = 0,
@@ -434,7 +359,7 @@ RETURNS @tbStatement TABLE (
 	Balance money,
 	CashCode nvarchar(50)
 	) 
-   WITH ENCRYPTION AS
+AS
 	BEGIN
 	declare @ReferenceCode nvarchar(20) 
 	declare @AccountCode nvarchar(10)
@@ -541,13 +466,9 @@ RETURNS @tbStatement TABLE (
 		
 	RETURN
 	END
-
 GO
-
-
-
 ALTER  PROCEDURE [dbo].[spCashFlowInitialise]
-WITH ENCRYPTION AS
+AS
 declare @StartOn datetime
 		
 	exec dbo.spCashGeneratePeriods
@@ -613,24 +534,21 @@ declare @StartOn datetime
 	                      
 	
 	RETURN 
-
 GO
-
 ALTER TABLE [tbCashCategory]
 	DROP CONSTRAINT [DF_tbCashCategory_ManualForecast],
 	COLUMN ManualForecast
 GO
-
 DROP VIEW [dbo].[vwStatementForecasts]
+GO
 DROP VIEW [dbo].[vwCorpTaxManualForecasts]
+GO
 DROP VIEW [dbo].[vwTaxVatManualForecasts]
 GO
-
 INSERT INTO tbTaskStatus
 (TaskStatusCode, TaskStatus)
 VALUES (6, 'Archive')
 GO
-
 ALTER TRIGGER Trigger_tbTask_Update
 ON dbo.tbTask 
 FOR UPDATE

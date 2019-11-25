@@ -5,21 +5,15 @@
 * Description: Sql Server Upgrade Script - Encrypted Distribution Schema
 * Data Version: 1.15
 * Release Date: 14 June 2010
-* Confidential Information
 ************************************************************/
 
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
-ALTER PROCEDURE dbo.spTaskCopy
+CREATE OR ALTER PROCEDURE dbo.spTaskCopy
 	(
 	@FromTaskCode nvarchar(20),
 	@ParentTaskCode nvarchar(20) = null,
 	@ToTaskCode nvarchar(20) = null output
 	)
-WITH ENCRYPTION AS
+AS
 declare @ActivityCode nvarchar(50)
 declare @Printed bit
 declare @ChildTaskCode nvarchar(20)
@@ -119,23 +113,12 @@ declare @UserId nvarchar(10)
 		
 	RETURN
 GO
-
-SET ANSI_NULLS OFF
-GO
-SET QUOTED_IDENTIFIER OFF
-GO
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
 CREATE PROCEDURE [dbo].[spTaskParent] 
 	(
 	@TaskCode nvarchar(20),
 	@ParentTaskCode nvarchar(20) output
 	)
- WITH ENCRYPTION AS
+AS
 	set @ParentTaskCode = @TaskCode
 	if exists(SELECT     ParentTaskCode
 	             FROM         tbTaskFlow
@@ -146,23 +129,12 @@ CREATE PROCEDURE [dbo].[spTaskParent]
 		
 	RETURN
 GO
-
-SET ANSI_NULLS OFF
-GO
-SET QUOTED_IDENTIFIER OFF
-GO
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
 ALTER PROCEDURE [dbo].[spTaskAssignToParent] 
 	(
 	@ChildTaskCode nvarchar(20),
 	@ParentTaskCode nvarchar(20)
 	)
-WITH ENCRYPTION AS
+AS
 declare @TaskTitle nvarchar(100)
 declare @StepNumber smallint
 

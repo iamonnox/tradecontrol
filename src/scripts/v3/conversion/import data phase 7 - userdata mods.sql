@@ -6,11 +6,11 @@ Release: 3.02.1
 Date: 7/5/2018
 Author: IaM
 
-Trade Control by Trade Control Ltd is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License. 
+Trade Control by Trade Control Ltd is licensed under GNU General Public License v3.0. 
 
 You may obtain a copy of the License at
 
-	http://creativecommons.org/licenses/by-sa/4.0/
+	https://www.gnu.org/licenses/gpl-3.0.en.html
 
 *********************************************************/
 

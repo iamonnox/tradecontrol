@@ -5,10 +5,28 @@ VisualStudioVersion = 16.0.29418.71
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{A2CF2C96-FEBE-4353-B319-D88FA5BF1FB2}"
 	ProjectSection(SolutionItems) = preProject
+		..\docs\diagrams.docx = ..\docs\diagrams.docx
 		..\readme.md = ..\readme.md
+		..\docs\tc_functions.md = ..\docs\tc_functions.md
+		..\docs\tc_history.md = ..\docs\tc_history.md
+		..\docs\tc_papers.md = ..\docs\tc_papers.md
 	EndProjectSection
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "scripts", "scripts\scripts.sqlproj", "{76882F5E-F463-4574-877A-12931A289B3A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "img", "img", "{0A1DCD54-7EEB-4135-8DE3-19EA18086513}"
+	ProjectSection(SolutionItems) = preProject
+		..\img\functions_component.jpg = ..\img\functions_component.jpg
+		..\img\functions_consumer_network.jpg = ..\img\functions_consumer_network.jpg
+		..\img\functions_exchange_polarity.jpg = ..\img\functions_exchange_polarity.jpg
+		..\img\functions_mdf_production_plant.jpg = ..\img\functions_mdf_production_plant.jpg
+		..\img\functions_namespace.jpg = ..\img\functions_namespace.jpg
+		..\img\functions_organization.jpg = ..\img\functions_organization.jpg
+		..\img\functions_primary_industry_mdf.jpg = ..\img\functions_primary_industry_mdf.jpg
+		..\img\functions_production_network.jpg = ..\img\functions_production_network.jpg
+		..\img\functions_workflow_bom_level_2.jpg = ..\img\functions_workflow_bom_level_2.jpg
+		..\img\functions_workflow_bom_level_3.jpg = ..\img\functions_workflow_bom_level_3.jpg
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

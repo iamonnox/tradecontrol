@@ -5,39 +5,30 @@
 * Description: Sql Server Upgrade Script - Encrypted Distribution Schema
 * Data Version: 1.04
 * Release Date: 18/6/8
-* Confidential Information
 ************************************************************/
 
 
 ALTER TABLE tbActivity WITH NOCHECK ADD
 	[RegisterName] [nvarchar] (50) NULL	
 GO
-
-if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[FK_tbActivity_tbSystemRegister]') and OBJECTPROPERTY(id, N'IsForeignKey') = 1)
 ALTER TABLE [dbo].[tbActivity] DROP CONSTRAINT FK_tbActivity_tbSystemRegister
 GO
-
-if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[tbSystemRegister]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
-drop table [dbo].[tbSystemRegister]
+DROP TABLE [dbo].[tbSystemRegister]
 GO
-
 CREATE TABLE [dbo].[tbSystemRegister] (
 	[RegisterName] [nvarchar] (50) NOT NULL ,
 	[NextNumber] [int] NOT NULL 
 ) ON [PRIMARY]
 GO
-
 ALTER TABLE [dbo].[tbSystemRegister] WITH NOCHECK ADD 
 	CONSTRAINT [PK_tbSystemRegister] PRIMARY KEY  CLUSTERED 
 	(
 		[RegisterName]
 	)  ON [PRIMARY] 
 GO
-
 ALTER TABLE [dbo].[tbSystemRegister] ADD 
 	CONSTRAINT [DF_tbSystemRegister_NextNumber] DEFAULT (1) FOR [NextNumber]
 GO
-
 ALTER TABLE [dbo].[tbActivity] ADD 
 	CONSTRAINT [FK_tbActivity_tbSystemRegister] FOREIGN KEY 
 	(
@@ -46,24 +37,17 @@ ALTER TABLE [dbo].[tbActivity] ADD
 		[RegisterName]
 	) ON UPDATE CASCADE
 GO
-
 if not exists(select ItemName from tbProfileObjectDetail where ItemName = 'RegisterName')
 	begin
 	insert into [tbProfileObjectDetail] ([ObjectTypeCode], [ObjectName], [ItemName], [ItemTypeCode], [Caption], [StatusBarText], [ControlTipText], [CharLength], [Visible], [FormatString]) values (1, 'System Fields', 'RegisterName', 1, 'Register Name', '', '', 50, 1, '')
 	end
 GO
-
-SET QUOTED_IDENTIFIER ON 
-GO
-SET ANSI_NULLS ON 
-GO
-
 ALTER  PROCEDURE dbo.spTaskNextCode
 	(
 		@ActivityCode nvarchar(50),
 		@TaskCode nvarchar(20) OUTPUT
 	)
-WITH ENCRYPTION AS
+AS
 declare @UserId nvarchar(10)
 declare @NextTaskNumber int
 
@@ -101,27 +85,12 @@ declare @NextTaskNumber int
 	set @TaskCode = @UserId + '_' + dbo.fnPad(ltrim(str(@NextTaskNumber)), 4)
 			                      
 	RETURN 
-
 GO
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS ON 
-GO
-
-
-
-SET QUOTED_IDENTIFIER ON 
-GO
-SET ANSI_NULLS ON 
-GO
-
-
-
 ALTER  PROCEDURE dbo.spTaskConfigure 
 	(
 	@ParentTaskCode nvarchar(20)
 	)
-WITH ENCRYPTION AS
+AS
 declare @StepNumber smallint
 declare @TaskCode nvarchar(20)
 declare @UserId nvarchar(10)
@@ -243,29 +212,12 @@ declare @ActivityCode nvarchar(50)
 
 
 	RETURN
-
-
 GO
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS ON 
-GO
-
-
-
-
-
-SET QUOTED_IDENTIFIER ON 
-GO
-SET ANSI_NULLS ON 
-GO
-
-
 ALTER  PROCEDURE dbo.spPaymentPostMisc
 	(
 	@PaymentCode nvarchar(20) 
 	)
-WITH ENCRYPTION AS
+AS
 declare @InvoiceNumber nvarchar(20)
 declare @UserId nvarchar(10)
 declare @NextNumber int
@@ -348,29 +300,12 @@ declare @InvoiceTypeCode smallint
 	WHERE     (PaymentCode = @PaymentCode)
 	
 	RETURN
-
-
-
-
-
 GO
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS ON 
-GO
-
-
-
-SET QUOTED_IDENTIFIER ON 
-GO
-SET ANSI_NULLS ON 
-GO
-
 ALTER  PROCEDURE dbo.spOrgRebuild
 	(
 		@AccountCode nvarchar(10)
 	)
-WITH ENCRYPTION AS
+AS
 declare @Balance money
 declare @BalanceOutstanding money
 
@@ -515,25 +450,12 @@ declare @TaxRate float
 	
 
 	RETURN 
-
-
-
 GO
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS ON 
-GO
-
-SET QUOTED_IDENTIFIER ON 
-GO
-SET ANSI_NULLS ON 
-GO
-
 ALTER  PROCEDURE dbo.spInvoiceTotal 
 	(
 	@InvoiceNumber nvarchar(20)
 	)
-WITH ENCRYPTION AS
+AS
 declare @InvoiceValue money
 declare @TaxValue money
 declare @PaidValue money
@@ -589,15 +511,7 @@ declare @PaidTaxValue money
 	
 	
 	RETURN
-
-
 GO
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS ON 
-GO
-
-
 CREATE TABLE [tbSystemRecurrence] (
 	[RecurrenceCode] [smallint] NOT NULL ,
 	[Recurrence] [nvarchar] (20) NOT NULL ,
@@ -607,26 +521,21 @@ CREATE TABLE [tbSystemRecurrence] (
 	)  ON [PRIMARY] 
 ) ON [PRIMARY]
 GO
-
-
 insert into tbSystemRecurrence (RecurrenceCode, Recurrence) values (1, 'On Demand')
 insert into tbSystemRecurrence (RecurrenceCode, Recurrence) values (2, 'Monthly')
 insert into tbSystemRecurrence (RecurrenceCode, Recurrence) values (3, 'Quarterly')
 insert into tbSystemRecurrence (RecurrenceCode, Recurrence) values (4, 'Bi-annual')
 insert into tbSystemRecurrence (RecurrenceCode, Recurrence) values (5, 'Yearly')
 GO
-
 UPDATE tbCashTaxType
 SET TaxType = 'Corporation Tax'
 WHERE TaxTypeCode = 1
 GO
-
 ALTER TABLE [tbCashTaxType] WITH NOCHECK ADD
 	[CashCode] [nvarchar] (50) NULL ,
 	[MonthNumber] [smallint] NOT NULL CONSTRAINT [DF_tbSystemOptions_MonthNumber] DEFAULT (1),
 	[RecurrenceCode] [smallint] NOT NULL CONSTRAINT [DF_tbSystemOptions_Recurrence] DEFAULT (1)
 GO
-
 ALTER TABLE [dbo].[tbCashTaxType] ADD 
 	CONSTRAINT [FK_tbCashTaxType_tbCashCode] FOREIGN KEY 
 	(
@@ -647,36 +556,30 @@ ALTER TABLE [dbo].[tbCashTaxType] ADD
 		[RecurrenceCode]
 	)
 GO
-
 UPDATE tbCashTaxType
 SET CashCode = CorporationTax, RecurrenceCode = 5
 FROM         tbCashTaxType CROSS JOIN
                       tbSystemOptions
 WHERE     (tbCashTaxType.TaxTypeCode = 1)
 GO
-
 UPDATE tbCashTaxType
 SET CashCode = EmployersNI, RecurrenceCode = 2
 FROM         tbCashTaxType CROSS JOIN
                       tbSystemOptions
 WHERE     (tbCashTaxType.TaxTypeCode = 3)
 GO
-
 UPDATE tbCashTaxType
 SET CashCode = Vat, RecurrenceCode = 3
 FROM         tbCashTaxType CROSS JOIN
                       tbSystemOptions
 WHERE     (tbCashTaxType.TaxTypeCode = 2)
 GO
-
 UPDATE tbCashTaxType
 SET CashCode = GeneralTax, RecurrenceCode = 1
 FROM         tbCashTaxType CROSS JOIN
                       tbSystemOptions
 WHERE     (tbCashTaxType.TaxTypeCode = 4)
 GO
-
-
 ALTER TABLE tbSystemOptions DROP CONSTRAINT [FK_tbSystemRoot_tbCashCode]
 GO 
 ALTER TABLE tbSystemOptions DROP CONSTRAINT [FK_tbSystemRoot_tbCashCode1]
@@ -685,14 +588,12 @@ ALTER TABLE tbSystemOptions DROP CONSTRAINT [FK_tbSystemRoot_tbCashCode2]
 GO
 ALTER TABLE tbSystemOptions DROP CONSTRAINT [FK_tbSystemRoot_tbCashCode3]
 GO
-
 ALTER TABLE tbSystemOptions DROP 
 	COLUMN EmployersNI,
 	COLUMN Vat,
 	COLUMN CorporationTax,
 	COLUMN GeneralTax
 GO
-
 ALTER TABLE [dbo].[tbSystemYearPeriod] DROP 
 	CONSTRAINT [DF_tbSystemYearPeriod_MaterialStoreValue],
 	CONSTRAINT [DF_tbSystemYearPeriod_MaterialWipValue],
@@ -706,15 +607,12 @@ ALTER TABLE tbSystemYearPeriod DROP
 	COLUMN ProductionStoreValue,
 	COLUMN ProductionWipValue
 GO
-
 ALTER TABLE tbSystemYearPeriod WITH NOCHECK ADD
 	CorporationTaxRate real NOT NULL CONSTRAINT [DF_tbSystemYearPeriod_CorporationTaxRate] DEFAULT (0)
 GO
-
 alter table tbSystemOptions with nocheck add
 	NetProfitCode nvarchar(10) null
 GO
-
 alter table tbSystemOptions add
 	CONSTRAINT [FK_tbSystemOption_tbCashCategory] FOREIGN KEY 
 	(
@@ -723,75 +621,33 @@ alter table tbSystemOptions add
 		[CategoryCode]
 	)
 GO
-
-
-
-SET QUOTED_IDENTIFIER ON 
-GO
-SET ANSI_NULLS ON 
-GO
-
 CREATE VIEW dbo.vwSystemCorpTaxCashCode
-WITH ENCRYPTION AS
+AS
 SELECT     CashCode, MonthNumber, RecurrenceCode
 FROM         dbo.tbCashTaxType
 WHERE     (TaxTypeCode = 1)
-
 GO
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS ON 
-GO
-
-SET QUOTED_IDENTIFIER ON 
-GO
-SET ANSI_NULLS ON 
-GO
-
 CREATE VIEW dbo.vwSystemNICashCode
-WITH ENCRYPTION AS
+AS
 SELECT     CashCode, MonthNumber, RecurrenceCode
 FROM         dbo.tbCashTaxType
 WHERE     (TaxTypeCode = 3)
-
 GO
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS ON 
-GO
-
-SET QUOTED_IDENTIFIER ON 
-GO
-SET ANSI_NULLS ON 
-GO
-
 CREATE VIEW dbo.vwSystemVatCashCode
-WITH ENCRYPTION AS
+AS
 SELECT     CashCode, MonthNumber, RecurrenceCode
 FROM         dbo.tbCashTaxType
 WHERE     (TaxTypeCode = 2)
-
 GO
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS ON 
-GO
-
 alter table tbSystemOptions with nocheck add
 	NetProfitTaxCode nvarchar(50) null
 GO
-
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS OFF 
-GO
-
 CREATE FUNCTION dbo.fnCategoryTotalCashCodes
 	(
 	@CategoryCode nvarchar(10)
 	)
 RETURNS @tbCashCode TABLE (CashCode nvarchar(50))
-WITH ENCRYPTION AS
+AS
 	BEGIN
 	INSERT INTO @tbCashCode (CashCode)
 	SELECT     tbCashCode.CashCode
@@ -822,22 +678,11 @@ WITH ENCRYPTION AS
 	
 	RETURN
 	END
-
 GO
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS ON 
-GO
-
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS OFF 
-GO
-
 CREATE FUNCTION dbo.fnNetProfitCashCodes
 	()
 RETURNS @tbCashCode TABLE (CashCode nvarchar(50))
-WITH ENCRYPTION AS
+AS
 	BEGIN
 	declare @CategoryCode nvarchar(10)
 	select @CategoryCode = NetProfitCode from tbSystemOptions	
@@ -849,20 +694,9 @@ WITH ENCRYPTION AS
 		end
 	RETURN
 	END
-
 GO
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS ON 
-GO
-
-SET QUOTED_IDENTIFIER ON 
-GO
-SET ANSI_NULLS ON 
-GO
-
 CREATE VIEW dbo.vwCorpTaxInvoiceItems
-WITH ENCRYPTION AS
+AS
 SELECT     TOP 100 PERCENT dbo.fnAccountPeriod(dbo.tbInvoice.InvoicedOn) AS StartOn, 
                       CASE WHEN tbInvoiceType.CashModeCode = 1 THEN dbo.tbInvoiceItem.InvoiceValue * - 1 ELSE dbo.tbInvoiceItem.InvoiceValue END AS InvoiceValue
 FROM         dbo.tbInvoiceItem INNER JOIN
@@ -870,20 +704,9 @@ FROM         dbo.tbInvoiceItem INNER JOIN
                       dbo.tbInvoiceItem.CashCode = fnNetProfitCashCodes.CashCode COLLATE Latin1_General_CI_AS INNER JOIN
                       dbo.tbInvoice ON dbo.tbInvoiceItem.InvoiceNumber = dbo.tbInvoice.InvoiceNumber INNER JOIN
                       dbo.tbInvoiceType ON dbo.tbInvoice.InvoiceTypeCode = dbo.tbInvoiceType.InvoiceTypeCode
-
 GO
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS ON 
-GO
-
-SET QUOTED_IDENTIFIER ON 
-GO
-SET ANSI_NULLS ON 
-GO
-
 CREATE VIEW dbo.vwCorpTaxInvoiceTasks
-WITH ENCRYPTION AS
+AS
 SELECT     TOP 100 PERCENT dbo.fnAccountPeriod(dbo.tbInvoice.InvoicedOn) AS StartOn, 
                       CASE WHEN tbInvoiceType.CashModeCode = 1 THEN dbo.tbInvoiceTask.InvoiceValue * - 1 ELSE dbo.tbInvoiceTask.InvoiceValue END AS InvoiceValue
 FROM         dbo.tbInvoiceTask INNER JOIN
@@ -891,20 +714,9 @@ FROM         dbo.tbInvoiceTask INNER JOIN
                       dbo.tbInvoiceTask.CashCode = fnNetProfitCashCodes.CashCode COLLATE Latin1_General_CI_AS INNER JOIN
                       dbo.tbInvoice ON dbo.tbInvoiceTask.InvoiceNumber = dbo.tbInvoice.InvoiceNumber INNER JOIN
                       dbo.tbInvoiceType ON dbo.tbInvoice.InvoiceTypeCode = dbo.tbInvoiceType.InvoiceTypeCode
-
 GO
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS ON 
-GO
-
-SET QUOTED_IDENTIFIER ON 
-GO
-SET ANSI_NULLS ON 
-GO
-
 CREATE VIEW dbo.vwCorpTaxInvoiceBase
-WITH ENCRYPTION AS
+AS
 SELECT     StartOn, SUM(InvoiceValue) AS NetProfit
 FROM         dbo.vwCorpTaxInvoiceItems
 GROUP BY StartOn
@@ -912,41 +724,19 @@ UNION
 SELECT     StartOn, SUM(InvoiceValue) AS NetProfit
 FROM         dbo.vwCorpTaxInvoiceTasks
 GROUP BY StartOn
-
 GO
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS ON 
-GO
-
-SET QUOTED_IDENTIFIER ON 
-GO
-SET ANSI_NULLS ON 
-GO
-
 CREATE VIEW dbo.vwCorpTaxInvoice
-WITH ENCRYPTION AS
+AS
 SELECT     TOP 100 PERCENT dbo.tbSystemYearPeriod.StartOn, dbo.vwCorpTaxInvoiceBase.NetProfit, 
                       dbo.vwCorpTaxInvoiceBase.NetProfit * dbo.tbSystemYearPeriod.CorporationTaxRate AS CorporationTax
 FROM         dbo.vwCorpTaxInvoiceBase INNER JOIN
                       dbo.tbSystemYearPeriod ON dbo.vwCorpTaxInvoiceBase.StartOn = dbo.tbSystemYearPeriod.StartOn
 ORDER BY dbo.tbSystemYearPeriod.StartOn
-
 GO
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS ON 
-GO
-
-SET QUOTED_IDENTIFIER ON 
-GO
-SET ANSI_NULLS ON 
-GO
-
 CREATE FUNCTION dbo.fnSystemCorpTaxBalance
 	()
 RETURNS money
-WITH ENCRYPTION AS
+AS
 	BEGIN
 	declare @Balance money
 	SELECT  @Balance = SUM(CorporationTax)
@@ -958,24 +748,11 @@ WITH ENCRYPTION AS
 
 	RETURN isnull(@Balance, 0)
 	END
-
-
 GO
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS ON 
-GO
-
-SET QUOTED_IDENTIFIER ON 
-GO
-SET ANSI_NULLS ON 
-GO
-
-
 ALTER  FUNCTION dbo.fnSystemVatBalance
 	()
 RETURNS money
-WITH ENCRYPTION AS
+AS
 	BEGIN
 	declare @Balance money
 	SELECT  @Balance = SUM(HomeSalesVat - HomePurchasesVat + ExportSalesVat - ExportPurchasesVat)
@@ -987,40 +764,13 @@ WITH ENCRYPTION AS
 
 	RETURN isnull(@Balance, 0)
 	END
-
-
 GO
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS ON 
-GO
-
-
-SET QUOTED_IDENTIFIER ON 
-GO
-SET ANSI_NULLS ON 
-GO
-
 ALTER  VIEW dbo.vwCashSummaryBase
-WITH ENCRYPTION AS
+AS
 SELECT     ISNULL(SUM(ToCollect), 0) AS Collect, ISNULL(SUM(ToPay), 0) AS Pay, ISNULL(SUM(TaxValue), 0) + dbo.fnSystemVatBalance() 
                       + dbo.fnSystemCorpTaxBalance() AS Tax, dbo.fnCashCompanyBalance() AS CompanyBalance
 FROM         dbo.vwCashSummaryInvoices
-
 GO
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS ON 
-GO
-
-
-
-SET QUOTED_IDENTIFIER ON 
-GO
-SET ANSI_NULLS ON 
-GO
-
-
 ALTER  PROCEDURE dbo.spSettingNewCompany
 	(
 	@FirstNames nvarchar(50),
@@ -1035,7 +785,7 @@ ALTER  PROCEDURE dbo.spSettingNewCompany
 	@Email nvarchar(50) = null,
 	@WebSite nvarchar(128) = null
 	)
-WITH ENCRYPTION AS
+AS
 declare @UserId nvarchar(10)
 declare @CalendarCode nvarchar(10)
 declare @MenuId smallint
@@ -1104,23 +854,11 @@ declare @SqlDataVersion real
 	where TaxTypeCode = 4
 	
 	RETURN 1 
-
-
 GO
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS ON 
-GO
-
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS OFF 
-GO
-
 CREATE FUNCTION dbo.fnTaxTypeDueDates
 	(@TaxTypeCode smallint)
 RETURNS @tbDueDate TABLE (PayOn datetime, PayFrom datetime, PayTo datetime)
-WITH ENCRYPTION AS
+AS
 	BEGIN
 	declare @MonthNumber smallint
 	declare @RecurrenceCode smallint
@@ -1218,18 +956,7 @@ WITH ENCRYPTION AS
 	
 	RETURN
 	END
-
 GO
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS ON 
-GO
-
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS OFF 
-GO
-
 CREATE FUNCTION dbo.fnTaxVatTotals
 	()
 RETURNS @tbVat TABLE 
@@ -1245,7 +972,7 @@ RETURNS @tbVat TABLE
 	ExportPurchasesVat money,
 	VatDue money
 	)
-WITH ENCRYPTION AS
+AS
 	BEGIN
 	declare @PayOn datetime
 	declare @PayFrom datetime
@@ -1277,20 +1004,9 @@ WITH ENCRYPTION AS
 	
 	RETURN
 	END
-
 GO
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS ON 
-GO
-
-SET QUOTED_IDENTIFIER ON 
-GO
-SET ANSI_NULLS ON 
-GO
-
 CREATE VIEW dbo.vwTaxVatTotals
-WITH ENCRYPTION AS
+AS
 SELECT     TOP 100 PERCENT dbo.tbSystemYear.YearNumber, dbo.tbSystemYear.[Description], dbo.tbSystemMonth.MonthName, fnTaxVatTotals.StartOn, fnTaxVatTotals.HomeSales, 
                       fnTaxVatTotals.HomePurchases, fnTaxVatTotals.ExportSales, fnTaxVatTotals.ExportPurchases, fnTaxVatTotals.HomeSalesVat, 
                       fnTaxVatTotals.HomePurchasesVat, fnTaxVatTotals.ExportSalesVat, fnTaxVatTotals.ExportPurchasesVat, fnTaxVatTotals.VatDue
@@ -1299,18 +1015,7 @@ FROM         dbo.fnTaxVatTotals() fnTaxVatTotals INNER JOIN
                       dbo.tbSystemMonth ON dbo.tbSystemYearPeriod.MonthNumber = dbo.tbSystemMonth.MonthNumber INNER JOIN
                       dbo.tbSystemYear ON dbo.tbSystemYearPeriod.YearNumber = dbo.tbSystemYear.YearNumber
 ORDER BY fnTaxVatTotals.StartOn
-
 GO
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS ON 
-GO
-
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS OFF 
-GO
-
 CREATE FUNCTION dbo.fnTaxVatStatement
 	()
 RETURNS @tbVat TABLE 
@@ -1320,7 +1025,7 @@ RETURNS @tbVat TABLE
 	VatPaid money ,
 	Balance money
 	)
-WITH ENCRYPTION AS
+AS
 	BEGIN
 	declare @Balance money
 	declare @StartOn datetime
@@ -1358,35 +1063,13 @@ WITH ENCRYPTION AS
 	DEALLOCATE curVS	
 	RETURN
 	END
-
 GO
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS ON 
-GO
-
-SET QUOTED_IDENTIFIER ON 
-GO
-SET ANSI_NULLS ON 
-GO
-
 CREATE VIEW dbo.vwTaxVatStatement
-WITH ENCRYPTION AS
+AS
 SELECT     TOP 100 PERCENT *
 FROM         dbo.fnTaxVatStatement() fnTaxVatStatement
 ORDER BY StartOn, VatDue
-
 GO
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS ON 
-GO
-
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS OFF 
-GO
-
 CREATE FUNCTION dbo.fnTaxCorpTotals
 ()
 RETURNS @tbCorp TABLE 
@@ -1395,7 +1078,7 @@ RETURNS @tbCorp TABLE
 	NetProfit money,
 	CorporationTax money
 	)
-WITH ENCRYPTION AS
+AS
 	BEGIN
 	declare @PayOn datetime
 	declare @PayFrom datetime
@@ -1424,37 +1107,15 @@ WITH ENCRYPTION AS
 	RETURN
 	END
 GO
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS ON 
-GO
-
-
-SET QUOTED_IDENTIFIER ON 
-GO
-SET ANSI_NULLS ON 
-GO
-
 CREATE VIEW dbo.vwTaxCorpTotals
-WITH ENCRYPTION AS
+AS
 SELECT     dbo.tbSystemYear.Description, dbo.tbSystemMonth.MonthName, dbo.vwCorpTaxInvoice.StartOn, dbo.vwCorpTaxInvoice.NetProfit, 
                       dbo.vwCorpTaxInvoice.CorporationTax
 FROM         dbo.vwCorpTaxInvoice INNER JOIN
                       dbo.tbSystemYearPeriod ON dbo.vwCorpTaxInvoice.StartOn = dbo.tbSystemYearPeriod.StartOn INNER JOIN
                       dbo.tbSystemYear ON dbo.tbSystemYearPeriod.YearNumber = dbo.tbSystemYear.YearNumber INNER JOIN
                       dbo.tbSystemMonth ON dbo.tbSystemYearPeriod.MonthNumber = dbo.tbSystemMonth.MonthNumber
-
 GO
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS ON 
-GO
-
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS OFF 
-GO
-
 CREATE FUNCTION dbo.fnTaxCorpStatement
 	()
 RETURNS @tbCorp TABLE 
@@ -1464,7 +1125,7 @@ RETURNS @tbCorp TABLE
 	TaxPaid money ,
 	Balance money
 	)
-WITH ENCRYPTION AS
+AS
 	BEGIN
 	declare @Balance money
 	declare @StartOn datetime
@@ -1502,44 +1163,19 @@ WITH ENCRYPTION AS
 	DEALLOCATE curVS	
 	RETURN
 	END
-
 GO
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS ON 
-GO
-
-SET QUOTED_IDENTIFIER ON 
-GO
-SET ANSI_NULLS ON 
-GO
-
 CREATE VIEW dbo.vwTaxCorpStatement
-WITH ENCRYPTION AS
+AS
 SELECT     TOP 100 PERCENT fnTaxCorpStatement.*
 FROM         dbo.fnTaxCorpStatement() fnTaxCorpStatement
 ORDER BY StartOn, TaxDue
-
 GO
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS ON 
-GO
-
-
-
-SET QUOTED_IDENTIFIER ON 
-GO
-SET ANSI_NULLS ON 
-GO
-
-
 ALTER  FUNCTION dbo.fnSystemCashCode
 	(
 	@TaxTypeCode smallint
 	)
 RETURNS nvarchar(50)
-WITH ENCRYPTION AS
+AS
 	BEGIN
 	declare @CashCode nvarchar(50)
 	
@@ -1550,22 +1186,9 @@ WITH ENCRYPTION AS
 	
 	RETURN @CashCode
 	END
-
-
 GO
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS ON 
-GO
-
-SET QUOTED_IDENTIFIER ON 
-GO
-SET ANSI_NULLS ON 
-GO
-
-
 ALTER  PROCEDURE dbo.spSystemPeriodTransferAll
-WITH ENCRYPTION AS
+AS
 
 	UPDATE tbCashPeriod
 	SET InvoiceValue = 0, InvoiceTax = 0, CashValue = 0, CashTax = 0, ForecastValue = 0, ForecastTax = 0
@@ -1591,23 +1214,9 @@ WITH ENCRYPTION AS
 	                      vwCashAccountPeriodClosingBalance.StartOn = tbCashPeriod.StartOn
 
 	RETURN 
-
-
 GO
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS ON 
-GO
-
-
-SET QUOTED_IDENTIFIER ON 
-GO
-SET ANSI_NULLS ON 
-GO
-
-
 ALTER  PROCEDURE dbo.spCashFlowInitialise
-WITH ENCRYPTION AS
+AS
 declare @StartOn datetime
 		
 	exec dbo.spCashGeneratePeriods
@@ -1666,11 +1275,4 @@ declare @StartOn datetime
 	                      
 	
 	RETURN 
-
-
 GO
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS ON 
-GO
-

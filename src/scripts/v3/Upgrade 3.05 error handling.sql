@@ -266,9 +266,9 @@ END
 go
 ALTER TABLE App.tbUom ENABLE TRIGGER App_tbUom_TriggerUpdate
 go
-SET ANSI_NULLS ON
+
 go
-SET QUOTED_IDENTIFIER ON
+
 go
 CREATE OR ALTER TRIGGER Cash.App_tbCategory_TriggerUpdate 
    ON  Cash.tbCategory

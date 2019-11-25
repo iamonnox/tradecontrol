@@ -5,53 +5,14 @@
 * Description: Sql Server Upgrade Script - Encrypted Distribution Schema
 * Data Version: 1.09
 * Release Date: TBC
-* Confidential Information
 ************************************************************/
 
-
-/****** Object:  StoredProcedure [dbo].[spTaskDefaultDocType]    Script Date: 02/13/2009 11:54:27 ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[spTaskDefaultDocType]') AND type in (N'P', N'PC'))
-DROP PROCEDURE [dbo].[spTaskDefaultDocType]
-GO
-/****** Object:  StoredProcedure [dbo].[spTaskDefaultDocType]    Script Date: 02/13/2009 11:54:27 ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[spInvoiceDefaultDocType]') AND type in (N'P', N'PC'))
-DROP PROCEDURE [dbo].[spInvoiceDefaultDocType]
-GO
-/****** Object:  View [dbo].[vwDocInvoiceItem]    Script Date: 02/13/2009 11:55:40 ******/
-IF  EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[dbo].[vwDocInvoiceItem]'))
-DROP VIEW [dbo].[vwDocInvoiceItem]
-GO
-/****** Object:  View [dbo].[vwDocInvoiceTask]    Script Date: 02/13/2009 11:56:05 ******/
-IF  EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[dbo].[vwDocInvoiceTask]'))
-DROP VIEW [dbo].[vwDocInvoiceTask]
-GO
-/****** Object:  View [dbo].[vwDocInvoice]    Script Date: 02/13/2009 11:57:45 ******/
-IF  EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[dbo].[vwDocInvoice]'))
-DROP VIEW [dbo].[vwDocInvoice]
-GO
-/****** Object:  View [dbo].[vwDocTaskCode]    Script Date: 02/13/2009 11:59:43 ******/
-IF  EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[dbo].[vwDocTaskCode]'))
-DROP VIEW [dbo].[vwDocTaskCode]
-GO
-/****** Object:  UserDefinedFunction [dbo].[fnTaskEmailAddress]    Script Date: 02/13/2009 11:58:26 ******/
-IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[fnTaskEmailAddress]') AND type in (N'FN', N'IF', N'TF', N'FS', N'FT'))
-DROP FUNCTION [dbo].[fnTaskEmailAddress]
-GO
-/****** Object:  View [dbo].[vwDocCompany]    Script Date: 02/13/2009 11:57:45 ******/
-IF  EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[dbo].[vwDocCompany]'))
-DROP VIEW [dbo].[vwDocCompany]
-GO
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE dbo.spInvoiceDefaultDocType
+CREATE OR ALTER  PROCEDURE dbo.spInvoiceDefaultDocType
 	(
 		@InvoiceNumber nvarchar(20),
 		@DocTypeCode smallint OUTPUT
 	)
-WITH ENCRYPTION AS
+AS
 declare @InvoiceType smallint
 
 	SELECT  @InvoiceType = InvoiceTypeCode
@@ -67,17 +28,12 @@ declare @InvoiceType smallint
 							
 	RETURN
 GO
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE dbo.spTaskDefaultDocType
+CREATE OR ALTER  PROCEDURE dbo.spTaskDefaultDocType
 	(
 		@TaskCode nvarchar(20),
 		@DocTypeCode smallint OUTPUT
 	)
-WITH ENCRYPTION AS
+AS
 declare @CashMode smallint
 declare @TaskStatus smallint
 
@@ -101,32 +57,21 @@ declare @TaskStatus smallint
 		
 	RETURN 
 GO
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE VIEW [dbo].[vwDocCompany]
-WITH ENCRYPTION AS
+CREATE OR ALTER  VIEW [dbo].[vwDocCompany]
+AS
 SELECT     dbo.tbOrg.AccountName AS CompanyName, dbo.tbOrgAddress.Address AS CompanyAddress, dbo.tbOrg.PhoneNumber AS CompanyPhoneNumber, 
                       dbo.tbOrg.FaxNumber AS CompanyFaxNumber, dbo.tbOrg.EmailAddress AS CompanyEmailAddress, dbo.tbOrg.WebSite AS CompanyWebsite, 
                       dbo.tbOrg.CompanyNumber, dbo.tbOrg.VatNumber, dbo.tbOrg.Logo
 FROM         dbo.tbOrg INNER JOIN
                       dbo.tbSystemOptions ON dbo.tbOrg.AccountCode = dbo.tbSystemOptions.AccountCode LEFT OUTER JOIN
                       dbo.tbOrgAddress ON dbo.tbOrg.AddressCode = dbo.tbOrgAddress.AddressCode
-
 GO
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE FUNCTION [dbo].[fnTaskEmailAddress]
+CREATE OR ALTER  FUNCTION [dbo].[fnTaskEmailAddress]
 	(
 	@TaskCode nvarchar(20)
 	)
 RETURNS nvarchar(255)
-WITH ENCRYPTION AS
+AS
 	BEGIN
 	declare @EmailAddress nvarchar(255)
 
@@ -155,14 +100,8 @@ WITH ENCRYPTION AS
 	RETURN @EmailAddress
 	END
 GO
-
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE VIEW [dbo].[vwDocTaskCode]
-WITH ENCRYPTION AS
+CREATE OR ALTER  VIEW [dbo].[vwDocTaskCode]
+AS
 SELECT     dbo.fnTaskEmailAddress(dbo.tbTask.TaskCode) AS EmailAddress, dbo.tbTask.TaskCode, dbo.tbTaskStatus.TaskStatus, dbo.tbTask.ContactName, 
                       dbo.tbOrgContact.NickName, dbo.tbUser.UserName, dbo.tbOrg.AccountName, dbo.tbOrgAddress.Address AS InvoiceAddress, 
                       tbOrg_1.AccountName AS DeliveryAccountName, tbOrgAddress_1.Address AS DeliveryAddress, tbOrg_2.AccountName AS CollectionAccountName, 
@@ -185,14 +124,8 @@ FROM         dbo.tbOrg AS tbOrg_2 RIGHT OUTER JOIN
                       dbo.tbTask.AccountCode = dbo.tbOrgContact.AccountCode LEFT OUTER JOIN
                       dbo.tbSystemTaxCode ON dbo.tbTask.TaxCode = dbo.tbSystemTaxCode.TaxCode
 GO
-
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE VIEW [dbo].[vwDocInvoice]
-WITH ENCRYPTION AS
+CREATE OR ALTER  VIEW [dbo].[vwDocInvoice]
+AS
 SELECT     dbo.tbOrg.EmailAddress, dbo.tbUser.UserName, dbo.tbOrg.AccountCode, dbo.tbOrg.AccountName, dbo.tbOrgAddress.Address AS InvoiceAddress, 
                       dbo.tbInvoice.InvoiceNumber, dbo.tbInvoiceType.InvoiceType, dbo.tbInvoiceStatus.InvoiceStatus, dbo.tbInvoice.InvoicedOn, dbo.tbInvoice.CollectOn, 
                       dbo.tbInvoice.InvoiceValue, dbo.tbInvoice.TaxValue, dbo.tbInvoice.PaymentTerms, dbo.tbInvoice.Notes
@@ -202,16 +135,9 @@ FROM         dbo.tbInvoice INNER JOIN
                       dbo.tbUser ON dbo.tbInvoice.UserId = dbo.tbUser.UserId INNER JOIN
                       dbo.tbInvoiceStatus ON dbo.tbInvoice.InvoiceStatusCode = dbo.tbInvoiceStatus.InvoiceStatusCode LEFT OUTER JOIN
                       dbo.tbOrgAddress ON dbo.tbOrg.AddressCode = dbo.tbOrgAddress.AddressCode
-
 GO
-
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE VIEW [dbo].[vwDocInvoiceTask]
-WITH ENCRYPTION AS
+CREATE OR ALTER  VIEW [dbo].[vwDocInvoiceTask]
+AS
 SELECT     dbo.tbInvoiceTask.InvoiceNumber, dbo.tbInvoiceTask.TaskCode, dbo.tbTask.TaskTitle, dbo.tbTask.ActivityCode, dbo.tbInvoiceTask.CashCode, 
                       dbo.tbCashCode.CashDescription, dbo.tbTask.ActionedOn, dbo.tbInvoiceTask.Quantity, dbo.tbActivity.UnitOfMeasure, dbo.tbInvoiceTask.InvoiceValue, 
                       dbo.tbInvoiceTask.TaxValue, dbo.tbInvoiceTask.TaxCode
@@ -220,14 +146,8 @@ FROM         dbo.tbInvoiceTask INNER JOIN
                       dbo.tbCashCode ON dbo.tbInvoiceTask.CashCode = dbo.tbCashCode.CashCode INNER JOIN
                       dbo.tbActivity ON dbo.tbTask.ActivityCode = dbo.tbActivity.ActivityCode
 GO
-
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE VIEW [dbo].[vwDocInvoiceItem]
-WITH ENCRYPTION AS
+CREATE OR ALTER  VIEW [dbo].[vwDocInvoiceItem]
+AS
 SELECT     dbo.tbInvoiceItem.InvoiceNumber, dbo.tbInvoiceItem.CashCode, dbo.tbCashCode.CashDescription, dbo.tbInvoice.InvoicedOn AS ActionedOn, 
                       dbo.tbInvoiceItem.TaxCode, dbo.tbInvoiceItem.InvoiceValue, dbo.tbInvoiceItem.TaxValue, dbo.tbInvoiceItem.ItemReference
 FROM         dbo.tbInvoiceItem INNER JOIN

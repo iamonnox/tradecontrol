@@ -1,80 +1,5 @@
-if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[vwStatementVat]') and OBJECTPROPERTY(id, N'IsView') = 1)
-drop view [dbo].[vwStatementVat]
-GO
-
-
-if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[fnStatementCompany]') and xtype in (N'FN', N'IF', N'TF'))
-drop function [dbo].[fnStatementCompany]
-GO
-
-if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[fnStatementTaxAccount]') and xtype in (N'FN', N'IF', N'TF'))
-drop function [dbo].[fnStatementTaxAccount]
-GO
-
-if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[fnStatementVat]') and xtype in (N'FN', N'IF', N'TF'))
-drop function [dbo].[fnStatementVat]
-GO
-
-if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[fnTaxCorpOrderTotals]') and xtype in (N'FN', N'IF', N'TF'))
-drop function [dbo].[fnTaxCorpOrderTotals]
-GO
-
-if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[fnTaxVatOrderTotals]') and xtype in (N'FN', N'IF', N'TF'))
-drop function [dbo].[fnTaxVatOrderTotals]
-GO
-
-if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[vwCorpTaxConfirmed]') and OBJECTPROPERTY(id, N'IsView') = 1)
-drop view [dbo].[vwCorpTaxConfirmed]
-GO
-
-if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[vwCorpTaxConfirmedBase]') and OBJECTPROPERTY(id, N'IsView') = 1)
-drop view [dbo].[vwCorpTaxConfirmedBase]
-GO
-
-if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[vwCorpTaxTasks]') and OBJECTPROPERTY(id, N'IsView') = 1)
-drop view [dbo].[vwCorpTaxTasks]
-GO
-
-if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[vwCorpTaxTasksBase]') and OBJECTPROPERTY(id, N'IsView') = 1)
-drop view [dbo].[vwCorpTaxTasksBase]
-GO
-
-if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[vwStatementCorpTax]') and OBJECTPROPERTY(id, N'IsView') = 1)
-drop view [dbo].[vwStatementCorpTax]
-GO
-
-if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[vwStatementInvoices]') and OBJECTPROPERTY(id, N'IsView') = 1)
-drop view [dbo].[vwStatementInvoices]
-GO
-
-if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[vwStatementTasksConfirmed]') and OBJECTPROPERTY(id, N'IsView') = 1)
-drop view [dbo].[vwStatementTasksConfirmed]
-GO
-
-if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[vwStatementTasksFull]') and OBJECTPROPERTY(id, N'IsView') = 1)
-drop view [dbo].[vwStatementTasksFull]
-GO
-
-
-if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[vwStatementVatDueDate]') and OBJECTPROPERTY(id, N'IsView') = 1)
-drop view [dbo].[vwStatementVatDueDate]
-GO
-
-if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[vwTaskVatConfirmed]') and OBJECTPROPERTY(id, N'IsView') = 1)
-drop view [dbo].[vwTaskVatConfirmed]
-GO
-
-if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[vwTaskVatFull]') and OBJECTPROPERTY(id, N'IsView') = 1)
-drop view [dbo].[vwTaskVatFull]
-GO
-
-SET QUOTED_IDENTIFIER ON 
-GO
-SET ANSI_NULLS ON 
-GO
-
-CREATE VIEW dbo.vwCorpTaxConfirmedBase
-WITH ENCRYPTION AS
+CREATE OR ALTER  VIEW dbo.vwCorpTaxConfirmedBase
+AS
 SELECT     TOP 100 PERCENT dbo.fnAccountPeriod(dbo.tbTask.PaymentOn) AS StartOn, 
                       CASE WHEN tbCashCategory.CashModeCode = 1 THEN (dbo.tbTask.UnitCharge * (dbo.tbTask.Quantity - ISNULL(dbo.vwTaskInvoicedQuantity.InvoiceQuantity,
                        0))) * - 1 ELSE dbo.tbTask.UnitCharge * (dbo.tbTask.Quantity - ISNULL(dbo.vwTaskInvoicedQuantity.InvoiceQuantity, 0)) END AS OrderValue
@@ -86,39 +11,17 @@ FROM         dbo.vwTaskInvoicedQuantity RIGHT OUTER JOIN
                       dbo.tbTask ON fnNetProfitCashCodes.CashCode = dbo.tbTask.CashCode ON dbo.vwTaskInvoicedQuantity.TaskCode = dbo.tbTask.TaskCode
 WHERE     (dbo.tbTask.TaskStatusCode > 1) AND (dbo.tbTask.TaskStatusCode < 4) AND 
                       (dbo.tbTask.Quantity - ISNULL(dbo.vwTaskInvoicedQuantity.InvoiceQuantity, 0) > 0)
-
 GO
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS ON 
-GO
-
-SET QUOTED_IDENTIFIER ON 
-GO
-SET ANSI_NULLS ON 
-GO
-
-CREATE VIEW dbo.vwCorpTaxConfirmed
-WITH ENCRYPTION AS
+CREATE OR ALTER  VIEW dbo.vwCorpTaxConfirmed
+AS
 SELECT     dbo.vwCorpTaxConfirmedBase.StartOn, SUM(dbo.vwCorpTaxConfirmedBase.OrderValue) AS NetProfit, 
                       SUM(dbo.vwCorpTaxConfirmedBase.OrderValue * dbo.tbSystemYearPeriod.CorporationTaxRate) AS CorporationTax
 FROM         dbo.vwCorpTaxConfirmedBase INNER JOIN
                       dbo.tbSystemYearPeriod ON dbo.vwCorpTaxConfirmedBase.StartOn = dbo.tbSystemYearPeriod.StartOn
 GROUP BY dbo.vwCorpTaxConfirmedBase.StartOn
-
 GO
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS ON 
-GO
-
-SET QUOTED_IDENTIFIER ON 
-GO
-SET ANSI_NULLS ON 
-GO
-
-CREATE VIEW dbo.vwCorpTaxTasksBase
-WITH ENCRYPTION AS
+CREATE OR ALTER  VIEW dbo.vwCorpTaxTasksBase
+AS
 SELECT     TOP 100 PERCENT dbo.fnAccountPeriod(dbo.tbTask.PaymentOn) AS StartOn, 
                       CASE WHEN tbCashCategory.CashModeCode = 1 THEN (dbo.tbTask.UnitCharge * (dbo.tbTask.Quantity - ISNULL(dbo.vwTaskInvoicedQuantity.InvoiceQuantity,
                        0))) * - 1 ELSE dbo.tbTask.UnitCharge * (dbo.tbTask.Quantity - ISNULL(dbo.vwTaskInvoicedQuantity.InvoiceQuantity, 0)) END AS OrderValue
@@ -129,43 +32,21 @@ FROM         dbo.vwTaskInvoicedQuantity RIGHT OUTER JOIN
                       fnNetProfitCashCodes.CashCode = dbo.tbCashCode.CashCode INNER JOIN
                       dbo.tbTask ON fnNetProfitCashCodes.CashCode = dbo.tbTask.CashCode ON dbo.vwTaskInvoicedQuantity.TaskCode = dbo.tbTask.TaskCode
 WHERE     (dbo.tbTask.TaskStatusCode < 4) AND (dbo.tbTask.Quantity - ISNULL(dbo.vwTaskInvoicedQuantity.InvoiceQuantity, 0) > 0)
-
 GO
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS ON 
-GO
-
-SET QUOTED_IDENTIFIER ON 
-GO
-SET ANSI_NULLS ON 
-GO
-
-CREATE VIEW dbo.vwCorpTaxTasks
-WITH ENCRYPTION AS
+CREATE OR ALTER  VIEW dbo.vwCorpTaxTasks
+AS
 SELECT     dbo.vwCorpTaxTasksBase.StartOn, SUM(dbo.vwCorpTaxTasksBase.OrderValue) AS NetProfit, 
                       dbo.vwCorpTaxTasksBase.OrderValue * dbo.tbSystemYearPeriod.CorporationTaxRate AS CorporationTax
 FROM         dbo.vwCorpTaxTasksBase INNER JOIN
                       dbo.tbSystemYearPeriod ON dbo.vwCorpTaxTasksBase.StartOn = dbo.tbSystemYearPeriod.StartOn
 GROUP BY dbo.vwCorpTaxTasksBase.StartOn, dbo.vwCorpTaxTasksBase.OrderValue * dbo.tbSystemYearPeriod.CorporationTaxRate
-
 GO
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS ON 
-GO
-
-SET QUOTED_IDENTIFIER ON 
-GO
-SET ANSI_NULLS ON 
-GO
-
-CREATE FUNCTION dbo.fnStatementTaxAccount
+CREATE OR ALTER  FUNCTION dbo.fnStatementTaxAccount
 	(
 	@TaxTypeCode smallint
 	)
 RETURNS nvarchar(10)
-WITH ENCRYPTION AS
+AS
 	BEGIN
 	declare @AccountCode nvarchar(10)
 	if exists (SELECT     AccountCode
@@ -185,19 +66,8 @@ WITH ENCRYPTION AS
 	
 	RETURN @AccountCode
 	END
-
 GO
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS ON 
-GO
-
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS OFF 
-GO
-
-CREATE FUNCTION dbo.fnStatementVat
+CREATE OR ALTER  FUNCTION dbo.fnStatementVat
 	()
 RETURNS @tbVat TABLE (
 	ReferenceCode nvarchar(20), 
@@ -207,7 +77,7 @@ RETURNS @tbVat TABLE (
 	PayOut money,
 	PayIn money
 	)
-WITH ENCRYPTION AS
+AS
 	BEGIN
 	declare @LastBalanceOn datetime
 	declare @VatDueOn datetime
@@ -233,41 +103,16 @@ WITH ENCRYPTION AS
 	
 	RETURN
 	END
-
 GO
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS ON 
-GO
-
-
-
-SET QUOTED_IDENTIFIER ON 
-GO
-SET ANSI_NULLS ON 
-GO
-
-CREATE VIEW dbo.vwStatementCorpTax
-WITH ENCRYPTION AS
+CREATE OR ALTER  VIEW dbo.vwStatementCorpTax
+AS
 SELECT     '-' AS ReferenceCode, dbo.fnStatementTaxAccount(1) AS AccountCode, StartOn AS TransactOn, 5 AS CashEntryTypeCode, 
                       CASE WHEN TaxDue - TaxPaid < 0 THEN Abs(TaxDue - TaxPaid) ELSE 0 END AS PayIn, 
                       CASE WHEN TaxDue - TaxPaid >= 0 THEN Abs(TaxDue - TaxPaid) ELSE 0 END AS PayOut
 FROM         dbo.vwTaxCorpStatement
 WHERE     (TaxDue - TaxPaid <> 0)
-
 GO
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS ON 
-GO
-
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS OFF 
-GO
-
-
-CREATE FUNCTION dbo.fnStatementCompany
+CREATE OR ALTER  FUNCTION dbo.fnStatementCompany
 	(
 	@IncludeForecasts bit = 0
 	)
@@ -280,7 +125,7 @@ RETURNS @tbStatement TABLE (
 	PayIn money,
 	Balance money
 	) 
-WITH ENCRYPTION AS
+AS
 	BEGIN
 	declare @ReferenceCode nvarchar(20) 
 	declare @AccountCode nvarchar(10)
@@ -356,42 +201,18 @@ WITH ENCRYPTION AS
 		
 	RETURN
 	END
-
-
 GO
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS ON 
-GO
-
-
-SET QUOTED_IDENTIFIER ON 
-GO
-SET ANSI_NULLS ON 
-GO
-
-CREATE VIEW dbo.vwStatementInvoices
-WITH ENCRYPTION AS
+CREATE OR ALTER  VIEW dbo.vwStatementInvoices
+AS
 SELECT     TOP 100 PERCENT dbo.vwCashSummaryInvoices.InvoiceNumber AS ReferenceCode, dbo.tbInvoice.AccountCode, 
                       dbo.tbInvoice.CollectOn AS TransactOn, 2 AS CashEntryTypeCode, dbo.vwCashSummaryInvoices.ToCollect AS PayIn, 
                       dbo.vwCashSummaryInvoices.ToPay AS PayOut
 FROM         dbo.vwCashSummaryInvoices INNER JOIN
                       dbo.tbInvoice ON dbo.vwCashSummaryInvoices.InvoiceNumber = dbo.tbInvoice.InvoiceNumber
 ORDER BY dbo.tbInvoice.CollectOn, 2
-
 GO
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS ON 
-GO
-
-SET QUOTED_IDENTIFIER ON 
-GO
-SET ANSI_NULLS ON 
-GO
-
-CREATE VIEW dbo.vwStatementTasksConfirmed
-WITH ENCRYPTION AS
+CREATE OR ALTER  VIEW dbo.vwStatementTasksConfirmed
+AS
 SELECT     TOP 100 PERCENT dbo.tbTask.TaskCode AS ReferenceCode, dbo.tbTask.AccountCode, dbo.tbTask.PaymentOn AS TransactOn, 3 AS CashEntryTypeCode, 
                       CASE WHEN tbCashCategory.CashModeCode = 1 THEN (dbo.tbTask.UnitCharge + dbo.tbTask.UnitCharge * dbo.tbSystemTaxCode.TaxRate) 
                       * (dbo.tbTask.Quantity - ISNULL(dbo.vwTaskInvoicedQuantity.InvoiceQuantity, 0)) ELSE 0 END AS PayOut, 
@@ -405,20 +226,9 @@ FROM         dbo.tbSystemTaxCode INNER JOIN
 WHERE     (dbo.tbTask.TaskStatusCode > 1) AND (dbo.tbTask.TaskStatusCode < 4) AND 
                       (dbo.tbTask.Quantity - ISNULL(dbo.vwTaskInvoicedQuantity.InvoiceQuantity, 0) > 0)
 ORDER BY dbo.tbTask.PaymentOn
-
 GO
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS ON 
-GO
-
-SET QUOTED_IDENTIFIER ON 
-GO
-SET ANSI_NULLS ON 
-GO
-
-CREATE VIEW dbo.vwStatementTasksFull
-WITH ENCRYPTION AS
+CREATE OR ALTER  VIEW dbo.vwStatementTasksFull
+AS
 SELECT     TOP 100 PERCENT dbo.tbTask.TaskCode AS ReferenceCode, dbo.tbTask.AccountCode, dbo.tbTask.PaymentOn AS TransactOn, 
                       CASE WHEN tbTask.TaskStatusCode = 1 THEN 4 ELSE 3 END AS CashEntryTypeCode, 
                       CASE WHEN tbCashCategory.CashModeCode = 1 THEN (dbo.tbTask.UnitCharge + dbo.tbTask.UnitCharge * dbo.tbSystemTaxCode.TaxRate) 
@@ -432,38 +242,15 @@ FROM         dbo.tbSystemTaxCode INNER JOIN
                       dbo.vwTaskInvoicedQuantity ON dbo.tbTask.TaskCode = dbo.vwTaskInvoicedQuantity.TaskCode
 WHERE     (dbo.tbTask.TaskStatusCode < 4) AND (dbo.tbTask.Quantity - ISNULL(dbo.vwTaskInvoicedQuantity.InvoiceQuantity, 0) > 0)
 ORDER BY dbo.tbTask.PaymentOn, CASE WHEN tbTask.TaskStatusCode = 1 THEN 4 ELSE 3 END
-
 GO
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS ON 
-GO
-
-SET QUOTED_IDENTIFIER ON 
-GO
-SET ANSI_NULLS ON 
-GO
-
-CREATE VIEW dbo.vwStatementVatDueDate
-WITH ENCRYPTION AS
+CREATE OR ALTER  VIEW dbo.vwStatementVatDueDate
+AS
 SELECT     TOP 1 PayOn
 FROM         dbo.fnTaxTypeDueDates(2) fnTaxTypeDueDates
 WHERE     (PayOn > GETDATE())
-
 GO
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS ON 
-GO
-
-
-SET QUOTED_IDENTIFIER ON 
-GO
-SET ANSI_NULLS ON 
-GO
-
-CREATE VIEW dbo.vwTaskVatConfirmed
-WITH ENCRYPTION AS
+CREATE OR ALTER  VIEW dbo.vwTaskVatConfirmed
+AS
 SELECT     dbo.fnAccountPeriod(dbo.tbTask.PaymentOn) AS StartOn, 
                       CASE WHEN tbCashCategory.CashModeCode = 1 THEN (dbo.tbTask.UnitCharge * (dbo.tbTask.Quantity - ISNULL(dbo.vwTaskInvoicedQuantity.InvoiceQuantity,
                        0))) * tbSystemTaxCode.TaxRate ELSE dbo.tbTask.UnitCharge * (dbo.tbTask.Quantity - ISNULL(dbo.vwTaskInvoicedQuantity.InvoiceQuantity, 0)) 
@@ -477,20 +264,9 @@ WHERE     (dbo.tbSystemTaxCode.TaxTypeCode = 2) AND (dbo.tbTask.TaskStatusCode >
                       (CASE WHEN tbCashCategory.CashModeCode = 1 THEN (dbo.tbTask.UnitCharge * (dbo.tbTask.Quantity - ISNULL(dbo.vwTaskInvoicedQuantity.InvoiceQuantity,
                        0))) * tbSystemTaxCode.TaxRate ELSE dbo.tbTask.UnitCharge * (dbo.tbTask.Quantity - ISNULL(dbo.vwTaskInvoicedQuantity.InvoiceQuantity, 0)) 
                       * tbSystemTaxCode.TaxRate * - 1 END <> 0)
-
 GO
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS ON 
-GO
-
-SET QUOTED_IDENTIFIER ON 
-GO
-SET ANSI_NULLS ON 
-GO
-
-CREATE VIEW dbo.vwTaskVatFull
-WITH ENCRYPTION AS
+CREATE OR ALTER  VIEW dbo.vwTaskVatFull
+AS
 SELECT     dbo.fnAccountPeriod(dbo.tbTask.PaymentOn) AS StartOn, 
                       CASE WHEN tbCashCategory.CashModeCode = 1 THEN (dbo.tbTask.UnitCharge * (dbo.tbTask.Quantity - ISNULL(dbo.vwTaskInvoicedQuantity.InvoiceQuantity,
                        0))) * tbSystemTaxCode.TaxRate ELSE dbo.tbTask.UnitCharge * (dbo.tbTask.Quantity - ISNULL(dbo.vwTaskInvoicedQuantity.InvoiceQuantity, 0)) 
@@ -504,21 +280,8 @@ WHERE     (dbo.tbSystemTaxCode.TaxTypeCode = 2) AND (dbo.tbTask.TaskStatusCode <
                       (CASE WHEN tbCashCategory.CashModeCode = 1 THEN (dbo.tbTask.UnitCharge * (dbo.tbTask.Quantity - ISNULL(dbo.vwTaskInvoicedQuantity.InvoiceQuantity,
                        0))) * tbSystemTaxCode.TaxRate ELSE dbo.tbTask.UnitCharge * (dbo.tbTask.Quantity - ISNULL(dbo.vwTaskInvoicedQuantity.InvoiceQuantity, 0)) 
                       * tbSystemTaxCode.TaxRate * - 1 END <> 0)
-
 GO
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS ON 
-GO
-
-
-
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS OFF 
-GO
-
-CREATE FUNCTION dbo.fnTaxCorpOrderTotals
+CREATE OR ALTER  FUNCTION dbo.fnTaxCorpOrderTotals
 (@IncludeForecasts bit = 0)
 RETURNS @tbCorp TABLE 
 	(
@@ -526,7 +289,7 @@ RETURNS @tbCorp TABLE
 	NetProfit money,
 	CorporationTax money
 	)
- WITH ENCRYPTION AS
+AS
 	BEGIN
 	declare @PayOn datetime
 	declare @PayFrom datetime
@@ -566,17 +329,7 @@ RETURNS @tbCorp TABLE
 	RETURN
 	END
 GO
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS ON 
-GO
-
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS OFF 
-GO
-
-CREATE FUNCTION dbo.fnTaxVatOrderTotals
+CREATE OR ALTER  FUNCTION dbo.fnTaxVatOrderTotals
 	(@IncludeForecasts bit = 0)
 RETURNS @tbVat TABLE 
 	(
@@ -584,7 +337,7 @@ RETURNS @tbVat TABLE
 	PayIn money,
 	PayOut money
 	)
- WITH ENCRYPTION AS
+AS
 	BEGIN
 	declare @PayOn datetime
 	declare @PayFrom datetime
@@ -626,26 +379,11 @@ RETURNS @tbVat TABLE
 	RETURN
 	END
 GO
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS ON 
-GO
-
-if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[spStatementCompany]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
-drop procedure [dbo].[spStatementCompany]
-GO
-
-SET QUOTED_IDENTIFIER ON 
-GO
-SET ANSI_NULLS ON 
-GO
-
-
-CREATE PROCEDURE dbo.spStatementCompany
+CREATE OR ALTER  PROCEDURE dbo.spStatementCompany
 	(
 		@IncludeForecasts bit = 0
 	)
-WITH ENCRYPTION AS
+AS
 	SELECT     fnStatementCompany.TransactOn, fnStatementCompany.CashEntryTypeCode, fnStatementCompany.ReferenceCode, 
 	                      fnStatementCompany.AccountCode, tbOrg.AccountName, tbCashEntryType.CashEntryType, fnStatementCompany.PayOut, fnStatementCompany.PayIn, 
 	                      fnStatementCompany.Balance
@@ -656,27 +394,13 @@ WITH ENCRYPTION AS
 	
 	
 	RETURN 
-
-
 GO
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS ON 
-GO
-
-
-SET QUOTED_IDENTIFIER ON 
-GO
-SET ANSI_NULLS ON 
-GO
-
-
 ALTER  PROCEDURE dbo.spTaskSchedule
 	(
 	@ParentTaskCode nvarchar(20),
 	@ActionOn datetime = null output
 	)
-WITH ENCRYPTION  AS
+AS
 declare @UserId nvarchar(10)
 declare @StepNumber smallint
 declare @TaskCode nvarchar(20)
@@ -748,25 +472,12 @@ declare @PaymentOn datetime
 	deallocate curAct	
 	
 	RETURN
-
 GO
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS ON 
-GO
-
-
-
-SET QUOTED_IDENTIFIER ON 
-GO
-SET ANSI_NULLS ON 
-GO
-
 ALTER  PROCEDURE dbo.spTaskConfigure 
 	(
 	@ParentTaskCode nvarchar(20)
 	)
-WITH ENCRYPTION  AS
+AS
 declare @StepNumber smallint
 declare @TaskCode nvarchar(20)
 declare @UserId nvarchar(10)
@@ -889,31 +600,14 @@ declare @ActivityCode nvarchar(50)
 
 
 	RETURN
-
-
-
 GO
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS ON 
-GO
-
-if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[spTaskDefaultPaymentOn]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
-drop procedure [dbo].[spTaskDefaultPaymentOn]
-GO
-
-SET QUOTED_IDENTIFIER ON 
-GO
-SET ANSI_NULLS ON 
-GO
-
-CREATE PROCEDURE dbo.spTaskDefaultPaymentOn
+CREATE OR ALTER  PROCEDURE dbo.spTaskDefaultPaymentOn
 	(
 		@AccountCode nvarchar(10),
 		@ActionOn datetime,
 		@PaymentOn datetime output
 	)
-WITH ENCRYPTION AS
+AS
 declare @PaymentDays smallint
 declare @UserId nvarchar(10)
 
@@ -925,26 +619,14 @@ declare @UserId nvarchar(10)
 	set @PaymentOn = dbo.fnSystemAdjustToCalendar(@UserId, dateadd(d, @PaymentDays, @ActionOn), 0)
 	
 	RETURN 
-
 GO
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS ON 
-GO
-
-SET QUOTED_IDENTIFIER ON 
-GO
-SET ANSI_NULLS ON 
-GO
-
-
 ALTER  PROCEDURE dbo.spInvoiceRaise
 	(
 	@TaskCode nvarchar(20),
 	@InvoiceTypeCode smallint,
 	@InvoiceNumber nvarchar(20) = null output
 	)
-WITH ENCRYPTION AS
+AS
 declare @UserId nvarchar(10)
 declare @NextNumber int
 declare @InvoiceSuffix nvarchar(4)
@@ -999,12 +681,4 @@ declare @AccountCode nvarchar(10)
 	commit tran Invoice
 	
 	RETURN
-
-
-
-
-GO
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS ON 
 GO

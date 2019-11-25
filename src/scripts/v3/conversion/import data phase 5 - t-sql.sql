@@ -6,11 +6,11 @@ Release: 3.02.1
 Date: 7/5/2018
 Author: IaM
 
-Trade Control by Trade Control Ltd is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License. 
+Trade Control by Trade Control Ltd is licensed under GNU General Public License v3.0. 
 
 You may obtain a copy of the License at
 
-	http://creativecommons.org/licenses/by-sa/4.0/
+	https://www.gnu.org/licenses/gpl-3.0.en.html
 
 *********************************************************/
 
@@ -21,10 +21,10 @@ USE misTradeControl
 GO
 
 /****** Object:  UserDefinedFunction [App].[fnAccountPeriod]    Script Date: 18/06/2018 18:07:09 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE FUNCTION [App].[fnAccountPeriod]
@@ -45,10 +45,10 @@ RETURNS datetime
 GO
 
 /****** Object:  UserDefinedFunction [App].[fnActiveStartOn]    Script Date: 18/06/2018 18:07:09 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE FUNCTION [App].[fnActiveStartOn]
@@ -63,10 +63,10 @@ RETURNS datetime
 GO
 
 /****** Object:  UserDefinedFunction [App].[fnAdjustDateToBucket]    Script Date: 18/06/2018 18:07:09 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 /*****************************************
@@ -105,10 +105,10 @@ RETURNS datetime
 GO
 
 /****** Object:  UserDefinedFunction [App].[fnAdjustToCalendar]    Script Date: 18/06/2018 18:07:09 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 
@@ -177,10 +177,10 @@ RETURNS datetime
 GO
 
 /****** Object:  UserDefinedFunction [App].[fnCashCode]    Script Date: 18/06/2018 18:07:09 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE  FUNCTION [App].[fnCashCode]
@@ -202,10 +202,10 @@ RETURNS nvarchar(50)
 GO
 
 /****** Object:  UserDefinedFunction [Cash].[fnCodeDefaultAccount]    Script Date: 18/06/2018 18:07:09 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE FUNCTION [Cash].[fnCodeDefaultAccount] 
@@ -247,10 +247,10 @@ RETURNS nvarchar(10)
 GO
 
 /****** Object:  UserDefinedFunction [App].[fnCompanyAccount]    Script Date: 18/06/2018 18:07:09 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 
@@ -266,10 +266,10 @@ AS
 GO
 
 /****** Object:  UserDefinedFunction [Cash].[fnCompanyBalance]    Script Date: 18/06/2018 18:07:09 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE FUNCTION [Cash].[fnCompanyBalance]
@@ -288,10 +288,10 @@ RETURNS MONEY
 GO
 
 /****** Object:  UserDefinedFunction [App].[fnCorpTaxBalance]    Script Date: 18/06/2018 18:07:09 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE FUNCTION [App].[fnCorpTaxBalance]
@@ -315,10 +315,10 @@ RETURNS money
 GO
 
 /****** Object:  UserDefinedFunction [Task].[fnCost]    Script Date: 18/06/2018 18:07:09 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE FUNCTION [Task].[fnCost]
@@ -358,10 +358,10 @@ AS
 GO
 
 /****** Object:  UserDefinedFunction [Cash].[fnCurrentBalance]    Script Date: 18/06/2018 18:07:09 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE FUNCTION [Cash].[fnCurrentBalance]
@@ -381,10 +381,10 @@ AS
 GO
 
 /****** Object:  UserDefinedFunction [App].[fnDateBucket]    Script Date: 18/06/2018 18:07:09 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE FUNCTION [App].[fnDateBucket]
@@ -401,10 +401,10 @@ RETURNS smallint
 GO
 
 /****** Object:  UserDefinedFunction [Task].[fnDefaultPaymentOn]    Script Date: 18/06/2018 18:07:09 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE FUNCTION [Task].[fnDefaultPaymentOn]
@@ -442,10 +442,10 @@ AS
 GO
 
 /****** Object:  UserDefinedFunction [Task].[fnDefaultTaxCode]    Script Date: 18/06/2018 18:07:09 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE FUNCTION [Task].[fnDefaultTaxCode] 
@@ -483,10 +483,10 @@ RETURNS nvarchar(10)
 GO
 
 /****** Object:  UserDefinedFunction [App].[fnDocInvoiceType]    Script Date: 18/06/2018 18:07:09 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE FUNCTION [App].[fnDocInvoiceType]
@@ -511,10 +511,10 @@ AS
 GO
 
 /****** Object:  UserDefinedFunction [App].[fnDocTaskType]    Script Date: 18/06/2018 18:07:09 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE FUNCTION [App].[fnDocTaskType]
@@ -549,10 +549,10 @@ AS
 GO
 
 /****** Object:  UserDefinedFunction [Task].[fnEmailAddress]    Script Date: 18/06/2018 18:07:09 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE FUNCTION [Task].[fnEmailAddress]
@@ -592,10 +592,10 @@ AS
 GO
 
 /****** Object:  UserDefinedFunction [App].[fnHistoryStartOn]    Script Date: 18/06/2018 18:07:09 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE FUNCTION [App].[fnHistoryStartOn]()
@@ -614,10 +614,10 @@ AS
 GO
 
 /****** Object:  UserDefinedFunction [Org].[fnIndustrySectors]    Script Date: 18/06/2018 18:07:09 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE FUNCTION [Org].[fnIndustrySectors]
@@ -657,10 +657,10 @@ RETURNS nvarchar(256)
 GO
 
 /****** Object:  UserDefinedFunction [Task].[fnIsExpense]    Script Date: 18/06/2018 18:07:09 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE FUNCTION [Task].[fnIsExpense]
@@ -697,10 +697,10 @@ AS
 GO
 
 /****** Object:  UserDefinedFunction [App].[fnParsePrimaryKey]    Script Date: 18/06/2018 18:07:09 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE FUNCTION [App].[fnParsePrimaryKey](@PK NVARCHAR(50)) RETURNS BIT
@@ -735,10 +735,10 @@ AS
 GO
 
 /****** Object:  UserDefinedFunction [App].[fnProfileText]    Script Date: 18/06/2018 18:07:09 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE FUNCTION [App].[fnProfileText]
@@ -756,10 +756,10 @@ RETURNS nvarchar(255)
 GO
 
 /****** Object:  UserDefinedFunction [Cash].[fnReserveBalance]    Script Date: 18/06/2018 18:07:09 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE FUNCTION [Cash].[fnReserveBalance]
@@ -779,10 +779,10 @@ AS
 GO
 
 /****** Object:  UserDefinedFunction [Org].[fnStatementTaxAccount]    Script Date: 18/06/2018 18:07:09 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE FUNCTION [Org].[fnStatementTaxAccount]
@@ -813,10 +813,10 @@ RETURNS nvarchar(10)
 GO
 
 /****** Object:  UserDefinedFunction [App].[fnTaxHorizon]    Script Date: 18/06/2018 18:07:09 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE FUNCTION [App].[fnTaxHorizon]	()
@@ -831,10 +831,10 @@ AS
 GO
 
 /****** Object:  UserDefinedFunction [App].[fnVatBalance]    Script Date: 18/06/2018 18:07:09 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE  FUNCTION [App].[fnVatBalance]
@@ -858,10 +858,10 @@ RETURNS money
 GO
 
 /****** Object:  UserDefinedFunction [App].[fnWeekDay]    Script Date: 18/06/2018 18:07:09 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE FUNCTION [App].[fnWeekDay]
@@ -882,10 +882,10 @@ RETURNS smallint
 GO
 
 /****** Object:  UserDefinedFunction [App].[fnActivePeriod]    Script Date: 18/06/2018 18:08:08 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 
@@ -921,10 +921,10 @@ RETURNS @tbSystemYearPeriod TABLE (YearNumber smallint, StartOn datetime, EndOn 
 GO
 
 /****** Object:  UserDefinedFunction [App].[fnBuckets]    Script Date: 18/06/2018 18:08:08 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE FUNCTION [App].[fnBuckets]
@@ -997,10 +997,10 @@ RETURNS  @tbBkn TABLE (Period smallint, BucketId nvarchar(10), StartDate datetim
 GO
 
 /****** Object:  UserDefinedFunction [Cash].[fnAccountStatement]    Script Date: 18/06/2018 18:08:08 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 
@@ -1068,10 +1068,10 @@ RETURNS @tbCash TABLE (EntryNumber int, PaymentCode nvarchar(20), PaidOn datetim
 GO
 
 /****** Object:  UserDefinedFunction [Cash].[fnAccountStatements]    Script Date: 18/06/2018 18:08:08 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE FUNCTION [Cash].[fnAccountStatements]
@@ -1104,10 +1104,10 @@ RETURNS  @tbCashAccount TABLE (CashAccountCode nvarchar(20), EntryNumber int, Pa
 GO
 
 /****** Object:  UserDefinedFunction [Cash].[fnCategoryCashCodes]    Script Date: 18/06/2018 18:08:08 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE FUNCTION [Cash].[fnCategoryCashCodes]
@@ -1149,10 +1149,10 @@ RETURNS @tbCashCode TABLE (CashCode nvarchar(50))
 GO
 
 /****** Object:  UserDefinedFunction [Cash].[fnCorpTaxCashCodes]    Script Date: 18/06/2018 18:08:08 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE FUNCTION [Cash].[fnCorpTaxCashCodes]
@@ -1173,10 +1173,10 @@ RETURNS @tbCashCode TABLE (CashCode nvarchar(50))
 GO
 
 /****** Object:  UserDefinedFunction [Cash].[fnStatementCompany]    Script Date: 18/06/2018 18:08:08 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE FUNCTION [Cash].[fnStatementCompany]()
@@ -1305,10 +1305,10 @@ RETURNS @tbStatement TABLE (
 GO
 
 /****** Object:  UserDefinedFunction [Cash].[fnStatementReserves]    Script Date: 18/06/2018 18:08:08 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE FUNCTION [Cash].[fnStatementReserves] ()
@@ -1408,10 +1408,10 @@ AS
 GO
 
 /****** Object:  UserDefinedFunction [Cash].[fnStatementTaxEntries]    Script Date: 18/06/2018 18:08:08 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE FUNCTION [Cash].[fnStatementTaxEntries](@TaxTypeCode smallint)
@@ -1527,10 +1527,10 @@ VatTax:
 GO
 
 /****** Object:  UserDefinedFunction [Cash].[fnTaxCorpOrderTotals]    Script Date: 18/06/2018 18:08:08 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 
@@ -1592,10 +1592,10 @@ RETURNS @tbCorp TABLE
 GO
 
 /****** Object:  UserDefinedFunction [Cash].[fnTaxCorpStatement]    Script Date: 18/06/2018 18:08:08 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE FUNCTION [Cash].[fnTaxCorpStatement]()
@@ -1647,10 +1647,10 @@ RETURNS @tbCorp TABLE
 GO
 
 /****** Object:  UserDefinedFunction [Cash].[fnTaxCorpTotals]    Script Date: 18/06/2018 18:08:08 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE FUNCTION [Cash].[fnTaxCorpTotals]
@@ -1692,10 +1692,10 @@ RETURNS @tbCorp TABLE
 GO
 
 /****** Object:  UserDefinedFunction [Cash].[fnTaxTypeDueDates]    Script Date: 18/06/2018 18:08:08 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE  FUNCTION [Cash].[fnTaxTypeDueDates](@TaxTypeCode smallint)
@@ -1835,10 +1835,10 @@ VatTax:
 GO
 
 /****** Object:  UserDefinedFunction [Cash].[fnTaxVatOrderTotals]    Script Date: 18/06/2018 18:08:08 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE FUNCTION [Cash].[fnTaxVatOrderTotals]
@@ -1899,10 +1899,10 @@ RETURNS @tbVat TABLE
 GO
 
 /****** Object:  UserDefinedFunction [Cash].[fnTaxVatStatement]    Script Date: 18/06/2018 18:08:08 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE FUNCTION [Cash].[fnTaxVatStatement]()
@@ -1954,10 +1954,10 @@ RETURNS @tbVat TABLE
 GO
 
 /****** Object:  UserDefinedFunction [Cash].[fnTaxVatTotals]    Script Date: 18/06/2018 18:08:08 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 
@@ -2017,10 +2017,10 @@ RETURNS @tbVat TABLE
 GO
 
 /****** Object:  UserDefinedFunction [Org].[fnStatement]    Script Date: 18/06/2018 18:08:08 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE FUNCTION [Org].[fnStatement]
@@ -2074,10 +2074,10 @@ RETURNS @tbStatement TABLE (TransactedOn datetime, OrderBy smallint, Reference n
 GO
 
 /****** Object:  UserDefinedFunction [Task].[fnProfit]    Script Date: 18/06/2018 18:08:08 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE FUNCTION [Task].[fnProfit]()
@@ -2140,10 +2140,10 @@ DECLARE @InvoicedCostPaid money
 GO
 
 /****** Object:  UserDefinedFunction [Task].[fnProfitCost]    Script Date: 18/06/2018 18:08:08 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE FUNCTION [Task].[fnProfitCost]
@@ -2210,10 +2210,10 @@ DECLARE @CashModeCode smallint
 GO
 
 /****** Object:  UserDefinedFunction [Task].[fnProfitOrder]    Script Date: 18/06/2018 18:08:08 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 
@@ -2255,10 +2255,10 @@ DECLARE @InvoicedCostPaid money
 GO
 
 /****** Object:  UserDefinedFunction [Invoice].[fnEditCreditCandidates]    Script Date: 18/06/2018 18:08:08 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE FUNCTION [Invoice].[fnEditCreditCandidates] (@InvoiceNumber nvarchar(20), @AccountCode nvarchar(10))
@@ -2286,10 +2286,10 @@ AS
 GO
 
 /****** Object:  UserDefinedFunction [Invoice].[fnEditDebitCandidates]    Script Date: 18/06/2018 18:08:08 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE FUNCTION [Invoice].[fnEditDebitCandidates] (@InvoiceNumber nvarchar(20), @AccountCode nvarchar(10))
@@ -2317,10 +2317,10 @@ AS
 GO
 
 /****** Object:  UserDefinedFunction [Invoice].[fnEditTasks]    Script Date: 18/06/2018 18:08:08 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 
@@ -2346,10 +2346,10 @@ AS
 GO
 
 /****** Object:  UserDefinedFunction [Org].[fnRebuildInvoiceItems]    Script Date: 18/06/2018 18:08:08 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE FUNCTION [Org].[fnRebuildInvoiceItems]
@@ -2368,10 +2368,10 @@ RETURNS TABLE
 GO
 
 /****** Object:  UserDefinedFunction [Org].[fnRebuildInvoiceTasks]    Script Date: 18/06/2018 18:08:08 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE FUNCTION [Org].[fnRebuildInvoiceTasks]
@@ -2388,10 +2388,10 @@ RETURNS TABLE
 	         GROUP BY Invoice.tbTask.InvoiceNumber, Invoice.tbInvoice.InvoiceNumber )
 GO
 /****** Object:  View [Task].[vwBucket]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Task].[vwBucket]
@@ -2404,10 +2404,10 @@ FROM            Task.tbTask AS task CROSS APPLY
 GO
 
 /****** Object:  View [Task].[vwTasks]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Task].[vwTasks]
@@ -2431,10 +2431,10 @@ FROM            Usr.tbUser INNER JOIN
 GO
 
 /****** Object:  View [Invoice].[vwCandidateSales]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Invoice].[vwCandidateSales]
@@ -2448,10 +2448,10 @@ ORDER BY ActionOn;
 GO
 
 /****** Object:  View [Invoice].[vwCandidatePurchases]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 
@@ -2466,10 +2466,10 @@ ORDER BY ActionOn;
 GO
 
 /****** Object:  View [Invoice].[vwRegisterItems]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 /************************************************************
@@ -2501,10 +2501,10 @@ FROM         Invoice.tbInvoice INNER JOIN
 GO
 
 /****** Object:  View [Invoice].[vwRegisterTasks]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Invoice].[vwRegisterTasks]
@@ -2529,10 +2529,10 @@ FROM            Invoice.tbInvoice INNER JOIN
 GO
 
 /****** Object:  View [Invoice].[vwRegisterDetail]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Invoice].[vwRegisterDetail]
@@ -2553,10 +2553,10 @@ SELECT *, ([InvoiceValue])+[TaxValue]-([PaidValue]+[PaidTaxValue]) AS UnpaidValu
 GO
 
 /****** Object:  View [Invoice].[vwRegisterCashCodes]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Invoice].[vwRegisterCashCodes]
@@ -2568,10 +2568,10 @@ ORDER BY StartOn, CashCode;
 GO
 
 /****** Object:  View [Invoice].[vwRegister]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Invoice].[vwRegister]
@@ -2593,10 +2593,10 @@ WHERE     (Invoice.tbInvoice.AccountCode <> App.fnCompanyAccount())
 GO
 
 /****** Object:  View [Invoice].[vwRegisterPurchases]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Invoice].[vwRegisterPurchases]
@@ -2608,10 +2608,10 @@ WHERE        (InvoiceTypeCode > 1);
 GO
 
 /****** Object:  View [Invoice].[vwRegisterPurchaseTasks]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Invoice].[vwRegisterPurchaseTasks]
@@ -2623,10 +2623,10 @@ WHERE        (InvoiceTypeCode > 1);
 GO
 
 /****** Object:  View [Task].[vwInvoicedQuantity]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Task].[vwInvoicedQuantity]
@@ -2640,10 +2640,10 @@ GROUP BY Invoice.tbTask.TaskCode
 GO
 
 /****** Object:  View [App].[vwTaxRates]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [App].[vwTaxRates]
@@ -2653,10 +2653,10 @@ FROM         App.tbTaxCode
 GO
 
 /****** Object:  View [Cash].[vwStatementTasksConfirmed]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 
@@ -2678,10 +2678,10 @@ WHERE     (Task.tbTask.TaskStatusCode > 0) AND (Task.tbTask.TaskStatusCode < 3) 
 GO
 
 /****** Object:  View [Invoice].[vwRegisterSales]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Invoice].[vwRegisterSales]
@@ -2693,10 +2693,10 @@ WHERE        (InvoiceTypeCode < 2);
 GO
 
 /****** Object:  View [Invoice].[vwRegisterSaleTasks]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Invoice].[vwRegisterSaleTasks]
@@ -2708,10 +2708,10 @@ WHERE        (InvoiceTypeCode < 2);
 GO
 
 /****** Object:  View [Org].[vwStatementPayments]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Org].[vwStatementPayments]
@@ -2725,10 +2725,10 @@ ORDER BY Org.tbPayment.AccountCode, Org.tbPayment.PaidOn
 GO
 
 /****** Object:  View [Org].[vwStatementPaymentBase]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Org].[vwStatementPaymentBase]
@@ -2739,10 +2739,10 @@ GROUP BY AccountCode, TransactedOn, OrderBy, Reference, StatementType
 GO
 
 /****** Object:  View [Org].[vwStatementInvoices]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Org].[vwStatementInvoices]
@@ -2757,10 +2757,10 @@ ORDER BY Invoice.tbInvoice.AccountCode, Invoice.tbInvoice.InvoicedOn
 GO
 
 /****** Object:  View [Org].[vwStatementBase]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Org].[vwStatementBase]
@@ -2773,10 +2773,10 @@ FROM         Org.vwStatementInvoices
 GO
 
 /****** Object:  View [Org].[vwPurchases]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Org].[vwPurchases]
@@ -2789,10 +2789,10 @@ WHERE        (CashModeCode = 0) AND (CashCode IS NOT NULL);
 GO
 
 /****** Object:  View [Org].[vwSales]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Org].[vwSales]
@@ -2805,10 +2805,10 @@ WHERE        (CashModeCode = 1) AND (CashCode IS NOT NULL);
 GO
 
 /****** Object:  View [Cash].[vwCodeInvoiceSummary]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Cash].[vwCodeInvoiceSummary]
@@ -2823,10 +2823,10 @@ GROUP BY Invoice.vwRegisterDetail.StartOn, Invoice.vwRegisterDetail.CashCode
 GO
 
 /****** Object:  View [Task].[vwOrgActivity]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Task].[vwOrgActivity]
@@ -2839,10 +2839,10 @@ WHERE        (TaskStatusCode < 2);
 GO
 
 /****** Object:  View [Task].[vwActiveData]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Task].[vwActiveData]
@@ -2856,10 +2856,10 @@ WHERE        (TaskStatusCode < 2);
 GO
 
 /****** Object:  View [Task].[vwPurchases]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Task].[vwPurchases]
@@ -2877,10 +2877,10 @@ WHERE        (Task.vwTasks.CashCode IS NOT NULL) AND (Task.vwTasks.CashModeCode 
 GO
 
 /****** Object:  View [Org].[vwRebuildInvoicedItems]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Org].[vwRebuildInvoicedItems]
@@ -2895,10 +2895,10 @@ FROM         Invoice.tbItem INNER JOIN
 GO
 
 /****** Object:  View [Org].[vwRebuildInvoicedTasks]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Org].[vwRebuildInvoicedTasks]
@@ -2913,10 +2913,10 @@ FROM         Invoice.tbTask INNER JOIN
 GO
 
 /****** Object:  View [Org].[vwRebuildInvoices]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Org].[vwRebuildInvoices]
@@ -2930,10 +2930,10 @@ FROM         Org.vwRebuildInvoicedItems
 GO
 
 /****** Object:  View [Task].[vwSales]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Task].[vwSales]
@@ -2951,10 +2951,10 @@ WHERE        (Task.vwTasks.CashCode IS NOT NULL) AND (Task.vwTasks.CashModeCode 
 GO
 
 /****** Object:  View [Org].[vwRebuildInvoiceTotals]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Org].[vwRebuildInvoiceTotals]
@@ -2966,10 +2966,10 @@ GROUP BY AccountCode, InvoiceNumber
 GO
 
 /****** Object:  View [Cash].[vwPolarData]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Cash].[vwPolarData]
@@ -2986,10 +2986,10 @@ WHERE        (App.tbYear.CashStatusCode < 3)
 GO
 
 /****** Object:  View [Cash].[vwFlowData]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Cash].[vwFlowData]
@@ -3002,10 +3002,10 @@ FROM            App.tbYearPeriod INNER JOIN
 GO
 
 /****** Object:  View [Cash].[vwAccountStatement]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER OFF
+
 GO
 
 
@@ -3027,10 +3027,10 @@ FROM         Org.tbPayment INNER JOIN
 GO
 
 /****** Object:  View [Cash].[vwAccountStatements]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 
@@ -3053,10 +3053,10 @@ ORDER BY fnCashAccountStatements.CashAccountCode, fnCashAccountStatements.EntryN
 GO
 
 /****** Object:  View [Cash].[vwAccountStatementListing]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Cash].[vwAccountStatementListing]
@@ -3076,10 +3076,10 @@ FROM            App.tbYearPeriod INNER JOIN
 GO
 
 /****** Object:  View [Invoice].[vwOutstandingItems]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Invoice].[vwOutstandingItems]
@@ -3090,10 +3090,10 @@ FROM         Invoice.tbItem
 GO
 
 /****** Object:  View [Invoice].[vwOutstandingTasks]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Invoice].[vwOutstandingTasks]
@@ -3104,10 +3104,10 @@ FROM         Invoice.tbTask
 GO
 
 /****** Object:  View [Invoice].[vwOutstandingBase]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Invoice].[vwOutstandingBase]
@@ -3122,10 +3122,10 @@ FROM         Invoice.vwOutstandingTasks
 GO
 
 /****** Object:  View [Invoice].[vwVatItems]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 
@@ -3143,10 +3143,10 @@ ORDER BY StartOn
 GO
 
 /****** Object:  View [Invoice].[vwVatTasks]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Invoice].[vwVatTasks]
@@ -3164,10 +3164,10 @@ ORDER BY StartOn
 GO
 
 /****** Object:  View [Invoice].[vwVatBase]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Invoice].[vwVatBase]
@@ -3181,10 +3181,10 @@ FROM         Invoice.vwVatTasks
 GO
 
 /****** Object:  View [Invoice].[vwVatDetail]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Invoice].[vwVatDetail]
@@ -3211,10 +3211,10 @@ FROM            Invoice.vwVatBase
 GO
 
 /****** Object:  View [Invoice].[vwVatSummary]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Invoice].[vwVatSummary]
@@ -3232,10 +3232,10 @@ FROM tbBase;
 GO
 
 /****** Object:  View [Invoice].[vwVatDetailListing]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Invoice].[vwVatDetailListing]
@@ -3250,10 +3250,10 @@ FROM            Invoice.vwVatSummary INNER JOIN
 GO
 
 /****** Object:  View [Invoice].[vwOutstanding]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Invoice].[vwOutstanding]
@@ -3271,10 +3271,10 @@ WHERE     (Invoice.tbInvoice.InvoiceStatusCode = 1) OR
 GO
 
 /****** Object:  View [Cash].[vwStatementTasksFull]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Cash].[vwStatementTasksFull]
@@ -3295,10 +3295,10 @@ WHERE     (Task.tbTask.TaskStatusCode < 3) AND (Task.tbTask.Quantity - ISNULL(Ta
 GO
 
 /****** Object:  View [Invoice].[vwSummaryTasks]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Invoice].[vwSummaryTasks]
@@ -3316,10 +3316,10 @@ WHERE     (Invoice.tbInvoice.InvoicedOn >= App.fnHistoryStartOn())
 GO
 
 /****** Object:  View [Invoice].[vwSummaryItems]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Invoice].[vwSummaryItems]
@@ -3336,10 +3336,10 @@ WHERE     (Invoice.tbInvoice.InvoicedOn >= App.fnHistoryStartOn())
 GO
 
 /****** Object:  View [Invoice].[vwSummaryBase]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Invoice].[vwSummaryBase]
@@ -3353,10 +3353,10 @@ FROM         Invoice.vwSummaryTasks
 GO
 
 /****** Object:  View [Invoice].[vwSummaryTotals]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Invoice].[vwSummaryTotals]
@@ -3369,10 +3369,10 @@ GROUP BY Invoice.vwSummaryBase.StartOn, Invoice.vwSummaryBase.InvoiceTypeCode, I
 GO
 
 /****** Object:  View [Invoice].[vwHistoryCashCodes]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Invoice].[vwHistoryCashCodes]
@@ -3388,10 +3388,10 @@ GROUP BY App.tbYearPeriod.YearNumber, CONCAT(App.tbMonth.MonthName, SPACE(1), YE
 GO
 
 /****** Object:  View [Invoice].[vwSummaryMargin]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Invoice].[vwSummaryMargin]
@@ -3403,10 +3403,10 @@ GROUP BY StartOn
 GO
 
 /****** Object:  View [Invoice].[vwHistoryPurchaseItems]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Invoice].[vwHistoryPurchaseItems]
@@ -3425,10 +3425,10 @@ WHERE        (Invoice.vwRegisterDetail.InvoiceTypeCode > 1);
 GO
 
 /****** Object:  View [Invoice].[vwSummary]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Invoice].[vwSummary]
@@ -3444,10 +3444,10 @@ FROM         Invoice.vwSummaryMargin
 GO
 
 /****** Object:  View [Invoice].[vwHistoryPurchases]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Invoice].[vwHistoryPurchases]
@@ -3465,10 +3465,10 @@ WHERE        (Invoice.vwRegister.InvoiceTypeCode > 1);
 GO
 
 /****** Object:  View [Invoice].[vwHistorySalesItems]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Invoice].[vwHistorySalesItems]
@@ -3487,10 +3487,10 @@ WHERE        (Invoice.vwRegisterDetail.InvoiceTypeCode < 2);
 GO
 
 /****** Object:  View [Invoice].[vwTaxBase]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 
@@ -3514,10 +3514,10 @@ HAVING      (NOT (TaxCode IS NULL))
 GO
 
 /****** Object:  View [Invoice].[vwTaxSummary]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 
@@ -3538,10 +3538,10 @@ GROUP BY InvoiceNumber, TaxCode
 GO
 
 /****** Object:  View [Invoice].[vwHistorySales]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Invoice].[vwHistorySales]
@@ -3559,10 +3559,10 @@ WHERE        (Invoice.vwRegister.InvoiceTypeCode < 2);
 GO
 
 /****** Object:  View [Org].[vwMailContacts]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 
@@ -3578,10 +3578,10 @@ WHERE     (OnMailingList <> 0)
 GO
 
 /****** Object:  View [Org].[vwAddresses]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 
@@ -3603,10 +3603,10 @@ ORDER BY Org.tbOrg.AccountName
 GO
 
 /****** Object:  View [Org].[vwTaskCount]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 
@@ -3623,10 +3623,10 @@ GROUP BY AccountCode
 GO
 
 /****** Object:  View [Org].[vwDatasheet]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Org].[vwDatasheet]
@@ -3649,10 +3649,10 @@ FROM         Org.tbOrg INNER JOIN
 GO
 
 /****** Object:  View [Task].[vwOpBucket]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Task].[vwOpBucket]
@@ -3665,10 +3665,10 @@ FROM            Task.tbOp AS op CROSS APPLY
 GO
 
 /****** Object:  View [Task].[vwOps]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Task].[vwOps]
@@ -3685,10 +3685,10 @@ FROM            Task.tbOp INNER JOIN
 GO
 
 /****** Object:  View [Org].[vwStatusReport]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Org].[vwStatusReport]
@@ -3710,10 +3710,10 @@ WHERE        (Org.tbPayment.PaymentStatusCode = 1);
 GO
 
 /****** Object:  View [Cash].[vwCorpTaxInvoiceItems]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 
@@ -3730,10 +3730,10 @@ ORDER BY StartOn
 GO
 
 /****** Object:  View [Cash].[vwCorpTaxInvoiceTasks]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Cash].[vwCorpTaxInvoiceTasks]
@@ -3749,10 +3749,10 @@ ORDER BY StartOn
 GO
 
 /****** Object:  View [Cash].[vwCorpTaxInvoiceValue]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Cash].[vwCorpTaxInvoiceValue]
@@ -3767,10 +3767,10 @@ GROUP BY StartOn
 GO
 
 /****** Object:  View [Cash].[vwCorpTaxInvoiceBase]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Cash].[vwCorpTaxInvoiceBase]
@@ -3782,10 +3782,10 @@ GROUP BY StartOn
 GO
 
 /****** Object:  View [Cash].[vwCorpTaxInvoice]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Cash].[vwCorpTaxInvoice]
@@ -3800,10 +3800,10 @@ ORDER BY App.tbYearPeriod.StartOn
 GO
 
 /****** Object:  View [Cash].[vwTaxCorpTotals]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Cash].[vwTaxCorpTotals]
@@ -3824,10 +3824,10 @@ ORDER BY Cash.vwCorpTaxInvoice.StartOn
 GO
 
 /****** Object:  View [Invoice].[vwRegisterExpenses]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Invoice].[vwRegisterExpenses]
@@ -3850,10 +3850,10 @@ WHERE     (Task.fnIsExpense(Invoice.vwRegisterTasks.TaskCode) = 1)
 GO
 
 /****** Object:  View [Task].[vwInvoiceValue]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Task].[vwInvoiceValue]
@@ -3865,10 +3865,10 @@ GROUP BY TaskCode
 GO
 
 /****** Object:  View [Cash].[vwCodeOrderSummary]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Cash].[vwCodeOrderSummary]
@@ -3886,10 +3886,10 @@ GROUP BY Task.tbTask.CashCode, App.fnAccountPeriod(Task.tbTask.ActionOn), Task.v
 GO
 
 /****** Object:  View [Cash].[vwSummaryInvoices]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 
@@ -3911,10 +3911,10 @@ WHERE     (Invoice.tbInvoice.InvoiceStatusCode = 1) OR
 GO
 
 /****** Object:  View [Cash].[vwSummaryBase]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 
@@ -3930,10 +3930,10 @@ FROM         Cash.vwSummaryInvoices
 GO
 
 /****** Object:  View [Cash].[vwSummary]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Cash].[vwSummary]
@@ -3943,10 +3943,10 @@ FROM            Cash.vwSummaryBase
 GO
 
 /****** Object:  View [Cash].[vwAccountLastPeriodEntry]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 
@@ -3963,10 +3963,10 @@ HAVING      (NOT (StartOn IS NULL))
 GO
 
 /****** Object:  View [Cash].[vwAccountPeriodClosingBalance]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Cash].[vwAccountPeriodClosingBalance]
@@ -3983,10 +3983,10 @@ GROUP BY Org.tbAccount.CashCode, Cash.vwAccountLastPeriodEntry.StartOn
 GO
 
 /****** Object:  View [Cash].[vwCodeForecastSummary]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Cash].[vwCodeForecastSummary]
@@ -4002,10 +4002,10 @@ GROUP BY Task.tbTask.CashCode, App.fnAccountPeriod(Task.tbTask.ActionOn)
 GO
 
 /****** Object:  View [App].[vwGraphBankBalance]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [App].[vwGraphBankBalance]
@@ -4018,10 +4018,10 @@ GROUP BY Format(Cash.vwAccountPeriodClosingBalance.StartOn, 'yyyy-MM');
 GO
 
 /****** Object:  View [Usr].[vwCredentials]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Usr].[vwCredentials]
@@ -4032,10 +4032,10 @@ WHERE     (LogonName = SUSER_SNAME())
 GO
 
 /****** Object:  View [Usr].[vwUserMenus]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Usr].[vwUserMenus]
@@ -4045,10 +4045,10 @@ FROM Usr.vwCredentials INNER JOIN Usr.tbMenuUser ON Usr.vwCredentials.UserId = U
 GO
 
 /****** Object:  View [App].[vwPeriods]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [App].[vwPeriods]
@@ -4062,10 +4062,10 @@ AS
 GO
 
 /****** Object:  View [Org].[vwInvoiceSummary]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Org].[vwInvoiceSummary]
@@ -4086,10 +4086,10 @@ AS
 GO
 
 /****** Object:  View [App].[vwDocPurchaseEnquiry]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [App].[vwDocPurchaseEnquiry]
@@ -4107,10 +4107,10 @@ ORDER BY Task.vwTasks.ActionOn;
 GO
 
 /****** Object:  View [App].[vwDocPurchaseOrder]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [App].[vwDocPurchaseOrder]
@@ -4128,10 +4128,10 @@ ORDER BY Task.vwTasks.ActionOn;
 GO
 
 /****** Object:  View [App].[vwDocQuotation]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [App].[vwDocQuotation]
@@ -4149,10 +4149,10 @@ ORDER BY Task.vwTasks.ActionOn;
 GO
 
 /****** Object:  View [App].[vwDocSalesOrder]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [App].[vwDocSalesOrder]
@@ -4170,10 +4170,10 @@ ORDER BY Task.vwTasks.ActionOn;
 GO
 
 /****** Object:  View [App].[vwIdentity]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [App].[vwIdentity]
@@ -4188,10 +4188,10 @@ FROM            Org.tbOrg INNER JOIN
 GO
 
 /****** Object:  View [Task].[vwVatConfirmed]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Task].[vwVatConfirmed]
@@ -4213,10 +4213,10 @@ WHERE     (App.vwTaxRates.TaxTypeCode = 1) AND (Task.tbTask.TaskStatusCode > 0) 
 GO
 
 /****** Object:  View [Task].[vwVatFull]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 
@@ -4239,10 +4239,10 @@ WHERE     (App.vwTaxRates.TaxTypeCode = 1) AND (Task.tbTask.TaskStatusCode < 3) 
 GO
 
 /****** Object:  View [Cash].[vwCorpTaxTasksBase]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 
@@ -4263,10 +4263,10 @@ WHERE     (Task.tbTask.TaskStatusCode < 3) AND (Task.tbTask.Quantity - ISNULL(Ta
 GO
 
 /****** Object:  View [Cash].[vwCorpTaxTasks]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Cash].[vwCorpTaxTasks]
@@ -4279,10 +4279,10 @@ GROUP BY Cash.vwCorpTaxTasksBase.StartOn, Cash.vwCorpTaxTasksBase.OrderValue * A
 GO
 
 /****** Object:  View [Cash].[vwCorpTaxConfirmedBase]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Cash].[vwCorpTaxConfirmedBase]
@@ -4302,10 +4302,10 @@ WHERE        (Task.tbTask.TaskStatusCode > 0) AND (Task.tbTask.TaskStatusCode < 
 GO
 
 /****** Object:  View [Cash].[vwCorpTaxConfirmed]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Cash].[vwCorpTaxConfirmed]
@@ -4319,10 +4319,10 @@ GROUP BY Cash.vwCorpTaxConfirmedBase.StartOn
 GO
 
 /****** Object:  View [Org].[vwAccountLookup]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Org].[vwAccountLookup]
@@ -4335,10 +4335,10 @@ WHERE        (Org.tbOrg.OrganisationStatusCode < 3);
 GO
 
 /****** Object:  View [Cash].[vwAccountRebuild]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Cash].[vwAccountRebuild]
@@ -4352,10 +4352,10 @@ GROUP BY Org.tbPayment.CashAccountCode, Org.tbAccount.OpeningBalance
 GO
 
 /****** Object:  View [Org].[vwAccountSources]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Org].[vwAccountSources]
@@ -4367,10 +4367,10 @@ HAVING        (AccountSource IS NOT NULL);
 GO
 
 /****** Object:  View [App].[vwActivePeriod]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [App].[vwActivePeriod]
@@ -4384,10 +4384,10 @@ FROM            App.tbYear INNER JOIN
 GO
 
 /****** Object:  View [Task].[vwActiveStatusCodes]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Task].[vwActiveStatusCodes]
@@ -4398,10 +4398,10 @@ WHERE        (TaskStatusCode < 3);
 GO
 
 /****** Object:  View [Cash].[vwActiveYears]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Cash].[vwActiveYears]
@@ -4414,10 +4414,10 @@ ORDER BY App.tbYear.YearNumber
 GO
 
 /****** Object:  View [Invoice].[vwAgedDebtPurchases]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Invoice].[vwAgedDebtPurchases]
@@ -4435,10 +4435,10 @@ ORDER BY Invoice.tbInvoice.CollectOn;
 GO
 
 /****** Object:  View [Invoice].[vwAgedDebtSales]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Invoice].[vwAgedDebtSales]
@@ -4456,10 +4456,10 @@ ORDER BY Invoice.tbInvoice.CollectOn;
 GO
 
 /****** Object:  View [Cash].[vwAnalysisCodes]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Cash].[vwAnalysisCodes]
@@ -4473,10 +4473,10 @@ ORDER BY Cash.tbCategory.DisplayOrder
 GO
 
 /****** Object:  View [Org].[vwAreaCodes]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Org].[vwAreaCodes]
@@ -4488,10 +4488,10 @@ HAVING        (AreaCode IS NOT NULL);
 GO
 
 /****** Object:  View [Task].[vwAttributeDescriptions]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Task].[vwAttributeDescriptions]
@@ -4503,10 +4503,10 @@ HAVING        (AttributeDescription IS NOT NULL);
 GO
 
 /****** Object:  View [Task].[vwAttributesForOrder]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Task].[vwAttributesForOrder]
@@ -4517,10 +4517,10 @@ WHERE        (AttributeTypeCode = 0);
 GO
 
 /****** Object:  View [Task].[vwAttributesForQuote]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Task].[vwAttributesForQuote]
@@ -4531,10 +4531,10 @@ WHERE        (AttributeTypeCode = 1);
 GO
 
 /****** Object:  View [Org].[vwBalanceOutstanding]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Org].[vwBalanceOutstanding]
@@ -4548,10 +4548,10 @@ GROUP BY Invoice.tbInvoice.AccountCode
 GO
 
 /****** Object:  View [Cash].[vwBankCashCodes]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Cash].[vwBankCashCodes]
@@ -4563,10 +4563,10 @@ WHERE        (Cash.tbCategory.CashTypeCode = 3);
 GO
 
 /****** Object:  View [Activity].[vwCandidateCashCodes]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Activity].[vwCandidateCashCodes]
@@ -4580,10 +4580,10 @@ ORDER BY Cash.tbCode.CashCode;
 GO
 
 /****** Object:  View [Invoice].[vwCandidateCredits]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Invoice].[vwCandidateCredits]
@@ -4600,10 +4600,10 @@ ORDER BY Invoice.tbInvoice.AccountCode, Invoice.tbInvoice.InvoicedOn DESC
 GO
 
 /****** Object:  View [Invoice].[vwCandidateDebits]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Invoice].[vwCandidateDebits]
@@ -4620,10 +4620,10 @@ ORDER BY Invoice.tbInvoice.AccountCode, Invoice.tbInvoice.InvoicedOn DESC
 GO
 
 /****** Object:  View [App].[vwCandidateHomeAccounts]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [App].[vwCandidateHomeAccounts]
@@ -4636,10 +4636,10 @@ WHERE        (Org.tbOrg.OrganisationStatusCode < 3);
 GO
 
 /****** Object:  View [App].[vwCandidateNetProfitCodes]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [App].[vwCandidateNetProfitCodes]
@@ -4651,10 +4651,10 @@ ORDER BY CategoryCode;
 GO
 
 /****** Object:  View [Org].[vwCashAccounts]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Org].[vwCashAccounts]
@@ -4667,10 +4667,10 @@ FROM            Org.tbOrg INNER JOIN
 GO
 
 /****** Object:  View [Org].[vwCashAccountsLive]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Org].[vwCashAccountsLive]
@@ -4682,10 +4682,10 @@ WHERE        (Org.tbAccount.AccountClosed = 0);
 GO
 
 /****** Object:  View [Cash].[vwCashFlowTypes]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Cash].[vwCashFlowTypes]
@@ -4696,10 +4696,10 @@ WHERE        (CashTypeCode < 3);
 GO
 
 /****** Object:  View [Task].[vwCashMode]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Task].[vwCashMode]
@@ -4714,10 +4714,10 @@ FROM         Task.tbTask INNER JOIN
 GO
 
 /****** Object:  View [Cash].[vwCategoriesBank]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Cash].[vwCategoriesBank]
@@ -4730,10 +4730,10 @@ ORDER BY DisplayOrder, Category
 GO
 
 /****** Object:  View [Cash].[vwCategoriesNominal]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Cash].[vwCategoriesNominal]
@@ -4746,10 +4746,10 @@ ORDER BY DisplayOrder, Category
 GO
 
 /****** Object:  View [Cash].[vwCategoriesTax]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Cash].[vwCategoriesTax]
@@ -4762,10 +4762,10 @@ ORDER BY DisplayOrder, Category
 GO
 
 /****** Object:  View [Cash].[vwCategoriesTotals]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Cash].[vwCategoriesTotals]
@@ -4777,10 +4777,10 @@ ORDER BY CashTypeCode, CategoryCode
 GO
 
 /****** Object:  View [Cash].[vwCategoriesTrade]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Cash].[vwCategoriesTrade]
@@ -4793,10 +4793,10 @@ ORDER BY DisplayOrder, Category
 GO
 
 /****** Object:  View [Cash].[vwCategoryCodesExpressions]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Cash].[vwCategoryCodesExpressions]
@@ -4807,10 +4807,10 @@ WHERE        (CategoryTypeCode = 2);
 GO
 
 /****** Object:  View [Cash].[vwCategoryCodesNominal]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Cash].[vwCategoryCodesNominal]
@@ -4821,10 +4821,10 @@ WHERE        (CategoryTypeCode = 0) AND (CashTypeCode = 2);
 GO
 
 /****** Object:  View [Cash].[vwCategoryCodesTotals]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Cash].[vwCategoryCodesTotals]
@@ -4835,10 +4835,10 @@ WHERE        (CategoryTypeCode = 1);
 GO
 
 /****** Object:  View [Cash].[vwCategoryCodesTrade]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Cash].[vwCategoryCodesTrade]
@@ -4849,10 +4849,10 @@ WHERE        (CategoryTypeCode = 0) AND (CashTypeCode <> 2);
 GO
 
 /****** Object:  View [Cash].[vwCategoryTotalCandidates]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Cash].[vwCategoryTotalCandidates]
@@ -4866,10 +4866,10 @@ WHERE        (Cash.tbCategory.CashTypeCode < 3);
 GO
 
 /****** Object:  View [Cash].[vwCodeLookup]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Cash].[vwCodeLookup]
@@ -4882,10 +4882,10 @@ FROM            Cash.tbCode INNER JOIN
 GO
 
 /****** Object:  View [Activity].[vwCodes]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Activity].[vwCodes]
@@ -4896,10 +4896,10 @@ FROM            Activity.tbActivity LEFT OUTER JOIN
 GO
 
 /****** Object:  View [Org].[vwCompanyHeader]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Org].[vwCompanyHeader]
@@ -4912,10 +4912,10 @@ FROM            Org.tbOrg INNER JOIN
 GO
 
 /****** Object:  View [Org].[vwCompanyLogo]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Org].[vwCompanyLogo]
@@ -4926,10 +4926,10 @@ FROM            Org.tbOrg INNER JOIN
 GO
 
 /****** Object:  View [Org].[vwContacts]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Org].[vwContacts]
@@ -4952,10 +4952,10 @@ AS
 GO
 
 /****** Object:  View [App].[vwCorpTaxCashCode]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 
@@ -4967,10 +4967,10 @@ WHERE     (TaxTypeCode = 0)
 GO
 
 /****** Object:  View [Invoice].[vwCreditNoteSpool]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Invoice].[vwCreditNoteSpool]
@@ -4993,10 +4993,10 @@ WHERE credit_note.InvoiceTypeCode = 1
 GO
 
 /****** Object:  View [Invoice].[vwDebitNoteSpool]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Invoice].[vwDebitNoteSpool]
@@ -5019,10 +5019,10 @@ WHERE debit_note.InvoiceTypeCode = 3 AND
 GO
 
 /****** Object:  View [Activity].[vwDefaultText]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Activity].[vwDefaultText]
@@ -5035,10 +5035,10 @@ ORDER BY DefaultText;
 GO
 
 /****** Object:  View [Org].[vwDepartments]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Org].[vwDepartments]
@@ -5050,10 +5050,10 @@ HAVING        (Department IS NOT NULL);
 GO
 
 /****** Object:  View [Task].[vwDoc]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Task].[vwDoc]
@@ -5081,10 +5081,10 @@ FROM         Org.tbOrg AS Org_tb2 RIGHT OUTER JOIN
 GO
 
 /****** Object:  View [Invoice].[vwDoc]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 
@@ -5102,10 +5102,10 @@ FROM         Invoice.tbInvoice INNER JOIN
 GO
 
 /****** Object:  View [Usr].[vwDoc]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Usr].[vwDoc]
@@ -5127,10 +5127,10 @@ FROM            Org.tbOrg AS company INNER JOIN
 GO
 
 /****** Object:  View [App].[vwDocCreditNote]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [App].[vwDocCreditNote]
@@ -5147,10 +5147,10 @@ ORDER BY Invoice.tbInvoice.InvoiceNumber;
 GO
 
 /****** Object:  View [App].[vwDocDebitNote]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [App].[vwDocDebitNote]
@@ -5167,10 +5167,10 @@ ORDER BY Invoice.tbInvoice.InvoiceNumber;
 GO
 
 /****** Object:  View [Invoice].[vwDocItem]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Invoice].[vwDocItem]
@@ -5183,10 +5183,10 @@ FROM         Invoice.tbItem INNER JOIN
 GO
 
 /****** Object:  View [App].[vwDocOpenModes]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [App].[vwDocOpenModes]
@@ -5198,10 +5198,10 @@ ORDER BY OpenMode;
 GO
 
 /****** Object:  View [App].[vwDocSalesInvoice]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [App].[vwDocSalesInvoice]
@@ -5218,10 +5218,10 @@ ORDER BY Invoice.tbInvoice.InvoiceNumber;
 GO
 
 /****** Object:  View [App].[vwDocSpool]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [App].[vwDocSpool]
@@ -5232,10 +5232,10 @@ WHERE     (UserName = SUSER_SNAME())
 GO
 
 /****** Object:  View [Invoice].[vwDocTask]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Invoice].[vwDocTask]
@@ -5249,10 +5249,10 @@ FROM            Invoice.tbTask AS tbTaskInvoice INNER JOIN
 GO
 
 /****** Object:  View [Task].[vwEdit]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Task].[vwEdit]
@@ -5270,10 +5270,10 @@ FROM            Task.tbTask INNER JOIN
 GO
 
 /****** Object:  View [Cash].[vwExternalCodesLookup]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Cash].[vwExternalCodesLookup]
@@ -5285,10 +5285,10 @@ WHERE        (Cash.tbCategory.CashTypeCode = 1);
 GO
 
 /****** Object:  View [Task].[vwFlow]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Task].[vwFlow]
@@ -5305,10 +5305,10 @@ FROM            Usr.tbUser AS tbUser_1 INNER JOIN
 GO
 
 /****** Object:  View [Cash].[vwFlowNITotals]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Cash].[vwFlowNITotals]
@@ -5322,10 +5322,10 @@ GROUP BY Cash.tbPeriod.StartOn
 GO
 
 /****** Object:  View [App].[vwGraphTaskActivity]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [App].[vwGraphTaskActivity]
@@ -5341,10 +5341,10 @@ GROUP BY CONCAT(Task.tbStatus.TaskStatus, SPACE(1), Cash.tbMode.CashMode);
 GO
 
 /****** Object:  View [Org].[vwInvoiceItems]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Org].[vwInvoiceItems]
@@ -5362,10 +5362,10 @@ WHERE        (Invoice.tbInvoice.InvoiceStatusCode > 0);
 GO
 
 /****** Object:  View [Invoice].[vwItems]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Invoice].[vwItems]
@@ -5378,10 +5378,10 @@ FROM            Invoice.tbItem INNER JOIN
 GO
 
 /****** Object:  View [Org].[vwJobTitles]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Org].[vwJobTitles]
@@ -5393,10 +5393,10 @@ HAVING        (JobTitle IS NOT NULL);
 GO
 
 /****** Object:  View [Org].[vwListActive]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 
@@ -5413,10 +5413,10 @@ AS
 GO
 
 /****** Object:  View [Org].[vwListAll]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Org].[vwListAll]
@@ -5427,10 +5427,10 @@ AS
 GO
 
 /****** Object:  View [Usr].[vwMenuItemFormMode]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Usr].[vwMenuItemFormMode]
@@ -5441,10 +5441,10 @@ AS
 GO
 
 /****** Object:  View [Usr].[vwMenuItemReportMode]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Usr].[vwMenuItemReportMode]
@@ -5455,10 +5455,10 @@ AS
 GO
 
 /****** Object:  View [Cash].[vwMonthList]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Cash].[vwMonthList]
@@ -5473,10 +5473,10 @@ ORDER BY StartOn
 GO
 
 /****** Object:  View [Org].[vwNameTitles]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Org].[vwNameTitles]
@@ -5488,10 +5488,10 @@ HAVING        (NameTitle IS NOT NULL);
 GO
 
 /****** Object:  View [App].[vwNICashCode]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [App].[vwNICashCode]
@@ -5502,10 +5502,10 @@ WHERE     (TaxTypeCode = 2)
 GO
 
 /****** Object:  View [Cash].[vwNominalEntryData]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Cash].[vwNominalEntryData]
@@ -5523,10 +5523,10 @@ ORDER BY Cash.tbCode.CashCode;
 GO
 
 /****** Object:  View [Cash].[vwNominalForecastData]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Cash].[vwNominalForecastData]
@@ -5543,10 +5543,10 @@ ORDER BY Cash.tbPeriod.StartOn;
 GO
 
 /****** Object:  View [Cash].[vwNominalForecastProjection]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Cash].[vwNominalForecastProjection]
@@ -5560,10 +5560,10 @@ ORDER BY Cash.tbPeriod.StartOn;
 GO
 
 /****** Object:  View [Cash].[vwNominalInvoiceData]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Cash].[vwNominalInvoiceData]
@@ -5580,10 +5580,10 @@ ORDER BY Cash.tbPeriod.StartOn;
 GO
 
 /****** Object:  View [Org].[vwPayments]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Org].[vwPayments]
@@ -5600,10 +5600,10 @@ WHERE        (Org.tbPayment.PaymentStatusCode = 1);
 GO
 
 /****** Object:  View [Org].[vwPaymentsListing]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Org].[vwPaymentsListing]
@@ -5625,10 +5625,10 @@ ORDER BY Org.tbPayment.AccountCode, Org.tbPayment.PaidOn DESC;
 GO
 
 /****** Object:  View [Org].[vwPaymentsUnposted]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Org].[vwPaymentsUnposted]
@@ -5640,10 +5640,10 @@ WHERE        (PaymentStatusCode = 0);
 GO
 
 /****** Object:  View [Org].[vwPaymentTerms]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Org].[vwPaymentTerms]
@@ -5655,10 +5655,10 @@ HAVING         LEN(ISNULL(PaymentTerms, '')) > 0;
 GO
 
 /****** Object:  View [App].[vwPeriodEndListing]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [App].[vwPeriodEndListing]
@@ -5673,10 +5673,10 @@ ORDER BY App.tbYearPeriod.StartOn;
 GO
 
 /****** Object:  View [Cash].[vwPeriods]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Cash].[vwPeriods]
@@ -5687,10 +5687,10 @@ FROM         App.tbYearPeriod CROSS JOIN
 GO
 
 /****** Object:  View [Task].[vwProfit]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Task].[vwProfit]
@@ -5717,10 +5717,10 @@ ORDER BY fnTaskProfit_1.StartOn
 GO
 
 /****** Object:  View [Task].[vwProfitOrders]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 
@@ -5740,10 +5740,10 @@ WHERE     (Task.tbTask.TaskStatusCode > 0) AND (Task.tbFlow.ParentTaskCode IS NU
 GO
 
 /****** Object:  View [Task].[vwProfitToDate]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Task].[vwProfitToDate]
@@ -5761,10 +5761,10 @@ AS
 GO
 
 /****** Object:  View [Task].[vwPurchaseEnquiryDeliverySpool]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Task].[vwPurchaseEnquiryDeliverySpool]
@@ -5789,10 +5789,10 @@ WHERE EXISTS (SELECT * FROM App.tbDocSpool AS doc WHERE DocTypeCode = 2 AND User
 GO
 
 /****** Object:  View [Task].[vwPurchaseEnquirySpool]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Task].[vwPurchaseEnquirySpool]
@@ -5813,10 +5813,10 @@ WHERE EXISTS (SELECT * FROM App.tbDocSpool AS doc WHERE DocTypeCode = 2 AND User
 GO
 
 /****** Object:  View [Org].[vwPurchaseInvoices]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Org].[vwPurchaseInvoices]
@@ -5835,10 +5835,10 @@ WHERE        (Invoice.tbInvoice.InvoiceStatusCode > 0) AND (Invoice.tbInvoice.In
 GO
 
 /****** Object:  View [Task].[vwPurchaseOrderDeliverySpool]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Task].[vwPurchaseOrderDeliverySpool]
@@ -5866,10 +5866,10 @@ WHERE EXISTS (
 GO
 
 /****** Object:  View [Task].[vwPurchaseOrderSpool]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Task].[vwPurchaseOrderSpool]
@@ -5890,10 +5890,10 @@ WHERE EXISTS (SELECT * FROM App.tbDocSpool AS doc WHERE DocTypeCode = 3 AND User
 GO
 
 /****** Object:  View [Task].[vwQuotationSpool]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Task].[vwQuotationSpool]
@@ -5916,10 +5916,10 @@ WHERE EXISTS (
 GO
 
 /****** Object:  View [Invoice].[vwRegisterPurchasesOverdue]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Invoice].[vwRegisterPurchasesOverdue]
@@ -5937,10 +5937,10 @@ ORDER BY Invoice.tbInvoice.CollectOn;
 GO
 
 /****** Object:  View [Invoice].[vwRegisterSalesOverdue]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Invoice].[vwRegisterSalesOverdue]
@@ -5958,10 +5958,10 @@ ORDER BY Invoice.tbInvoice.CollectOn;
 GO
 
 /****** Object:  View [Org].[vwSalesInvoices]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Org].[vwSalesInvoices]
@@ -5980,10 +5980,10 @@ WHERE        (Invoice.tbInvoice.InvoiceStatusCode > 1) AND (Invoice.tbInvoice.In
 GO
 
 /****** Object:  View [Invoice].[vwSalesInvoiceSpool]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Invoice].[vwSalesInvoiceSpool]
@@ -6006,10 +6006,10 @@ WHERE sales_invoice.InvoiceTypeCode = 0 AND
 GO
 
 /****** Object:  View [Invoice].[vwSalesInvoiceSpoolByActivity]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Invoice].[vwSalesInvoiceSpoolByActivity]
@@ -6045,10 +6045,10 @@ FROM            invoice AS invoice_1 INNER JOIN
 GO
 
 /****** Object:  View [Task].[vwSalesOrderSpool]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Task].[vwSalesOrderSpool]
@@ -6071,10 +6071,10 @@ WHERE EXISTS (
 GO
 
 /****** Object:  View [Cash].[vwStatement]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Cash].[vwStatement]
@@ -6089,10 +6089,10 @@ ORDER BY fnStatementCompany.TransactOn, fnStatementCompany.CashEntryTypeCode, fn
 GO
 
 /****** Object:  View [Cash].[vwStatementCorpTaxDueDate]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Cash].[vwStatementCorpTaxDueDate]
@@ -6103,10 +6103,10 @@ WHERE        (PayOn > CURRENT_TIMESTAMP)
 GO
 
 /****** Object:  View [Cash].[vwStatementReserves]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Cash].[vwStatementReserves]
@@ -6122,10 +6122,10 @@ ORDER BY fnStatementReserves.TransactOn, fnStatementReserves.CashEntryTypeCode, 
 GO
 
 /****** Object:  View [Cash].[vwStatementVatDueDate]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Cash].[vwStatementVatDueDate]
@@ -6136,10 +6136,10 @@ WHERE     (PayOn > CURRENT_TIMESTAMP)
 GO
 
 /****** Object:  View [App].[vwTaxCodes]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [App].[vwTaxCodes]
@@ -6150,10 +6150,10 @@ FROM            App.tbTaxCode INNER JOIN
 GO
 
 /****** Object:  View [App].[vwTaxCodeTypes]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [App].[vwTaxCodeTypes]
@@ -6164,10 +6164,10 @@ WHERE        (TaxTypeCode > 0);
 GO
 
 /****** Object:  View [Cash].[vwTaxCorpStatement]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 
@@ -6181,10 +6181,10 @@ ORDER BY StartOn, TaxDue
 GO
 
 /****** Object:  View [Cash].[vwTaxVatStatement]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 
@@ -6197,10 +6197,10 @@ ORDER BY StartOn, VatDue
 GO
 
 /****** Object:  View [Cash].[vwTaxVatTotals]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Cash].[vwTaxVatTotals]
@@ -6219,10 +6219,10 @@ ORDER BY fnTaxVatTotals.StartOn
 GO
 
 /****** Object:  View [Task].[vwTitles]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Task].[vwTitles]
@@ -6234,10 +6234,10 @@ HAVING        (TaskTitle IS NOT NULL);
 GO
 
 /****** Object:  View [Org].[vwTypeLookup]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Org].[vwTypeLookup]
@@ -6248,10 +6248,10 @@ FROM            Org.tbType INNER JOIN
 GO
 
 /****** Object:  View [App].[vwVatCashCode]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 /************************************************************
@@ -6267,10 +6267,10 @@ WHERE     (TaxTypeCode = 1)
 GO
 
 /****** Object:  View [Cash].[vwVATCodes]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [Cash].[vwVATCodes]
@@ -6281,10 +6281,10 @@ WHERE        (TaxTypeCode = 1);
 GO
 
 /****** Object:  View [App].[vwWarehouseOrg]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [App].[vwWarehouseOrg]
@@ -6297,10 +6297,10 @@ ORDER BY Org.tbDoc.AccountCode, Org.tbDoc.DocumentName;
 GO
 
 /****** Object:  View [App].[vwWarehouseTask]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [App].[vwWarehouseTask]
@@ -6314,10 +6314,10 @@ ORDER BY Task.tbDoc.TaskCode, Task.tbDoc.DocumentName;
 GO
 
 /****** Object:  View [App].[vwYearPeriod]    Script Date: 18/06/2018 18:08:31 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE VIEW [App].[vwYearPeriod]
@@ -7110,10 +7110,10 @@ EXEC sys.sp_addextendedproperty @name=N'MS_DiagramPaneCount', @value=1 , @level0
 GO
 
 /****** Object:  StoredProcedure [Invoice].[proc_Accept]    Script Date: 18/06/2018 18:10:32 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Invoice].[proc_Accept] 
@@ -7151,10 +7151,10 @@ CREATE PROCEDURE [Invoice].[proc_Accept]
 GO
 
 /****** Object:  StoredProcedure [Cash].[proc_AccountRebuild]    Script Date: 18/06/2018 18:10:32 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Cash].[proc_AccountRebuild]
@@ -7179,10 +7179,10 @@ CREATE PROCEDURE [Cash].[proc_AccountRebuild]
 GO
 
 /****** Object:  StoredProcedure [Cash].[proc_AccountRebuildAll]    Script Date: 18/06/2018 18:10:32 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Cash].[proc_AccountRebuildAll]
@@ -7203,10 +7203,10 @@ CREATE PROCEDURE [Cash].[proc_AccountRebuildAll]
 GO
 
 /****** Object:  StoredProcedure [Org].[proc_AddAddress]    Script Date: 18/06/2018 18:10:32 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Org].[proc_AddAddress] 
@@ -7228,10 +7228,10 @@ DECLARE @RC int
 GO
 
 /****** Object:  StoredProcedure [App].[proc_AddCalDateRange]    Script Date: 18/06/2018 18:10:32 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [App].[proc_AddCalDateRange]
@@ -7256,10 +7256,10 @@ DECLARE @UnavailableDate datetime
 GO
 
 /****** Object:  StoredProcedure [Org].[proc_AddContact]    Script Date: 18/06/2018 18:10:32 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Org].[proc_AddContact] 
@@ -7283,10 +7283,10 @@ DECLARE @RC int
 GO
 
 /****** Object:  StoredProcedure [Invoice].[proc_AddTask]    Script Date: 18/06/2018 18:10:32 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Invoice].[proc_AddTask] 
@@ -7363,10 +7363,10 @@ DECLARE @QuantityInvoiced float
 GO
 
 /****** Object:  StoredProcedure [App].[proc_AdjustToCalendar]    Script Date: 18/06/2018 18:10:32 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [App].[proc_AdjustToCalendar]
@@ -7387,10 +7387,10 @@ DECLARE @UserId nvarchar(10)
 GO
 
 /****** Object:  StoredProcedure [Task].[proc_AssignToParent]    Script Date: 18/06/2018 18:10:32 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Task].[proc_AssignToParent] 
@@ -7434,10 +7434,10 @@ DECLARE @StepNumber smallint
 GO
 
 /****** Object:  StoredProcedure [Org].[proc_BalanceOutstanding]    Script Date: 18/06/2018 18:10:32 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Org].[proc_BalanceOutstanding] 
@@ -7477,10 +7477,10 @@ CREATE PROCEDURE [Org].[proc_BalanceOutstanding]
 GO
 
 /****** Object:  StoredProcedure [Invoice].[proc_Cancel]    Script Date: 18/06/2018 18:10:32 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Invoice].[proc_Cancel] 
@@ -7505,10 +7505,10 @@ CREATE PROCEDURE [Invoice].[proc_Cancel]
 GO
 
 /****** Object:  StoredProcedure [Cash].[proc_CategoryCashCodes]    Script Date: 18/06/2018 18:10:32 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Cash].[proc_CategoryCashCodes]
@@ -7524,10 +7524,10 @@ CREATE PROCEDURE [Cash].[proc_CategoryCashCodes]
 GO
 
 /****** Object:  StoredProcedure [Cash].[proc_CategoryCodeFromName]    Script Date: 18/06/2018 18:10:32 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Cash].[proc_CategoryCodeFromName]
@@ -7549,10 +7549,10 @@ CREATE PROCEDURE [Cash].[proc_CategoryCodeFromName]
 GO
 
 /****** Object:  StoredProcedure [Cash].[proc_CategoryTotals]    Script Date: 18/06/2018 18:10:32 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Cash].[proc_CategoryTotals]
@@ -7572,10 +7572,10 @@ CREATE PROCEDURE [Cash].[proc_CategoryTotals]
 GO
 
 /****** Object:  StoredProcedure [Cash].[proc_CodeDefaults]    Script Date: 18/06/2018 18:10:32 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Cash].[proc_CodeDefaults] 
@@ -7594,10 +7594,10 @@ CREATE PROCEDURE [Cash].[proc_CodeDefaults]
 GO
 
 /****** Object:  StoredProcedure [Cash].[proc_CodeValues]    Script Date: 18/06/2018 18:10:32 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Cash].[proc_CodeValues]
@@ -7617,10 +7617,10 @@ CREATE PROCEDURE [Cash].[proc_CodeValues]
 GO
 
 /****** Object:  StoredProcedure [App].[proc_CompanyName]    Script Date: 18/06/2018 18:10:32 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [App].[proc_CompanyName]
@@ -7635,10 +7635,10 @@ CREATE PROCEDURE [App].[proc_CompanyName]
 GO
 
 /****** Object:  StoredProcedure [Task].[proc_Configure]    Script Date: 18/06/2018 18:10:32 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE  PROCEDURE [Task].[proc_Configure] 
@@ -7783,10 +7783,10 @@ DECLARE @ActivityCode nvarchar(50)
 GO
 
 /****** Object:  StoredProcedure [Org].[proc_ContactFileAs]    Script Date: 18/06/2018 18:10:32 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Org].[proc_ContactFileAs] 
@@ -7817,10 +7817,10 @@ CREATE PROCEDURE [Org].[proc_ContactFileAs]
 GO
 
 /****** Object:  StoredProcedure [Task].[proc_Copy]    Script Date: 18/06/2018 18:10:32 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Task].[proc_Copy]
@@ -7932,10 +7932,10 @@ DECLARE @UserId nvarchar(10)
 GO
 
 /****** Object:  StoredProcedure [Cash].[proc_CopyForecastToLiveCashCode]    Script Date: 18/06/2018 18:10:32 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Cash].[proc_CopyForecastToLiveCashCode]
@@ -7953,10 +7953,10 @@ CREATE PROCEDURE [Cash].[proc_CopyForecastToLiveCashCode]
 GO
 
 /****** Object:  StoredProcedure [Cash].[proc_CopyForecastToLiveCategory]    Script Date: 18/06/2018 18:10:32 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Cash].[proc_CopyForecastToLiveCategory]
@@ -7974,10 +7974,10 @@ CREATE PROCEDURE [Cash].[proc_CopyForecastToLiveCategory]
 GO
 
 /****** Object:  StoredProcedure [Cash].[proc_CopyLiveToForecastCashCode]    Script Date: 18/06/2018 18:10:32 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Cash].[proc_CopyLiveToForecastCashCode]
@@ -8089,10 +8089,10 @@ DECLARE @Idx integer
 GO
 
 /****** Object:  StoredProcedure [Cash].[proc_CopyLiveToForecastCategory]    Script Date: 18/06/2018 18:10:32 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Cash].[proc_CopyLiveToForecastCategory]
@@ -8127,10 +8127,10 @@ DECLARE @CashCode nvarchar(50)
 GO
 
 /****** Object:  StoredProcedure [Task].[proc_Cost]    Script Date: 18/06/2018 18:10:32 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Task].[proc_Cost] 
@@ -8167,10 +8167,10 @@ DECLARE @CashModeCode smallint
 GO
 
 /****** Object:  StoredProcedure [Invoice].[proc_Credit]    Script Date: 18/06/2018 18:10:32 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Invoice].[proc_Credit]
@@ -8248,10 +8248,10 @@ DECLARE @InvoiceSuffix nvarchar(4)
 GO
 
 /****** Object:  StoredProcedure [Org].[proc_DefaultAccountCode]    Script Date: 18/06/2018 18:10:32 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Org].[proc_DefaultAccountCode] 
@@ -8337,10 +8337,10 @@ DECLARE @Rows int
 GO
 
 /****** Object:  StoredProcedure [Invoice].[proc_DefaultDocType]    Script Date: 18/06/2018 18:10:32 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Invoice].[proc_DefaultDocType]
@@ -8367,10 +8367,10 @@ DECLARE @InvoiceTypeCode smallint
 GO
 
 /****** Object:  StoredProcedure [Task].[proc_DefaultDocType]    Script Date: 18/06/2018 18:10:32 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Task].[proc_DefaultDocType]
@@ -8405,10 +8405,10 @@ DECLARE @TaskStatusCode smallint
 GO
 
 /****** Object:  StoredProcedure [Task].[proc_DefaultInvoiceType]    Script Date: 18/06/2018 18:10:32 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Task].[proc_DefaultInvoiceType]
@@ -8437,10 +8437,10 @@ DECLARE @CashModeCode smallint
 GO
 
 /****** Object:  StoredProcedure [Task].[proc_DefaultPaymentOn]    Script Date: 18/06/2018 18:10:32 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Task].[proc_DefaultPaymentOn]
@@ -8457,10 +8457,10 @@ CREATE PROCEDURE [Task].[proc_DefaultPaymentOn]
 GO
 
 /****** Object:  StoredProcedure [Task].[proc_DefaultTaxCode]    Script Date: 18/06/2018 18:10:32 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Task].[proc_DefaultTaxCode] 
@@ -8477,10 +8477,10 @@ CREATE PROCEDURE [Task].[proc_DefaultTaxCode]
 GO
 
 /****** Object:  StoredProcedure [Org].[proc_DefaultTaxCode]    Script Date: 18/06/2018 18:10:32 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Org].[proc_DefaultTaxCode] 
@@ -8502,10 +8502,10 @@ CREATE PROCEDURE [Org].[proc_DefaultTaxCode]
 GO
 
 /****** Object:  StoredProcedure [App].[proc_DelCalDateRange]    Script Date: 18/06/2018 18:10:32 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [App].[proc_DelCalDateRange]
@@ -8524,10 +8524,10 @@ CREATE PROCEDURE [App].[proc_DelCalDateRange]
 GO
 
 /****** Object:  StoredProcedure [Task].[proc_Delete]    Script Date: 18/06/2018 18:10:32 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Task].[proc_Delete] 
@@ -8564,10 +8564,10 @@ DECLARE @ChildTaskCode nvarchar(20)
 GO
 
 /****** Object:  StoredProcedure [App].[proc_DocDespool]    Script Date: 18/06/2018 18:10:32 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [App].[proc_DocDespool]
@@ -8649,10 +8649,10 @@ DebitNote:
 GO
 
 /****** Object:  StoredProcedure [Task].[proc_EmailAddress]    Script Date: 18/06/2018 18:10:32 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Task].[proc_EmailAddress] 
@@ -8687,10 +8687,10 @@ CREATE PROCEDURE [Task].[proc_EmailAddress]
 GO
 
 /****** Object:  StoredProcedure [Task].[proc_EmailDetail]    Script Date: 18/06/2018 18:10:32 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Task].[proc_EmailDetail] 
@@ -8732,10 +8732,10 @@ DECLARE @EmailAddress nvarchar(255)
 GO
 
 /****** Object:  StoredProcedure [Task].[proc_EmailFooter]    Script Date: 18/06/2018 18:10:32 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Task].[proc_EmailFooter] 
@@ -8755,10 +8755,10 @@ DECLARE @WebSite nvarchar(255)
 GO
 
 /****** Object:  StoredProcedure [Cash].[proc_FlowInitialise]    Script Date: 18/06/2018 18:10:32 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE  PROCEDURE [Cash].[proc_FlowInitialise]
@@ -8843,10 +8843,10 @@ DECLARE @CashCode nvarchar(25)
 GO
 
 /****** Object:  StoredProcedure [Task].[proc_FullyInvoiced]    Script Date: 18/06/2018 18:10:32 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Task].[proc_FullyInvoiced]
@@ -8876,10 +8876,10 @@ DECLARE @TotalCharge money
 GO
 
 /****** Object:  StoredProcedure [Cash].[proc_GeneratePeriods]    Script Date: 18/06/2018 18:10:32 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Cash].[proc_GeneratePeriods]
@@ -8929,10 +8929,10 @@ DECLARE @Period smallint
 GO
 
 /****** Object:  StoredProcedure [App].[proc_Initialised]    Script Date: 18/06/2018 18:10:33 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [App].[proc_Initialised]
@@ -8961,10 +8961,10 @@ CREATE PROCEDURE [App].[proc_Initialised]
 GO
 
 /****** Object:  StoredProcedure [Task].[proc_IsProject]    Script Date: 18/06/2018 18:10:33 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Task].[proc_IsProject] 
@@ -8987,10 +8987,10 @@ CREATE PROCEDURE [Task].[proc_IsProject]
 GO
 
 /****** Object:  StoredProcedure [Usr].[proc_MenuCleanReferences]    Script Date: 18/06/2018 18:10:33 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Usr].[proc_MenuCleanReferences](@MenuId SMALLINT)
@@ -9013,10 +9013,10 @@ AS
 GO
 
 /****** Object:  StoredProcedure [Usr].[proc_MenuInsert]    Script Date: 18/06/2018 18:10:33 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Usr].[proc_MenuInsert]
@@ -9051,10 +9051,10 @@ CREATE PROCEDURE [Usr].[proc_MenuInsert]
 GO
 
 /****** Object:  StoredProcedure [Task].[proc_Mode]    Script Date: 18/06/2018 18:10:33 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Task].[proc_Mode] 
@@ -9070,10 +9070,10 @@ CREATE PROCEDURE [Task].[proc_Mode]
 GO
 
 /****** Object:  StoredProcedure [Activity].[proc_Mode]    Script Date: 18/06/2018 18:10:33 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 /*****************************************************
@@ -9095,10 +9095,10 @@ CREATE PROCEDURE [Activity].[proc_Mode]
 GO
 
 /****** Object:  StoredProcedure [App].[proc_NewCompany]    Script Date: 18/06/2018 18:10:33 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE OR ALTER PROCEDURE [App].[proc_NewCompany]
@@ -9182,10 +9182,10 @@ DECLARE @AddressCode nvarchar(15)
 GO
 
 /****** Object:  StoredProcedure [Org].[proc_NextAddressCode]    Script Date: 18/06/2018 18:10:33 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Org].[proc_NextAddressCode] 
@@ -9207,10 +9207,10 @@ DECLARE @AddCount int
 GO
 
 /****** Object:  StoredProcedure [Task].[proc_NextAttributeOrder]    Script Date: 18/06/2018 18:10:33 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Task].[proc_NextAttributeOrder] 
@@ -9235,10 +9235,10 @@ CREATE PROCEDURE [Task].[proc_NextAttributeOrder]
 GO
 
 /****** Object:  StoredProcedure [Activity].[proc_NextAttributeOrder]    Script Date: 18/06/2018 18:10:33 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Activity].[proc_NextAttributeOrder] 
@@ -9263,10 +9263,10 @@ CREATE PROCEDURE [Activity].[proc_NextAttributeOrder]
 GO
 
 /****** Object:  StoredProcedure [Task].[proc_NextCode]    Script Date: 18/06/2018 18:10:33 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Task].[proc_NextCode]
@@ -9315,10 +9315,10 @@ DECLARE @NextTaskNumber int
 GO
 
 /****** Object:  StoredProcedure [Task].[proc_NextOperationNumber]    Script Date: 18/06/2018 18:10:33 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Task].[proc_NextOperationNumber] 
@@ -9343,10 +9343,10 @@ CREATE PROCEDURE [Task].[proc_NextOperationNumber]
 GO
 
 /****** Object:  StoredProcedure [Activity].[proc_NextOperationNumber]    Script Date: 18/06/2018 18:10:33 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Activity].[proc_NextOperationNumber] 
@@ -9371,10 +9371,10 @@ CREATE PROCEDURE [Activity].[proc_NextOperationNumber]
 GO
 
 /****** Object:  StoredProcedure [Activity].[proc_NextStepNumber]    Script Date: 18/06/2018 18:10:33 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Activity].[proc_NextStepNumber] 
@@ -9399,10 +9399,10 @@ CREATE PROCEDURE [Activity].[proc_NextStepNumber]
 GO
 
 /****** Object:  StoredProcedure [Task].[proc_Op]    Script Date: 18/06/2018 18:10:33 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Task].[proc_Op]
@@ -9430,10 +9430,10 @@ AS
 GO
 
 /****** Object:  StoredProcedure [Activity].[proc_Parent]    Script Date: 18/06/2018 18:10:33 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Activity].[proc_Parent]
@@ -9455,10 +9455,10 @@ CREATE PROCEDURE [Activity].[proc_Parent]
 GO
 
 /****** Object:  StoredProcedure [Task].[proc_Parent]    Script Date: 18/06/2018 18:10:33 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Task].[proc_Parent] 
@@ -9479,10 +9479,10 @@ CREATE PROCEDURE [Task].[proc_Parent]
 GO
 
 /****** Object:  StoredProcedure [Invoice].[proc_Pay]    Script Date: 18/06/2018 18:10:33 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Invoice].[proc_Pay]
@@ -9571,10 +9571,10 @@ DECLARE @PaymentCode nvarchar(20)
 GO
 
 /****** Object:  StoredProcedure [Org].[proc_PaymentDelete]    Script Date: 18/06/2018 18:10:33 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Org].[proc_PaymentDelete]
@@ -9600,10 +9600,10 @@ DECLARE @CashAccountCode nvarchar(10)
 GO
 
 /****** Object:  StoredProcedure [Org].[proc_PaymentMove]    Script Date: 18/06/2018 18:10:33 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Org].[proc_PaymentMove]
@@ -9635,10 +9635,10 @@ DECLARE @OldAccountCode nvarchar(10)
 GO
 
 /****** Object:  StoredProcedure [Org].[proc_PaymentPost]    Script Date: 18/06/2018 18:10:33 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Org].[proc_PaymentPost] 
@@ -9686,10 +9686,10 @@ DECLARE @PaymentCode nvarchar(20)
 GO
 
 /****** Object:  StoredProcedure [Org].[proc_PaymentPostInvoiced]    Script Date: 18/06/2018 18:10:33 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Org].[proc_PaymentPostInvoiced]
@@ -9738,10 +9738,10 @@ DECLARE @PostValue money
 GO
 
 /****** Object:  StoredProcedure [Org].[proc_PaymentPostMisc]    Script Date: 18/06/2018 18:10:33 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Org].[proc_PaymentPostMisc]
@@ -9833,10 +9833,10 @@ DECLARE @InvoiceTypeCode smallint
 GO
 
 /****** Object:  StoredProcedure [Org].[proc_PaymentPostPaidIn]    Script Date: 18/06/2018 18:10:33 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Org].[proc_PaymentPostPaidIn]
@@ -9930,10 +9930,10 @@ DECLARE @TaxOutValue money
 GO
 
 /****** Object:  StoredProcedure [Org].[proc_PaymentPostPaidOut]    Script Date: 18/06/2018 18:10:33 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Org].[proc_PaymentPostPaidOut]
@@ -10025,10 +10025,10 @@ DECLARE @TaxOutValue money
 GO
 
 /****** Object:  StoredProcedure [App].[proc_PeriodClose]    Script Date: 18/06/2018 18:10:33 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [App].[proc_PeriodClose]
@@ -10078,10 +10078,10 @@ CREATE PROCEDURE [App].[proc_PeriodClose]
 GO
 
 /****** Object:  StoredProcedure [App].[proc_PeriodGetYear]    Script Date: 18/06/2018 18:10:33 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [App].[proc_PeriodGetYear]
@@ -10101,10 +10101,10 @@ AS
 GO
 
 /****** Object:  StoredProcedure [Task].[proc_Profit]    Script Date: 18/06/2018 18:10:33 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Task].[proc_Profit]
@@ -10155,10 +10155,10 @@ DECLARE @CashModeCode smallint
 GO
 
 /****** Object:  StoredProcedure [Task].[proc_ProfitTopLevel]    Script Date: 18/06/2018 18:10:33 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Task].[proc_ProfitTopLevel]
@@ -10187,10 +10187,10 @@ AS
 GO
 
 /****** Object:  StoredProcedure [Task].[proc_Project]    Script Date: 18/06/2018 18:10:33 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Task].[proc_Project] 
@@ -10211,10 +10211,10 @@ CREATE PROCEDURE [Task].[proc_Project]
 GO
 
 /****** Object:  StoredProcedure [Invoice].[proc_Raise]    Script Date: 18/06/2018 18:10:33 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Invoice].[proc_Raise]
@@ -10288,10 +10288,10 @@ DECLARE @AccountCode nvarchar(10)
 GO
 
 /****** Object:  StoredProcedure [Invoice].[proc_RaiseBlank]    Script Date: 18/06/2018 18:10:33 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Invoice].[proc_RaiseBlank]
@@ -10342,10 +10342,10 @@ DECLARE @InvoiceSuffix nvarchar(4)
 GO
 
 /****** Object:  StoredProcedure [App].[proc_ReassignUser]    Script Date: 18/06/2018 18:10:33 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [App].[proc_ReassignUser] 
@@ -10361,10 +10361,10 @@ CREATE PROCEDURE [App].[proc_ReassignUser]
 GO
 
 /****** Object:  StoredProcedure [Org].[proc_Rebuild]    Script Date: 18/06/2018 18:10:33 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Org].[proc_Rebuild]
@@ -10549,10 +10549,10 @@ DECLARE @TaxRate float
 GO
 
 /****** Object:  StoredProcedure [Task].[proc_ReconcileCharge]    Script Date: 18/06/2018 18:10:33 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Task].[proc_ReconcileCharge]
@@ -10574,10 +10574,10 @@ DECLARE @InvoiceValue money
 GO
 
 /****** Object:  StoredProcedure [Task].[proc_ResetChargedUninvoiced]    Script Date: 18/06/2018 18:10:33 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Task].[proc_ResetChargedUninvoiced]
@@ -10592,10 +10592,10 @@ AS
 GO
 
 /****** Object:  StoredProcedure [Task].[proc_Schedule]    Script Date: 18/06/2018 18:10:33 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE  PROCEDURE [Task].[proc_Schedule]
@@ -10685,10 +10685,10 @@ DECLARE @PaymentOn datetime
 GO
 
 /****** Object:  StoredProcedure [Task].[proc_ScheduleOp]    Script Date: 18/06/2018 18:10:33 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Task].[proc_ScheduleOp]
@@ -10749,10 +10749,10 @@ DECLARE @UserId nvarchar(10)
 GO
 
 /****** Object:  StoredProcedure [Task].[proc_SetActionOn]    Script Date: 18/06/2018 18:10:33 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Task].[proc_SetActionOn]
@@ -10794,10 +10794,10 @@ DECLARE @ActionOn datetime
 GO
 
 /****** Object:  StoredProcedure [Task].[proc_SetOpStatus]    Script Date: 18/06/2018 18:10:33 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Task].[proc_SetOpStatus]
@@ -10841,10 +10841,10 @@ DECLARE @OperationNumber smallint
 GO
 
 /****** Object:  StoredProcedure [Task].[proc_SetStatus]    Script Date: 18/06/2018 18:10:33 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Task].[proc_SetStatus]
@@ -10905,10 +10905,10 @@ DECLARE @IsOrder bit
 GO
 
 /****** Object:  StoredProcedure [Org].[proc_Statement]    Script Date: 18/06/2018 18:10:33 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Org].[proc_Statement]
@@ -10931,10 +10931,10 @@ DECLARE @FromDate datetime
 GO
 
 /****** Object:  StoredProcedure [Cash].[proc_StatementRescheduleOverdue]    Script Date: 18/06/2018 18:10:33 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Cash].[proc_StatementRescheduleOverdue]
@@ -10965,10 +10965,10 @@ CREATE PROCEDURE [Cash].[proc_StatementRescheduleOverdue]
 GO
 
 /****** Object:  StoredProcedure [Invoice].[proc_Total]    Script Date: 18/06/2018 18:10:33 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Invoice].[proc_Total] 
@@ -11033,10 +11033,10 @@ DECLARE @PaidTaxValue money
 GO
 
 /****** Object:  StoredProcedure [Cash].[proc_VatBalance]    Script Date: 18/06/2018 18:10:33 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Cash].[proc_VatBalance]
@@ -11049,10 +11049,10 @@ CREATE PROCEDURE [Cash].[proc_VatBalance]
 GO
 
 /****** Object:  StoredProcedure [Activity].[proc_WorkFlow]    Script Date: 18/06/2018 18:10:33 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Activity].[proc_WorkFlow]
@@ -11074,10 +11074,10 @@ CREATE PROCEDURE [Activity].[proc_WorkFlow]
 GO
 
 /****** Object:  StoredProcedure [Task].[proc_WorkFlow]    Script Date: 18/06/2018 18:10:33 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [Task].[proc_WorkFlow] 
@@ -11096,10 +11096,10 @@ CREATE PROCEDURE [Task].[proc_WorkFlow]
 GO
 
 /****** Object:  StoredProcedure [App].[proc_YearPeriods]    Script Date: 18/06/2018 18:10:33 ******/
-SET ANSI_NULLS ON
+
 GO
 
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE PROCEDURE [App].[proc_YearPeriods]
@@ -11116,9 +11116,9 @@ CREATE PROCEDURE [App].[proc_YearPeriods]
 	RETURN 
 GO
 
-SET ANSI_NULLS ON
+
 GO
-SET QUOTED_IDENTIFIER ON
+
 GO
 CREATE TRIGGER [Activity].[Activity_tbActivity_TriggerUpdate] 
    ON  [Activity].[tbActivity]
@@ -11145,9 +11145,9 @@ END
 GO
 ALTER TABLE [Activity].[tbActivity] ENABLE TRIGGER [Activity_tbActivity_TriggerUpdate]
 GO
-SET ANSI_NULLS ON
+
 GO
-SET QUOTED_IDENTIFIER ON
+
 GO
 CREATE TRIGGER [Activity].[Activity_tbAttribute_TriggerUpdate] 
    ON  [Activity].[tbAttribute]
@@ -11165,9 +11165,9 @@ END
 GO
 ALTER TABLE [Activity].[tbAttribute] ENABLE TRIGGER [Activity_tbAttribute_TriggerUpdate]
 GO
-SET ANSI_NULLS ON
+
 GO
-SET QUOTED_IDENTIFIER ON
+
 GO
 CREATE TRIGGER [Activity].[Activity_tbFlow_TriggerUpdate] 
    ON  [Activity].[tbFlow]
@@ -11185,9 +11185,9 @@ END
 GO
 ALTER TABLE [Activity].[tbFlow] ENABLE TRIGGER [Activity_tbFlow_TriggerUpdate]
 GO
-SET ANSI_NULLS ON
+
 GO
-SET QUOTED_IDENTIFIER ON
+
 GO
 CREATE TRIGGER [Activity].[Activity_tbOp_TriggerUpdate] 
    ON  [Activity].[tbOp] 
@@ -11205,9 +11205,9 @@ END
 GO
 ALTER TABLE [Activity].[tbOp] ENABLE TRIGGER [Activity_tbOp_TriggerUpdate]
 GO
-SET ANSI_NULLS ON
+
 GO
-SET QUOTED_IDENTIFIER ON
+
 GO
 CREATE TRIGGER [App].[App_tbCalendar_TriggerUpdate] 
    ON  [App].[tbCalendar]
@@ -11228,9 +11228,9 @@ END
 GO
 ALTER TABLE [App].[tbCalendar] ENABLE TRIGGER [App_tbCalendar_TriggerUpdate]
 GO
-SET ANSI_NULLS ON
+
 GO
-SET QUOTED_IDENTIFIER ON
+
 GO
 CREATE TRIGGER [App].[App_tbOptions_TriggerUpdate] 
    ON  [App].[tbOptions]
@@ -11248,9 +11248,9 @@ END
 GO
 ALTER TABLE [App].[tbOptions] ENABLE TRIGGER [App_tbOptions_TriggerUpdate]
 GO
-SET ANSI_NULLS ON
+
 GO
-SET QUOTED_IDENTIFIER ON
+
 GO
 CREATE TRIGGER [App].[App_tbTaxCode_TriggerUpdate] 
    ON  [App].[tbTaxCode]
@@ -11277,9 +11277,9 @@ END
 GO
 ALTER TABLE [App].[tbTaxCode] ENABLE TRIGGER [App_tbTaxCode_TriggerUpdate]
 GO
-SET ANSI_NULLS ON
+
 GO
-SET QUOTED_IDENTIFIER ON
+
 GO
 CREATE TRIGGER [App].[App_tbUom_TriggerUpdate] 
    ON  [App].[tbUom]
@@ -11300,9 +11300,9 @@ END
 GO
 ALTER TABLE [App].[tbUom] ENABLE TRIGGER [App_tbUom_TriggerUpdate]
 GO
-SET ANSI_NULLS ON
+
 GO
-SET QUOTED_IDENTIFIER ON
+
 GO
 CREATE TRIGGER [Cash].[App_tbCategory_TriggerUpdate] 
    ON  [Cash].[tbCategory]
@@ -11323,9 +11323,9 @@ END
 GO
 ALTER TABLE [Cash].[tbCategory] ENABLE TRIGGER [App_tbCategory_TriggerUpdate]
 GO
-SET ANSI_NULLS ON
+
 GO
-SET QUOTED_IDENTIFIER ON
+
 GO
 CREATE TRIGGER [Cash].[Cash_tbCategory_TriggerUpdate] 
    ON  [Cash].[tbCategory]
@@ -11343,9 +11343,9 @@ END
 GO
 ALTER TABLE [Cash].[tbCategory] ENABLE TRIGGER [Cash_tbCategory_TriggerUpdate]
 GO
-SET ANSI_NULLS ON
+
 GO
-SET QUOTED_IDENTIFIER ON
+
 GO
 CREATE TRIGGER [Cash].[Cash_tbCode_TriggerUpdate] 
    ON  [Cash].[tbCode]
@@ -11372,9 +11372,9 @@ END
 GO
 ALTER TABLE [Cash].[tbCode] ENABLE TRIGGER [Cash_tbCode_TriggerUpdate]
 GO
-SET ANSI_NULLS ON
+
 GO
-SET QUOTED_IDENTIFIER ON
+
 GO
 CREATE TRIGGER [Invoice].[Invoice_tbInvoice_TriggerUpdate]
 ON [Invoice].[tbInvoice]
@@ -11397,9 +11397,9 @@ AS
 GO
 ALTER TABLE [Invoice].[tbInvoice] ENABLE TRIGGER [Invoice_tbInvoice_TriggerUpdate]
 GO
-SET ANSI_NULLS ON
+
 GO
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE TRIGGER [Org].[Org_tbAccount_TriggerUpdate] 
@@ -11427,9 +11427,9 @@ END
 GO
 ALTER TABLE [Org].[tbAccount] ENABLE TRIGGER [Org_tbAccount_TriggerUpdate]
 GO
-SET ANSI_NULLS ON
+
 GO
-SET QUOTED_IDENTIFIER ON
+
 GO
 CREATE TRIGGER [Org].[Org_tbAddress_TriggerInsert]
 ON [Org].[tbAddress] 
@@ -11451,9 +11451,9 @@ AS
 GO
 ALTER TABLE [Org].[tbAddress] ENABLE TRIGGER [Org_tbAddress_TriggerInsert]
 GO
-SET ANSI_NULLS ON
+
 GO
-SET QUOTED_IDENTIFIER ON
+
 GO
 CREATE TRIGGER [Org].[Org_tbAddress_TriggerUpdate] 
    ON  [Org].[tbAddress]
@@ -11471,9 +11471,9 @@ END
 GO
 ALTER TABLE [Org].[tbAddress] ENABLE TRIGGER [Org_tbAddress_TriggerUpdate]
 GO
-SET ANSI_NULLS ON
+
 GO
-SET QUOTED_IDENTIFIER ON
+
 GO
 CREATE TRIGGER [Org].[Org_tbContact_TriggerUpdate] 
    ON  [Org].[tbContact]
@@ -11491,9 +11491,9 @@ END
 GO
 ALTER TABLE [Org].[tbContact] ENABLE TRIGGER [Org_tbContact_TriggerUpdate]
 GO
-SET ANSI_NULLS ON
+
 GO
-SET QUOTED_IDENTIFIER ON
+
 GO
 CREATE TRIGGER [Org].[Org_tbDoc_TriggerUpdate] 
    ON  [Org].[tbDoc]
@@ -11511,9 +11511,9 @@ END
 GO
 ALTER TABLE [Org].[tbDoc] ENABLE TRIGGER [Org_tbDoc_TriggerUpdate]
 GO
-SET ANSI_NULLS ON
+
 GO
-SET QUOTED_IDENTIFIER ON
+
 GO
 CREATE TRIGGER [Org].[Org_tbOrg_TriggerUpdate] 
    ON  [Org].[tbOrg]
@@ -11540,9 +11540,9 @@ END
 GO
 ALTER TABLE [Org].[tbOrg] ENABLE TRIGGER [Org_tbOrg_TriggerUpdate]
 GO
-SET ANSI_NULLS ON
+
 GO
-SET QUOTED_IDENTIFIER ON
+
 GO
 CREATE TRIGGER [Org].[Org_tbPayment_TriggerUpdate]
 ON [Org].[tbPayment]
@@ -11579,9 +11579,9 @@ AS
 GO
 ALTER TABLE [Org].[tbPayment] ENABLE TRIGGER [Org_tbPayment_TriggerUpdate]
 GO
-SET ANSI_NULLS ON
+
 GO
-SET QUOTED_IDENTIFIER ON
+
 GO
 CREATE TRIGGER [Task].[Task_tbAttribute_TriggerUpdate] 
    ON  [Task].[tbAttribute]
@@ -11599,9 +11599,9 @@ END
 GO
 ALTER TABLE [Task].[tbAttribute] ENABLE TRIGGER [Task_tbAttribute_TriggerUpdate]
 GO
-SET ANSI_NULLS ON
+
 GO
-SET QUOTED_IDENTIFIER ON
+
 GO
 CREATE TRIGGER [Task].[Task_tbDoc_TriggerUpdate] 
    ON  [Task].[tbDoc]
@@ -11619,9 +11619,9 @@ END
 GO
 ALTER TABLE [Task].[tbDoc] ENABLE TRIGGER [Task_tbDoc_TriggerUpdate]
 GO
-SET ANSI_NULLS ON
+
 GO
-SET QUOTED_IDENTIFIER ON
+
 GO
 CREATE TRIGGER [Task].[Task_tbFlow_TriggerUpdate] 
    ON  [Task].[tbFlow]
@@ -11639,9 +11639,9 @@ END
 GO
 ALTER TABLE [Task].[tbFlow] ENABLE TRIGGER [Task_tbFlow_TriggerUpdate]
 GO
-SET ANSI_NULLS ON
+
 GO
-SET QUOTED_IDENTIFIER ON
+
 GO
 CREATE TRIGGER [Task].[Task_tbOp_TriggerUpdate] 
    ON  [Task].[tbOp] 
@@ -11659,9 +11659,9 @@ END
 GO
 ALTER TABLE [Task].[tbOp] ENABLE TRIGGER [Task_tbOp_TriggerUpdate]
 GO
-SET ANSI_NULLS ON
+
 GO
-SET QUOTED_IDENTIFIER ON
+
 GO
 CREATE TRIGGER [Task].[Task_tbQuote_TriggerUpdate] 
    ON  [Task].[tbQuote]
@@ -11679,9 +11679,9 @@ END
 GO
 ALTER TABLE [Task].[tbQuote] ENABLE TRIGGER [Task_tbQuote_TriggerUpdate]
 GO
-SET ANSI_NULLS ON
+
 GO
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE TRIGGER [Task].[Task_tbTask_TriggerInsert]
@@ -11727,9 +11727,9 @@ AS
 GO
 ALTER TABLE [Task].[tbTask] ENABLE TRIGGER [Task_tbTask_TriggerInsert]
 GO
-SET ANSI_NULLS ON
+
 GO
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 CREATE TRIGGER [Task].[Task_tbTask_TriggerUpdate]
@@ -11847,9 +11847,9 @@ AS
 GO
 ALTER TABLE [Task].[tbTask] ENABLE TRIGGER [Task_tbTask_TriggerUpdate]
 GO
-SET ANSI_NULLS ON
+
 GO
-SET QUOTED_IDENTIFIER ON
+
 GO
 CREATE TRIGGER [Usr].[Usr_tbMenuEntry_TriggerUpdate] 
    ON  [Usr].[tbMenuEntry]
@@ -11867,9 +11867,9 @@ END
 GO
 ALTER TABLE [Usr].[tbMenuEntry] ENABLE TRIGGER [Usr_tbMenuEntry_TriggerUpdate]
 GO
-SET ANSI_NULLS ON
+
 GO
-SET QUOTED_IDENTIFIER ON
+
 GO
 CREATE TRIGGER [Usr].[Usr_tbUser_TriggerUpdate] 
    ON  [Usr].[tbUser]

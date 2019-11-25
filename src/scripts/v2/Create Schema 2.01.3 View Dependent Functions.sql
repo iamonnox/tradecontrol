@@ -1,6 +1,3 @@
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
 GO
 CREATE FUNCTION [dbo].[fnStatementCompany]()
 RETURNS @tbStatement TABLE (
@@ -123,10 +120,6 @@ RETURNS @tbStatement TABLE (
 	RETURN
 	END
 GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
 CREATE FUNCTION [dbo].[fnTaskProfitCost]
 	(
 	@ParentTaskCode nvarchar(20),
@@ -187,10 +180,6 @@ declare @CashModeCode smallint
 	
 	RETURN
 	END
-GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
 GO
 CREATE FUNCTION [dbo].[fnTaskProfitOrder]
 	(
@@ -624,10 +613,6 @@ AS
 	RETURN @EmailAddress
 	END
 GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
 CREATE FUNCTION [dbo].[fnSystemProfileText]
 	(
 	@TextId int
@@ -699,12 +684,7 @@ RETURNS @tbCash TABLE (EntryNumber int, PaymentCode nvarchar(20), PaidOn datetim
 	END
 GO
 /****** Object:  UserDefinedFunction [dbo].[fnTaxVatTotals]    Script Date: 01/11/2012 16:40:04 ******/
-SET ANSI_NULLS ON
 GO
-SET QUOTED_IDENTIFIER ON
-GO
-
-
 CREATE FUNCTION [dbo].[fnTaxVatTotals]
 	()
 RETURNS @tbVat TABLE 
@@ -807,10 +787,6 @@ RETURNS @tbVat TABLE
 	RETURN
 	END
 GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER OFF
-GO
 CREATE FUNCTION [dbo].[fnOrgIndustrySectors]
 	(
 	@AccountCode nvarchar(10)
@@ -845,10 +821,6 @@ RETURNS nvarchar(256)
 	
 	RETURN @IndustrySector
 	END
-GO
-SET ANSI_NULLS OFF
-GO
-SET QUOTED_IDENTIFIER ON
 GO
 CREATE FUNCTION [dbo].[fnSystemBuckets]
 	(@CurrentDate datetime)
@@ -947,10 +919,6 @@ RETURNS @tbSystemYearPeriod TABLE (YearNumber smallint, StartOn datetime, EndOn 
 	RETURN
 	END
 GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
 CREATE FUNCTION [dbo].[fnCashAccountStatements]
 ()
 RETURNS  @tbCashAccount TABLE (CashAccountCode nvarchar(20), EntryNumber int, PaymentCode nvarchar(20), PaidOn datetime, PaidBalance money, TaxedBalance money)
@@ -978,10 +946,6 @@ RETURNS  @tbCashAccount TABLE (CashAccountCode nvarchar(20), EntryNumber int, Pa
 	
 	RETURN
 	END
-GO
-SET ANSI_NULLS OFF
-GO
-SET QUOTED_IDENTIFIER ON
 GO
 CREATE FUNCTION [dbo].[fnTaxCorpStatement]
 	()
@@ -1060,10 +1024,6 @@ RETURNS datetime
 	RETURN @StartOn
 	END
 GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
 CREATE FUNCTION [dbo].[fnSystemDateBucket]
 	(@CurrentDate datetime, @BucketDate datetime)
 RETURNS smallint
@@ -1094,10 +1054,6 @@ RETURNS money
 		
 	RETURN isnull(@Balance, 0)
 	END
-GO
-SET ANSI_NULLS OFF
-GO
-SET QUOTED_IDENTIFIER ON
 GO
 CREATE FUNCTION [dbo].[fnStatementReserves] ()
 RETURNS @tbStatement TABLE (

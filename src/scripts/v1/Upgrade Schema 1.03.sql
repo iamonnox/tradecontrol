@@ -5,7 +5,6 @@
 * Description: Sql Server Upgrade Script - Encrypted Distribution Schema
 * Data Version: 1.03
 * Release Date: 8/5/8
-* Confidential Information
 ************************************************************/
 
 ALTER PROCEDURE dbo.spTaskCost 
@@ -14,7 +13,7 @@ ALTER PROCEDURE dbo.spTaskCost
 	@TotalCost money = 0 output
 	)
 
-WITH ENCRYPTION AS
+AS
 declare @TaskCode nvarchar(20)
 declare @TotalCharge money
 declare @CashModeCode smallint
@@ -40,15 +39,11 @@ declare @CashModeCode smallint
 	
 	RETURN
 GO
-
 alter table dbo.tbOrgContact with nocheck add
 	HomeNumber nvarchar(50) null
 GO
-
 insert into [tbProfileObjectDetail] ([ObjectTypeCode], [ObjectName], [ItemName], [ItemTypeCode], [Caption], [StatusBarText], [ControlTipText], [CharLength], [Visible], [FormatString]) values (1, 'System Fields', 'HomeNumber', 1, 'Home No.', '', '', 50, 1, '')
 GO
-
-
 ALTER TRIGGER Trigger_tbTask_Update
 ON dbo.tbTask 
 FOR UPDATE
@@ -99,27 +94,15 @@ AS
 		
 		end
 GO
-
-if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[FK_tbOrgSector_tbSystemSector]') and OBJECTPROPERTY(id, N'IsForeignKey') = 1)
 ALTER TABLE [dbo].[tbOrgSector] DROP CONSTRAINT FK_tbOrgSector_tbSystemSector
 GO
-
-if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[tbOrgSector]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
-drop table [dbo].[tbOrgSector]
+DROP TABLE [dbo].[tbOrgSector]
 GO
-
-
-if not exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[tbOrgSector]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
- BEGIN
 CREATE TABLE [dbo].[tbOrgSector] (
 	[AccountCode] [nvarchar] (10) NOT NULL ,
 	[IndustrySector] [nvarchar] (50) NOT NULL 
 ) ON [PRIMARY]
-END
-
 GO
-
-
 ALTER TABLE [dbo].[tbOrgSector] WITH NOCHECK ADD 
 	CONSTRAINT [PK_tbOrgSector] PRIMARY KEY  CLUSTERED 
 	(
@@ -127,7 +110,6 @@ ALTER TABLE [dbo].[tbOrgSector] WITH NOCHECK ADD
 		[IndustrySector]
 	)  ON [PRIMARY] 
 GO
-
 ALTER TABLE [dbo].[tbOrgSector] ADD 
 	CONSTRAINT [FK_tbOrgSector_tbOrg] FOREIGN KEY 
 	(
@@ -135,25 +117,21 @@ ALTER TABLE [dbo].[tbOrgSector] ADD
 	) REFERENCES [dbo].[tbOrg] (
 		[AccountCode]
 	) ON DELETE CASCADE  ON UPDATE CASCADE 
-
 GO
-
  CREATE  INDEX [IX_tbOrgSector_IndustrySector] ON [dbo].[tbOrgSector]([IndustrySector]) ON [PRIMARY]
 GO
-
 INSERT INTO tbOrgSector
                       (AccountCode, IndustrySector)
 SELECT     AccountCode, IndustrySector
 FROM         tbOrg
 WHERE     (NOT (IndustrySector IS NULL))
 GO
-
 CREATE FUNCTION dbo.fnOrgIndustrySectors
 	(
 	@AccountCode nvarchar(10)
 	)
 RETURNS nvarchar(256)
-WITH ENCRYPTION AS
+AS
 	BEGIN
 	declare @IndustrySector nvarchar(256)
 	
@@ -183,40 +161,19 @@ WITH ENCRYPTION AS
 	RETURN @IndustrySector
 	END
 GO
-
-if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[vwOrgTaskCount]') and OBJECTPROPERTY(id, N'IsView') = 1)
 drop view [dbo].[vwOrgTaskCount]
 GO
-
-if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[vwOrgDatasheet]') and OBJECTPROPERTY(id, N'IsView') = 1)
 drop view [dbo].[vwOrgDatasheet]
 GO
-
-SET QUOTED_IDENTIFIER ON 
-GO
-SET ANSI_NULLS ON 
-GO
-
 CREATE VIEW dbo.vwOrgTaskCount
-WITH ENCRYPTION AS
+AS
 SELECT     AccountCode, COUNT(TaskCode) AS TaskCount
 FROM         dbo.tbTask
 WHERE     (TaskStatusCode < 3)
 GROUP BY AccountCode
-
 GO
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS ON 
-GO
-
-SET QUOTED_IDENTIFIER ON 
-GO
-SET ANSI_NULLS ON 
-GO
-
 CREATE VIEW dbo.vwOrgDatasheet
-WITH ENCRYPTION AS
+AS
 SELECT     dbo.tbOrg.AccountCode, dbo.tbOrg.AccountName, ISNULL(dbo.vwOrgTaskCount.TaskCount, 0) AS Tasks, dbo.tbOrg.OrganisationTypeCode, 
                       dbo.tbOrgType.OrganisationType, dbo.tbOrgType.CashModeCode, dbo.tbOrg.OrganisationStatusCode, dbo.tbOrgStatus.OrganisationStatus, 
                       dbo.tbOrgAddress.Address, dbo.tbSystemTaxCode.TaxDescription, dbo.tbOrg.TaxCode, dbo.tbOrg.AddressCode, dbo.tbOrg.AreaCode, 
@@ -231,46 +188,28 @@ FROM         dbo.tbOrg INNER JOIN
                       dbo.tbSystemTaxCode ON dbo.tbOrg.TaxCode = dbo.tbSystemTaxCode.TaxCode LEFT OUTER JOIN
                       dbo.tbOrgAddress ON dbo.tbOrg.AddressCode = dbo.tbOrgAddress.AddressCode LEFT OUTER JOIN
                       dbo.vwOrgTaskCount ON dbo.tbOrg.AccountCode = dbo.vwOrgTaskCount.AccountCode
-
 GO
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS ON 
-GO
-
 /*****************************
 User Id Changes
 ****/
 
 
-if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[FK_tbInvoice_tbUser1]') and OBJECTPROPERTY(id, N'IsForeignKey') = 1)
 ALTER TABLE [dbo].[tbInvoice] DROP CONSTRAINT FK_tbInvoice_tbUser1
 GO
-
-if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[FK_tbOrgPayment_tbUser1]') and OBJECTPROPERTY(id, N'IsForeignKey') = 1)
 ALTER TABLE [dbo].[tbOrgPayment] DROP CONSTRAINT FK_tbOrgPayment_tbUser1
 GO
-
-if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[FK_tbTask_tbUser]') and OBJECTPROPERTY(id, N'IsForeignKey') = 1)
 ALTER TABLE [dbo].[tbTask] DROP CONSTRAINT FK_tbTask_tbUser
 GO
-
-if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[FK_tbTask_tbUser1]') and OBJECTPROPERTY(id, N'IsForeignKey') = 1)
 ALTER TABLE [dbo].[tbTask] DROP CONSTRAINT FK_tbTask_tbUser1
 GO
-
-if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[FK_tbUserMenu_tbUser1]') and OBJECTPROPERTY(id, N'IsForeignKey') = 1)
 ALTER TABLE [dbo].[tbUserMenu] DROP CONSTRAINT FK_tbUserMenu_tbUser1
 GO
-
 alter table dbo.tbUser 
 	drop constraint aaaaatbUser_PK
 GO
-
 alter table dbo.tbUser
 	alter column UserId nvarchar(10) not null
 GO
-
 alter table dbo.tbUser WITH NOCHECK ADD 
 	NextTaskNumber int NOT NULL CONSTRAINT [DF_tbUser_NextTaskNumber]  DEFAULT ((1))
 	CONSTRAINT [PK_tbUser] PRIMARY KEY  CLUSTERED 
@@ -278,15 +217,12 @@ alter table dbo.tbUser WITH NOCHECK ADD
 		UserId
 	)  ON [PRIMARY] 
 GO
-
 alter table dbo.tbUserMenu
 	drop constraint PK_tbUserMenu
 GO
-
 alter table dbo.tbUserMenu
 	alter column UserId nvarchar(10) not null
 GO
-
 alter table dbo.tbUserMenu WITH NOCHECK ADD 
 	CONSTRAINT [PK_tbUserMenu] PRIMARY KEY  CLUSTERED 
 	(
@@ -294,47 +230,34 @@ alter table dbo.tbUserMenu WITH NOCHECK ADD
 		MenuId
 	)  ON [PRIMARY] 
 GO
-
 drop index dbo.tbInvoice.IX_tbInvoice_UserId
 GO
-
 alter table dbo.tbInvoice
 	alter column UserId nvarchar(10) not null
 GO
-
 CREATE  INDEX [IX_tbInvoice_UserId] ON [dbo].[tbInvoice]([UserId], [InvoiceNumber]) ON [PRIMARY]
 GO
-
 alter table dbo.tbOrgPayment
 	alter column UserId nvarchar(10) not null
 GO
-
 drop index dbo.tbTask.IX_tbTask_UserId
 GO
-
 drop index dbo.tbTask.IX_tbTask_ActionBy
 GO
-
 drop index dbo.tbTask.IX_tbTask_ActionById
 GO
-
 alter table dbo.tbTask
 	alter column UserId nvarchar(10) not null
 GO
-
 alter table dbo.tbTask
 	alter column ActionById nvarchar(10) not null
 GO
-
  CREATE  INDEX [IX_tbTask_UserId] ON [dbo].[tbTask]([UserId]) ON [PRIMARY]
 GO
-
  CREATE  INDEX [IX_tbTask_ActionBy] ON [dbo].[tbTask]([ActionById], [TaskStatusCode], [ActionOn]) ON [PRIMARY]
 GO
-
  CREATE  INDEX [IX_tbTask_ActionById] ON [dbo].[tbTask]([ActionById]) ON [PRIMARY]
 GO
-
 ALTER TABLE [dbo].[tbInvoice] ADD 
 	CONSTRAINT [FK_tbInvoice_tbUser1] FOREIGN KEY 
 	(
@@ -342,9 +265,7 @@ ALTER TABLE [dbo].[tbInvoice] ADD
 	) REFERENCES [dbo].[tbUser] (
 		[UserId]
 	) ON UPDATE CASCADE 
-
 GO
-
 ALTER TABLE [dbo].[tbOrgPayment] ADD 
 	CONSTRAINT [FK_tbOrgPayment_tbUser1] FOREIGN KEY 
 	(
@@ -353,7 +274,6 @@ ALTER TABLE [dbo].[tbOrgPayment] ADD
 		[UserId]
 	) ON UPDATE CASCADE 
 GO
-
 ALTER TABLE [dbo].[tbUserMenu] ADD 
 	CONSTRAINT [FK_tbUserMenu_tbUser1] FOREIGN KEY 
 	(
@@ -362,7 +282,6 @@ ALTER TABLE [dbo].[tbUserMenu] ADD
 		[UserId]
 	) ON UPDATE CASCADE 
 GO
-
 ALTER TABLE [dbo].[tbTask] ADD 
 	CONSTRAINT [FK_tbTask_tbUser] FOREIGN KEY 
 	(
@@ -377,14 +296,6 @@ ALTER TABLE [dbo].[tbTask] ADD
 		[UserId]
 	)
 GO
-
-SET QUOTED_IDENTIFIER ON 
-GO
-SET ANSI_NULLS ON 
-GO
-
-
-
 ALTER FUNCTION dbo.fnSystemAdjustToCalendar
 	(
 	@UserId nvarchar(10),
@@ -392,7 +303,7 @@ ALTER FUNCTION dbo.fnSystemAdjustToCalendar
 	@Days int
 	)
 RETURNS datetime
-  WITH ENCRYPTION AS
+AS
 	BEGIN
 	declare @CalendarCode nvarchar(10)
 	declare @TargetDate datetime
@@ -447,25 +358,12 @@ RETURNS datetime
 
 	RETURN @TargetDate
 	END
-
-
-
 GO
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS ON 
-GO
-
-SET QUOTED_IDENTIFIER ON 
-GO
-SET ANSI_NULLS ON 
-GO
-
 ALTER PROCEDURE dbo.spInvoiceCredit
 	(
 		@InvoiceNumber nvarchar(20) output
 	)
-WITH ENCRYPTION AS
+AS
 declare @InvoiceTypeCode smallint
 declare @CreditNumber nvarchar(20)
 declare @UserId nvarchar(10)
@@ -529,25 +427,14 @@ declare @InvoiceSuffix nvarchar(4)
 
 	
 	RETURN 
-
 GO
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS ON 
-GO
-
-SET QUOTED_IDENTIFIER ON 
-GO
-SET ANSI_NULLS ON 
-GO
-
 ALTER PROCEDURE dbo.spInvoiceRaiseBlank
 	(
 	@AccountCode nvarchar(10),
 	@InvoiceTypeCode smallint,
 	@InvoiceNumber nvarchar(20) = null output
 	)
-WITH ENCRYPTION AS
+AS
 declare @UserId nvarchar(10)
 declare @NextNumber int
 declare @InvoiceSuffix nvarchar(4)
@@ -586,27 +473,14 @@ declare @InvoiceSuffix nvarchar(4)
 	commit tran InvoiceBlank
 	
 	RETURN
-
 GO
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS ON 
-GO
-
-SET QUOTED_IDENTIFIER ON 
-GO
-SET ANSI_NULLS ON 
-GO
-
-
-
 ALTER PROCEDURE dbo.spInvoiceRaise
 	(
 	@TaskCode nvarchar(20),
 	@InvoiceTypeCode smallint,
 	@InvoiceNumber nvarchar(20) = null output
 	)
-WITH ENCRYPTION AS
+AS
 declare @UserId nvarchar(10)
 declare @NextNumber int
 declare @InvoiceSuffix nvarchar(4)
@@ -650,25 +524,12 @@ declare @InvoiceSuffix nvarchar(4)
 	commit tran Invoice
 	
 	RETURN
-
-
-
 GO
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS ON 
-GO
-
-SET QUOTED_IDENTIFIER ON 
-GO
-SET ANSI_NULLS ON 
-GO
-
 ALTER PROCEDURE dbo.spPaymentPostMisc
 	(
 	@PaymentCode nvarchar(20) 
 	)
-WITH ENCRYPTION AS
+AS
 declare @InvoiceNumber nvarchar(20)
 declare @UserId nvarchar(10)
 declare @NextNumber int
@@ -746,48 +607,23 @@ WHERE     (tbOrgPayment.PaymentCode = @PaymentCode)
 	WHERE     (PaymentCode = @PaymentCode)
 	
 	RETURN
-
-
-
-
 GO
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS ON 
-GO
-
-SET QUOTED_IDENTIFIER ON 
-GO
-SET ANSI_NULLS ON 
-GO
-
-
-
 ALTER PROCEDURE dbo.spSystemReassignUser 
 	(
 	@UserId nvarchar(10)
 	)
-WITH ENCRYPTION AS
+AS
 	UPDATE    tbUser
 	SET       LogonName = (SUSER_SNAME())
 	WHERE     (UserId = @UserId)
 	
 	RETURN
-
-
-
-
 GO
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS ON 
-GO
-
 CREATE PROCEDURE dbo.spTaskNextCode
 	(
 		@TaskCode nvarchar(20) OUTPUT
 	)
-WITH ENCRYPTION AS
+AS
 declare @UserId nvarchar(10)
 declare @NextTaskNumber int
 
@@ -801,19 +637,12 @@ declare @NextTaskNumber int
 	where UserId = @UserId
 		                      
 	RETURN 
-
-SET QUOTED_IDENTIFIER ON 
 GO
-SET ANSI_NULLS ON 
-GO
-
-
-
 ALTER PROCEDURE dbo.spTaskConfigure 
 	(
 	@ParentTaskCode nvarchar(20)
 	)
-WITH ENCRYPTION AS
+AS
 declare @StepNumber smallint
 declare @TaskCode nvarchar(20)
 declare @UserId nvarchar(10)
@@ -929,13 +758,7 @@ declare @UserId nvarchar(10)
 
 
 	RETURN
-
 GO
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS ON 
-GO
-
 ALTER PROCEDURE dbo.spTaskSchedule
 	(
 	@ParentTaskCode nvarchar(20),
@@ -994,7 +817,6 @@ declare @Quantity float
 	
 	RETURN
 GO
-
 ALTER PROCEDURE dbo.spSettingNewCompany
 	(
 	@FirstNames nvarchar(50),
@@ -1009,7 +831,7 @@ ALTER PROCEDURE dbo.spSettingNewCompany
 	@Email nvarchar(50) = null,
 	@WebSite nvarchar(128) = null
 	)
-WITH ENCRYPTION AS
+AS
 declare @UserId nvarchar(10)
 declare @CalendarCode nvarchar(10)
 declare @MenuId smallint
@@ -1063,42 +885,17 @@ declare @SqlDataVersion real
 	VALUES     (N'TRU', 0, @SQLDataVersion, @AppAccountCode, 2, 1, 2, 1, N'900', N'902', N'901', N'903')
 
 	RETURN 1 
-
 GO
-
-if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[vwUserCredentials]') and OBJECTPROPERTY(id, N'IsView') = 1)
 drop view [dbo].[vwUserCredentials]
 GO
-
-SET QUOTED_IDENTIFIER ON 
-GO
-SET ANSI_NULLS ON 
-GO
-
-
 CREATE VIEW [dbo].[vwUserCredentials]
-WITH ENCRYPTION AS
+AS
 SELECT     UserId, UserName, LogonName, Administrator
 FROM         dbo.tbUser
 WHERE     (LogonName = SUSER_SNAME())
-
-
 GO
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS ON 
-GO
-
-SET QUOTED_IDENTIFIER ON 
-GO
-SET ANSI_NULLS ON 
-GO
-
-
-
-
 ALTER  VIEW [dbo].[vwTasks]
-WITH ENCRYPTION AS
+AS
 SELECT     dbo.tbTask.TaskCode, dbo.tbTask.UserId, dbo.tbTask.AccountCode, dbo.tbTask.ContactName, dbo.tbTask.ActivityCode, dbo.tbTask.TaskTitle, 
                       dbo.tbTask.TaskStatusCode, dbo.tbTask.ActionById, dbo.tbTask.ActionOn, dbo.tbTask.ActionedOn, dbo.tbTask.TaskNotes, dbo.tbTask.Quantity, 
                       dbo.tbTask.UnitCharge, dbo.tbTask.TotalCharge, dbo.tbTask.AddressCodeFrom, dbo.tbTask.AddressCodeTo, dbo.tbTask.Printed, 
@@ -1119,13 +916,4 @@ FROM         dbo.tbUser INNER JOIN
                       dbo.tbSystemBucket ON dbo.vwTaskBucket.Period = dbo.tbSystemBucket.Period LEFT OUTER JOIN
                       dbo.tbCashCode ON dbo.tbTask.CashCode = dbo.tbCashCode.CashCode LEFT OUTER JOIN
                       dbo.tbCashCategory ON dbo.tbCashCode.CategoryCode = dbo.tbCashCategory.CategoryCode
-
-
-
-
 GO
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS ON 
-GO
-

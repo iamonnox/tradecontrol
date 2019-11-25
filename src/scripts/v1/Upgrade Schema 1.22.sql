@@ -3,7 +3,7 @@ ALTER PROCEDURE [dbo].[spInvoiceTotal]
 	(
 	@InvoiceNumber nvarchar(20)
 	)
-WITH ENCRYPTION AS
+AS
 declare @InvoiceValue money
 declare @TaxValue money
 declare @PaidValue money
@@ -60,9 +60,8 @@ declare @PaidTaxValue money
 	
 	RETURN
 GO
-
 ALTER VIEW [dbo].[vwStatementTasksFull]
- WITH ENCRYPTION AS
+AS
 SELECT     TOP (100) PERCENT dbo.tbTask.TaskCode AS ReferenceCode, dbo.tbTask.AccountCode, dbo.tbTask.ActionOn, dbo.tbTask.PaymentOn, 
                       CASE WHEN tbTask.TaskStatusCode = 1 THEN 4 ELSE 3 END AS CashEntryTypeCode, 
                       CASE WHEN tbCashCategory.CashModeCode = 1 THEN (dbo.tbTask.UnitCharge + dbo.tbTask.UnitCharge * dbo.vwSystemTaxRates.TaxRate) 
@@ -76,9 +75,8 @@ FROM         dbo.vwSystemTaxRates INNER JOIN
                       dbo.vwTaskInvoicedQuantity ON dbo.tbTask.TaskCode = dbo.vwTaskInvoicedQuantity.TaskCode
 WHERE     (dbo.tbTask.TaskStatusCode < 4) AND (dbo.tbTask.Quantity - ISNULL(dbo.vwTaskInvoicedQuantity.InvoiceQuantity, 0) > 0)
 GO
-
 ALTER VIEW [dbo].[vwStatementTasksConfirmed]
- WITH ENCRYPTION AS
+AS
 SELECT     TOP (100) PERCENT dbo.tbTask.TaskCode AS ReferenceCode, dbo.tbTask.AccountCode, dbo.tbTask.ActionOn, dbo.tbTask.PaymentOn, 
                       3 AS CashEntryTypeCode, 
                       CASE WHEN tbCashCategory.CashModeCode = 1 THEN (dbo.tbTask.UnitCharge + dbo.tbTask.UnitCharge * dbo.vwSystemTaxRates.TaxRate) 
@@ -93,9 +91,8 @@ FROM         dbo.vwSystemTaxRates INNER JOIN
 WHERE     (dbo.tbTask.TaskStatusCode > 1) AND (dbo.tbTask.TaskStatusCode < 4) AND 
                       (dbo.tbTask.Quantity - ISNULL(dbo.vwTaskInvoicedQuantity.InvoiceQuantity, 0) > 0)
 GO
-
 ALTER VIEW [dbo].[vwTaskVatConfirmed]
-WITH ENCRYPTION AS
+AS
 SELECT     dbo.fnAccountPeriod(dbo.tbTask.PaymentOn) AS StartOn, 
                       CASE WHEN tbCashCategory.CashModeCode = 1 THEN (dbo.tbTask.UnitCharge * (dbo.tbTask.Quantity - ISNULL(dbo.vwTaskInvoicedQuantity.InvoiceQuantity,
                        0))) * vwSystemTaxRates.TaxRate * - 1 ELSE dbo.tbTask.UnitCharge * (dbo.tbTask.Quantity - ISNULL(dbo.vwTaskInvoicedQuantity.InvoiceQuantity, 0)) 
@@ -110,9 +107,8 @@ WHERE     (dbo.vwSystemTaxRates.TaxTypeCode = 2) AND (dbo.tbTask.TaskStatusCode 
                        0))) * vwSystemTaxRates.TaxRate ELSE dbo.tbTask.UnitCharge * (dbo.tbTask.Quantity - ISNULL(dbo.vwTaskInvoicedQuantity.InvoiceQuantity, 0)) 
                       * vwSystemTaxRates.TaxRate * - 1 END <> 0) AND (dbo.tbTask.PaymentOn <= DATEADD(d, dbo.fnSystemTaxHorizon(), GETDATE()))
 GO
-
 ALTER VIEW [dbo].[vwTaskVatFull]
-  WITH ENCRYPTION AS
+AS
 SELECT     dbo.fnAccountPeriod(dbo.tbTask.PaymentOn) AS StartOn, 
                       CASE WHEN tbCashCategory.CashModeCode = 1 THEN (dbo.tbTask.UnitCharge * (dbo.tbTask.Quantity - ISNULL(dbo.vwTaskInvoicedQuantity.InvoiceQuantity,
                        0))) * vwSystemTaxRates.TaxRate ELSE dbo.tbTask.UnitCharge * (dbo.tbTask.Quantity - ISNULL(dbo.vwTaskInvoicedQuantity.InvoiceQuantity, 0)) 
@@ -127,12 +123,11 @@ WHERE     (dbo.vwSystemTaxRates.TaxTypeCode = 2) AND (dbo.tbTask.TaskStatusCode 
                        0))) * vwSystemTaxRates.TaxRate ELSE dbo.tbTask.UnitCharge * (dbo.tbTask.Quantity - ISNULL(dbo.vwTaskInvoicedQuantity.InvoiceQuantity, 0)) 
                       * vwSystemTaxRates.TaxRate * - 1 END <> 0)
 GO
-
 ALTER PROCEDURE [dbo].[spPaymentPostMisc]
 	(
 	@PaymentCode nvarchar(20) 
 	)
- WITH ENCRYPTION AS
+AS
 declare @InvoiceNumber nvarchar(20)
 declare @UserId nvarchar(10)
 declare @NextNumber int
@@ -214,9 +209,8 @@ declare @InvoiceTypeCode smallint
 	
 	RETURN
 GO
-
 ALTER VIEW [dbo].[vwCashCodeForecastSummary]
- WITH ENCRYPTION AS
+AS
 SELECT     dbo.tbTask.CashCode, dbo.fnAccountPeriod(dbo.tbTask.ActionOn) AS StartOn, SUM(dbo.tbTask.TotalCharge) AS ForecastValue, 
                       SUM(dbo.tbTask.TotalCharge * ISNULL(dbo.vwSystemTaxRates.TaxRate, 0)) AS ForecastTax
 FROM         dbo.tbTask INNER JOIN
@@ -225,12 +219,11 @@ FROM         dbo.tbTask INNER JOIN
 WHERE     (dbo.tbTask.ActionOn >= dbo.fnSystemActiveStartOn())
 GROUP BY dbo.tbTask.CashCode, dbo.fnAccountPeriod(dbo.tbTask.ActionOn)
 GO
-
 ALTER PROCEDURE [dbo].[spOrgRebuild]
 	(
 		@AccountCode nvarchar(10)
 	)
- WITH ENCRYPTION AS
+AS
 declare @PaidBalance money
 declare @InvoicedBalance money
 declare @Balance money
@@ -406,15 +399,8 @@ declare @TaxRate float
 
 	RETURN 
 GO
-
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
 ALTER VIEW [dbo].[vwInvoiceRegisterDetail]
-WITH ENCRYPTION AS
+AS
 SELECT     StartOn, InvoiceNumber, TaskCode, CashCode, CashDescription, TaxCode, TaxDescription, AccountCode, InvoiceTypeCode, InvoiceStatusCode, 
                       InvoicedOn, InvoiceValue, TaxValue, PaidValue, PaidTaxValue, PaymentTerms, Printed, AccountName, UserName, InvoiceStatus, CashModeCode, 
                       InvoiceType
@@ -425,13 +411,6 @@ SELECT     StartOn, InvoiceNumber, TaskCode, CashCode, CashDescription, TaxCode,
                       InvoiceType
 FROM         dbo.vwInvoiceRegisterItems
 GO
-
-SET ANSI_NULLS OFF
-GO
-SET QUOTED_IDENTIFIER OFF
-GO
-
-
 ALTER  PROCEDURE dbo.spInvoiceRaise
 	(
 	@TaskCode nvarchar(20),
@@ -439,7 +418,7 @@ ALTER  PROCEDURE dbo.spInvoiceRaise
 	@InvoicedOn datetime,
 	@InvoiceNumber nvarchar(20) = null output
 	)
-WITH ENCRYPTION AS
+AS
 declare @UserId nvarchar(10)
 declare @NextNumber int
 declare @InvoiceSuffix nvarchar(4)
@@ -500,15 +479,13 @@ declare @AccountCode nvarchar(10)
 	commit tran Invoice
 	
 	RETURN
-
 GO
-
 ALTER PROCEDURE dbo.spInvoicePay
 	(
 	@InvoiceNumber nvarchar(20),
 	@Now datetime
 	)
-WITH ENCRYPTION AS
+AS
 DECLARE @PaidOut money
 DECLARE @PaidIn money
 DECLARE @TaskOutstanding money

@@ -5,35 +5,10 @@
 * Description: Sql Server Upgrade Script - Encrypted Distribution Schema
 * Data Version: 1.08
 * Release Date: TBC
-* Confidential Information
 ************************************************************/
 
-DROP INDEX [tbActivityAttribute].[IX_tbActivityAttribute_DefaultText]
-GO
-DROP INDEX [tbTaskAttribute].[IX_tbTaskAttribute_Description]
-GO
-ALTER TABLE tbActivityAttribute
-	ALTER COLUMN DefaultText nvarchar(400)
-GO
-
-CREATE  INDEX [IX_tbActivityAttribute_DefaultText] ON [dbo].[tbActivityAttribute]([DefaultText]) WITH  FILLFACTOR = 90 ON [PRIMARY]
-GO
-
-ALTER TABLE tbTaskAttribute
-	ALTER COLUMN AttributeDescription nvarchar(400)
-GO
-
- CREATE  INDEX [IX_tbTaskAttribute_Description] ON [dbo].[tbTaskAttribute]([Attribute], [AttributeDescription]) WITH  FILLFACTOR = 90 ON [PRIMARY]
-GO
-
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
 CREATE VIEW [dbo].[vwTaskProfitOrders]
-WITH ENCRYPTION AS
+AS
 SELECT     dbo.fnAccountPeriod(dbo.tbTask.PaymentOn) AS StartOn, dbo.tbTask.TaskCode, 
                       CASE WHEN dbo.tbCashCategory.CashModeCode = 1 THEN dbo.tbTask.TotalCharge * - 1 ELSE dbo.tbTask.TotalCharge END AS TotalCharge
 FROM         dbo.tbCashCode INNER JOIN
@@ -45,12 +20,6 @@ WHERE     (dbo.tbTask.TaskStatusCode > 1) AND (dbo.tbTaskFlow.ParentTaskCode IS 
                       (dbo.tbTask.TaskStatusCode < 5) OR
                       (dbo.tbTask.TaskStatusCode > 1) AND (tbTask_1.CashCode IS NULL) AND (dbo.tbTask.TaskStatusCode < 5)
 GO
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
 CREATE FUNCTION [dbo].[fnTaskProfitCost]
 	(
 	@ParentTaskCode nvarchar(20),
@@ -63,7 +32,7 @@ RETURNS @tbCost TABLE (
 	InvoicedCost money,
 	InvoicedCostPaid money
 	)
-WITH ENCRYPTION AS
+AS
 	BEGIN
 declare @TaskCode nvarchar(20)
 declare @TotalCharge money
@@ -111,14 +80,7 @@ declare @CashModeCode smallint
 	
 	RETURN
 	END
-
 GO
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
 CREATE FUNCTION [dbo].[fnTaskProfitOrder]
 	(
 	@TaskCode nvarchar(20)
@@ -130,7 +92,7 @@ RETURNS @tbOrder TABLE (
 	InvoicedCost money,
 	InvoicedCostPaid money
 	)
-WITH ENCRYPTION AS
+AS
 	BEGIN
 declare @InvoicedCharge money
 declare @InvoicedChargePaid money
@@ -153,11 +115,6 @@ declare @InvoicedCostPaid money
 	
 	RETURN
 	END
-
-GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
 GO
 CREATE FUNCTION [dbo].[fnTaskProfit]()
 RETURNS @tbTaskProfit TABLE (
@@ -170,7 +127,7 @@ RETURNS @tbTaskProfit TABLE (
 	InvoicedCost money,
 	InvoicedCostPaid money
 	) 
-WITH ENCRYPTION AS
+AS
 	BEGIN
 declare @StartOn datetime
 declare @TaskCode nvarchar(20)
@@ -216,15 +173,9 @@ declare @InvoicedCostPaid money
 		
 	RETURN
 	END
-
-GO
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
 GO
 CREATE VIEW [dbo].[vwTaskProfit]
-WITH ENCRYPTION AS
+AS
 SELECT     TOP 100 PERCENT fnTaskProfit_1.StartOn, dbo.tbOrg.AccountCode, dbo.tbTask.TaskCode, dbo.tbTask.ActivityCode, dbo.tbCashCode.CashCode, 
                       dbo.tbTask.TaskTitle, dbo.tbOrg.AccountName, dbo.tbCashCode.CashDescription, dbo.tbTaskStatus.TaskStatus, fnTaskProfit_1.TotalCharge, 
                       fnTaskProfit_1.InvoicedCharge, fnTaskProfit_1.InvoicedChargePaid, fnTaskProfit_1.TotalCost, fnTaskProfit_1.InvoicedCost, 
@@ -240,16 +191,14 @@ FROM         dbo.tbTask INNER JOIN
                       dbo.tbOrg ON dbo.tbTask.AccountCode = dbo.tbOrg.AccountCode INNER JOIN
                       dbo.tbCashCode ON dbo.tbTask.CashCode = dbo.tbCashCode.CashCode
 ORDER BY fnTaskProfit_1.StartOn
-
 GO
-
 CREATE PROCEDURE dbo.spTaskCopy
 	(
 	@FromTaskCode nvarchar(20),
 	@ParentTaskCode nvarchar(20) = null,
 	@ToTaskCode nvarchar(20) = null output
 	)
-WITH ENCRYPTION AS
+AS
 declare @ActivityCode nvarchar(50)
 declare @Printed bit
 declare @ChildTaskCode nvarchar(20)
@@ -329,5 +278,18 @@ declare @StepNumber smallint
 	deallocate curTask
 		
 	RETURN
-
+GO
+DROP INDEX [tbActivityAttribute].[IX_tbActivityAttribute_DefaultText]
+GO
+DROP INDEX [tbTaskAttribute].[IX_tbTaskAttribute_Description]
+GO
+ALTER TABLE tbActivityAttribute
+	ALTER COLUMN DefaultText nvarchar(400)
+GO
+CREATE  INDEX [IX_tbActivityAttribute_DefaultText] ON [dbo].[tbActivityAttribute]([DefaultText]) WITH  FILLFACTOR = 90 ON [PRIMARY]
+GO
+ALTER TABLE tbTaskAttribute
+	ALTER COLUMN AttributeDescription nvarchar(400)
+GO
+ CREATE  INDEX [IX_tbTaskAttribute_Description] ON [dbo].[tbTaskAttribute]([Attribute], [AttributeDescription]) WITH  FILLFACTOR = 90 ON [PRIMARY]
 GO

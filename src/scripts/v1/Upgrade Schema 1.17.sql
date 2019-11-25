@@ -5,7 +5,6 @@
 * Description: Sql Server Upgrade Script - Encrypted Distribution Schema
 * Data Version: 1.17
 * Release Date: 30 July 2010
-* Confidential Information
 ************************************************************/
 
 ALTER TABLE dbo.tbSystemOptions WITH NOCHECK ADD
@@ -20,7 +19,6 @@ AS
 	RETURN @TaxHorizon
 	END
 GO
-
 UPDATE tbProfileText
 SET [Message] = 'Invoiced'
 WHERE TextId = 1214
@@ -29,14 +27,8 @@ UPDATE tbProfileText
 SET [Message] = 'Ordered'
 WHERE TextId = 1215
 GO
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
 ALTER VIEW [dbo].[vwCorpTaxConfirmedBase]
-WITH ENCRYPTION AS
+AS
 SELECT     TOP 100 PERCENT dbo.fnAccountPeriod(dbo.tbTask.PaymentOn) AS StartOn, 
                       CASE WHEN tbCashCategory.CashModeCode = 1 THEN (dbo.tbTask.UnitCharge * (dbo.tbTask.Quantity - ISNULL(dbo.vwTaskInvoicedQuantity.InvoiceQuantity,
                        0))) * - 1 ELSE dbo.tbTask.UnitCharge * (dbo.tbTask.Quantity - ISNULL(dbo.vwTaskInvoicedQuantity.InvoiceQuantity, 0)) END AS OrderValue
@@ -50,20 +42,8 @@ WHERE     (dbo.tbTask.TaskStatusCode > 1) AND (dbo.tbTask.TaskStatusCode < 4) AN
                       (dbo.tbTask.Quantity - ISNULL(dbo.vwTaskInvoicedQuantity.InvoiceQuantity, 0) > 0) AND (dbo.tbTask.PaymentOn <= DATEADD(d, 
                       dbo.fnSystemTaxHorizon(), GETDATE()))
 GO
-
-SET ANSI_NULLS OFF
-GO
-SET QUOTED_IDENTIFIER OFF
-GO
-
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
 ALTER VIEW [dbo].[vwTaskVatConfirmed]
-WITH ENCRYPTION AS
+AS
 SELECT     dbo.fnAccountPeriod(dbo.tbTask.PaymentOn) AS StartOn, 
                       CASE WHEN tbCashCategory.CashModeCode = 1 THEN (dbo.tbTask.UnitCharge * (dbo.tbTask.Quantity - ISNULL(dbo.vwTaskInvoicedQuantity.InvoiceQuantity,
                        0))) * tbSystemTaxCode.TaxRate * - 1 ELSE dbo.tbTask.UnitCharge * (dbo.tbTask.Quantity - ISNULL(dbo.vwTaskInvoicedQuantity.InvoiceQuantity, 0)) 
@@ -78,11 +58,6 @@ WHERE     (dbo.tbSystemTaxCode.TaxTypeCode = 2) AND (dbo.tbTask.TaskStatusCode >
                        0))) * tbSystemTaxCode.TaxRate ELSE dbo.tbTask.UnitCharge * (dbo.tbTask.Quantity - ISNULL(dbo.vwTaskInvoicedQuantity.InvoiceQuantity, 0)) 
                       * tbSystemTaxCode.TaxRate * - 1 END <> 0) AND (dbo.tbTask.PaymentOn <= DATEADD(d, dbo.fnSystemTaxHorizon(), GETDATE()))
 GO
-
-SET ANSI_NULLS OFF
-GO
-SET QUOTED_IDENTIFIER OFF
-GO
 CREATE FUNCTION dbo.fnStatementReserves ()
 RETURNS @tbStatement TABLE (
 	ReferenceCode nvarchar(20), 
@@ -94,7 +69,7 @@ RETURNS @tbStatement TABLE (
 	Balance money, 
 	CashCode nvarchar(50)
 	) 
- WITH ENCRYPTION  AS
+AS
 	BEGIN
 	declare @ReferenceCode nvarchar(20) 
 	declare @ReferenceCode2 nvarchar(20)
@@ -200,12 +175,9 @@ RETURNS @tbStatement TABLE (
 
 	RETURN
 	END
-
-
 GO
-
 CREATE VIEW dbo.vwStatementReserves
-WITH ENCRYPTION AS
+AS
 SELECT     TOP 100 PERCENT fnStatementReserves.TransactOn, fnStatementReserves.CashEntryTypeCode, fnStatementReserves.ReferenceCode, 
                       fnStatementReserves.AccountCode, dbo.tbOrg.AccountName, dbo.tbCashEntryType.CashEntryType, fnStatementReserves.PayOut, 
                       fnStatementReserves.PayIn, fnStatementReserves.Balance, dbo.tbCashCode.CashCode, dbo.tbCashCode.CashDescription
@@ -215,8 +187,6 @@ FROM         dbo.fnStatementReserves() AS fnStatementReserves INNER JOIN
                       dbo.tbCashCode ON fnStatementReserves.CashCode = dbo.tbCashCode.CashCode
 ORDER BY fnStatementReserves.TransactOn, fnStatementReserves.CashEntryTypeCode, fnStatementReserves.ReferenceCode, fnStatementReserves.CashCode
 GO
-
-
 ALTER FUNCTION [dbo].[fnStatementCompany]()
 RETURNS @tbStatement TABLE (
 	ReferenceCode nvarchar(20), 
@@ -228,7 +198,7 @@ RETURNS @tbStatement TABLE (
 	Balance money,
 	CashCode nvarchar(50)
 	) 
-   WITH ENCRYPTION AS
+AS
 	BEGIN
 	declare @ReferenceCode nvarchar(20) 
 	declare @CashCode nvarchar(50)
@@ -341,10 +311,7 @@ RETURNS @tbStatement TABLE (
 		
 	RETURN
 	END
-
 GO
-
-
 ALTER FUNCTION [dbo].[fnStatementCorpTax]
 	()
 RETURNS @tbCorpTax TABLE (
@@ -357,7 +324,7 @@ RETURNS @tbCorpTax TABLE (
 	CashCode nvarchar(50)
 	
 	)
- WITH ENCRYPTION AS
+AS
 	BEGIN
 	declare @StartOn datetime
 	declare @Balance money
@@ -400,11 +367,7 @@ RETURNS @tbCorpTax TABLE (
 	
 	RETURN
 	END
-
 GO
-
-
-
 ALTER FUNCTION [dbo].[fnStatementVat]
 	()
 RETURNS @tbVat TABLE (
@@ -416,7 +379,7 @@ RETURNS @tbVat TABLE (
 	PayIn money,
 	CashCode nvarchar(50)
 	)
-WITH ENCRYPTION AS
+AS
 	BEGIN
 	declare @LastBalanceOn datetime
 	declare @VatDueOn datetime
@@ -452,9 +415,7 @@ WITH ENCRYPTION AS
 	
 	RETURN
 	END
-
 GO
-
 ALTER FUNCTION [dbo].[fnTaxVatOrderTotals]
 	(@IncludeForecasts bit = 0)
 RETURNS @tbVat TABLE 
@@ -464,7 +425,7 @@ RETURNS @tbVat TABLE
 	PayIn money,
 	PayOut money
 	)
-WITH ENCRYPTION AS
+AS
 	BEGIN
 	declare @PayOn datetime
 	declare @PayFrom datetime
@@ -510,6 +471,4 @@ WITH ENCRYPTION AS
 	
 	RETURN
 	END
-
 GO
-

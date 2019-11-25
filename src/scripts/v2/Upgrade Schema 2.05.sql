@@ -5,7 +5,6 @@
 * Description: Sql Server Upgrade Script - Encrypted Distribution Schema
 * Data Version: 2.05
 * Release Date: 7.03.12
-* Confidential Information
 ************************************************************/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[tbProfileCustom]') AND type in (N'U'))
 DROP TABLE [dbo].[tbProfileCustom]
@@ -43,7 +42,7 @@ RETURNS @tbCorp TABLE
 	TaxPaid money ,
 	Balance money
 	)
- WITH ENCRYPTION AS
+AS
 	BEGIN
 	declare @Balance money
 	declare @StartOn datetime
@@ -82,12 +81,8 @@ RETURNS @tbCorp TABLE
 	RETURN
 	END
 GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
 ALTER VIEW [dbo].[vwDocTaskCode]
-WITH ENCRYPTION AS
+AS
 SELECT     dbo.fnTaskEmailAddress(dbo.tbTask.TaskCode) AS EmailAddress, dbo.tbTask.TaskCode, dbo.tbTask.TaskStatusCode, dbo.tbTaskStatus.TaskStatus, 
                       dbo.tbTask.ContactName, dbo.tbOrgContact.NickName, dbo.tbUser.UserName, dbo.tbOrg.AccountName, dbo.tbOrgAddress.Address AS InvoiceAddress, 
                       tbOrg_1.AccountName AS DeliveryAccountName, tbOrgAddress_1.Address AS DeliveryAddress, tbOrg_2.AccountName AS CollectionAccountName, 
@@ -109,5 +104,3 @@ FROM         dbo.tbOrg AS tbOrg_2 RIGHT OUTER JOIN
                       dbo.tbOrgContact ON dbo.tbTask.ContactName = dbo.tbOrgContact.ContactName AND dbo.tbTask.AccountCode = dbo.tbOrgContact.AccountCode LEFT OUTER JOIN
                       dbo.tbSystemTaxCode ON dbo.tbTask.TaxCode = dbo.tbSystemTaxCode.TaxCode
 GO
-
-

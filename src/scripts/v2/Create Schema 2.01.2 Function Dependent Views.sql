@@ -1,6 +1,3 @@
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
 GO
 CREATE FUNCTION [dbo].[fnStatementCompany]()
 RETURNS @tbStatement TABLE (
@@ -120,10 +117,6 @@ RETURNS @tbStatement TABLE (
 	RETURN
 	END
 GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
 CREATE FUNCTION [dbo].[fnAccountPeriod]
 	(
 	@TransactedOn datetime
@@ -163,10 +156,6 @@ WHERE     (dbo.tbTask.TaskStatusCode > 1) AND (dbo.tbTaskFlow.ParentTaskCode IS 
                       (dbo.tbTask.TaskStatusCode < 5) OR
                       (dbo.tbTask.TaskStatusCode > 1) AND (tbTask_1.CashCode IS NULL) AND (dbo.tbTask.TaskStatusCode < 5)
 GO
-SET ANSI_NULLS OFF
-GO
-SET QUOTED_IDENTIFIER ON
-GO
 CREATE FUNCTION [dbo].[fnNetProfitCashCodes]
 	()
 RETURNS @tbCashCode TABLE (CashCode nvarchar(50))
@@ -183,10 +172,6 @@ RETURNS @tbCashCode TABLE (CashCode nvarchar(50))
 	RETURN
 	END
 GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
 CREATE VIEW [dbo].[vwCorpTaxInvoiceItems]
 AS
 SELECT     TOP (100) PERCENT dbo.fnAccountPeriod(dbo.tbInvoice.InvoicedOn) AS StartOn, 
@@ -196,10 +181,6 @@ FROM         dbo.tbInvoiceItem INNER JOIN
                       dbo.tbInvoice ON dbo.tbInvoiceItem.InvoiceNumber = dbo.tbInvoice.InvoiceNumber INNER JOIN
                       dbo.tbInvoiceType ON dbo.tbInvoice.InvoiceTypeCode = dbo.tbInvoiceType.InvoiceTypeCode
 ORDER BY StartOn
-GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
 GO
 CREATE VIEW [dbo].[vwCorpTaxInvoiceTasks]
 AS
@@ -211,10 +192,6 @@ FROM         dbo.tbInvoiceTask INNER JOIN
                       dbo.tbInvoiceType ON dbo.tbInvoice.InvoiceTypeCode = dbo.tbInvoiceType.InvoiceTypeCode
 ORDER BY StartOn
 GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
 CREATE VIEW [dbo].[vwCorpTaxInvoiceValue]
 AS
 SELECT     StartOn, SUM(InvoiceValue) AS NetProfit
@@ -224,21 +201,12 @@ UNION
 SELECT     StartOn, SUM(InvoiceValue) AS NetProfit
 FROM         dbo.vwCorpTaxInvoiceTasks
 GROUP BY StartOn
-
-GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
 GO
 CREATE VIEW [dbo].[vwCorpTaxInvoiceBase]
 AS
 SELECT     StartOn, SUM(NetProfit) AS NetProfit
 FROM         dbo.vwCorpTaxInvoiceValue
 GROUP BY StartOn
-GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
 GO
 CREATE VIEW [dbo].[vwCorpTaxInvoice]
 AS
@@ -249,11 +217,6 @@ FROM         dbo.vwCorpTaxInvoiceBase INNER JOIN
                       dbo.tbSystemYearPeriod ON dbo.vwCorpTaxInvoiceBase.StartOn = dbo.tbSystemYearPeriod.StartOn
 ORDER BY dbo.tbSystemYearPeriod.StartOn
 GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
 CREATE  VIEW [dbo].[vwInvoiceVatItems]
 AS
 SELECT     TOP 100 PERCENT dbo.fnAccountPeriod(dbo.tbInvoice.InvoicedOn) AS StartOn, dbo.tbInvoice.InvoiceNumber, dbo.tbInvoice.InvoiceTypeCode, 
@@ -265,11 +228,6 @@ FROM         dbo.tbInvoiceItem INNER JOIN
 WHERE     (dbo.tbSystemTaxCode.TaxTypeCode = 2)
 ORDER BY dbo.fnAccountPeriod(dbo.tbInvoice.InvoicedOn)
 GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
 CREATE  VIEW [dbo].[vwInvoiceVatTasks]
 AS
 SELECT     dbo.fnAccountPeriod(dbo.tbInvoice.InvoicedOn) AS StartOn, dbo.tbInvoiceTask.InvoiceNumber, dbo.tbInvoice.InvoiceTypeCode, 
@@ -280,11 +238,6 @@ FROM         dbo.tbInvoiceTask INNER JOIN
                       dbo.tbSystemTaxCode ON dbo.tbInvoiceTask.TaxCode = dbo.tbSystemTaxCode.TaxCode
 WHERE     (dbo.tbSystemTaxCode.TaxTypeCode = 2)
 GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
 CREATE  VIEW [dbo].[vwInvoiceVatBase]
 AS
 SELECT DISTINCT StartOn, InvoiceNumber, InvoiceTypeCode, TaxCode, InvoiceValue, TaxValue, ForeignJurisdiction
@@ -292,15 +245,7 @@ FROM         dbo.vwInvoiceVatItems
 UNION
 SELECT DISTINCT StartOn, InvoiceNumber, InvoiceTypeCode, TaxCode, InvoiceValue, TaxValue, ForeignJurisdiction
 FROM         dbo.vwInvoiceVatTasks
-
-
 GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
-
 CREATE VIEW [dbo].[vwInvoiceVatDetail]
   AS
 SELECT     StartOn, TaxCode, 
@@ -322,10 +267,6 @@ SELECT     StartOn, TaxCode,
                        4 THEN vwInvoiceVatBase.TaxValue * - 1 ELSE 0 END ELSE 0 END AS ExportPurchasesVat
 FROM         dbo.vwInvoiceVatBase
 GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
 CREATE VIEW [dbo].[vwInvoiceVatSummary]
 AS
 SELECT     StartOn, TaxCode, SUM(HomeSales) AS HomeSales, SUM(HomePurchases) AS HomePurchases, SUM(ExportSales) AS ExportSales, 
@@ -334,19 +275,11 @@ SELECT     StartOn, TaxCode, SUM(HomeSales) AS HomeSales, SUM(HomePurchases) AS 
 FROM         dbo.vwInvoiceVatDetail
 GROUP BY StartOn, TaxCode
 GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
 CREATE VIEW [dbo].[vwSystemVatCashCode]
   AS
 SELECT     CashCode, MonthNumber, RecurrenceCode
 FROM         dbo.tbCashTaxType
 WHERE     (TaxTypeCode = 2)
-GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
 GO
 CREATE VIEW [dbo].[vwSystemCorpTaxCashCode]
   AS
@@ -391,11 +324,6 @@ RETURNS @tbCashCode TABLE (CashCode nvarchar(50))
 	RETURN
 	END
 GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
 CREATE VIEW [dbo].[vwTaskInvoicedQuantity]
   AS
 SELECT     dbo.tbInvoiceTask.TaskCode, SUM(dbo.tbInvoiceTask.Quantity) AS InvoiceQuantity
@@ -404,10 +332,6 @@ FROM         dbo.tbInvoiceTask INNER JOIN
 WHERE     (dbo.tbInvoice.InvoiceTypeCode = 1) OR
                       (dbo.tbInvoice.InvoiceTypeCode = 3)
 GROUP BY dbo.tbInvoiceTask.TaskCode
-GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
 GO
 CREATE FUNCTION [dbo].[fnSystemTaxHorizon]	()
 RETURNS SMALLINT
@@ -433,10 +357,6 @@ WHERE     (dbo.tbTask.TaskStatusCode > 1) AND (dbo.tbTask.TaskStatusCode < 4) AN
                       (dbo.tbTask.Quantity - ISNULL(dbo.vwTaskInvoicedQuantity.InvoiceQuantity, 0) > 0) AND (dbo.tbTask.PaymentOn <= DATEADD(d, 
                       dbo.fnSystemTaxHorizon(), GETDATE()))
 GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
 CREATE VIEW [dbo].[vwCorpTaxConfirmed]
   AS
 SELECT     dbo.vwCorpTaxConfirmedBase.StartOn, SUM(dbo.vwCorpTaxConfirmedBase.OrderValue) AS NetProfit, 
@@ -445,20 +365,11 @@ FROM         dbo.vwCorpTaxConfirmedBase INNER JOIN
                       dbo.tbSystemYearPeriod ON dbo.vwCorpTaxConfirmedBase.StartOn = dbo.tbSystemYearPeriod.StartOn
 GROUP BY dbo.vwCorpTaxConfirmedBase.StartOn
 GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
 CREATE VIEW [dbo].[vwSystemTaxRates]
 AS
 SELECT     TaxCode, CAST(TaxRate AS MONEY) AS TaxRate, TaxTypeCode
 FROM         tbSystemTaxCode
 GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
 CREATE VIEW [dbo].[vwTaskVatConfirmed]
 AS
 SELECT     dbo.fnAccountPeriod(dbo.tbTask.PaymentOn) AS StartOn, 
@@ -474,6 +385,4 @@ WHERE     (dbo.vwSystemTaxRates.TaxTypeCode = 2) AND (dbo.tbTask.TaskStatusCode 
                       (CASE WHEN tbCashCategory.CashModeCode = 1 THEN (dbo.tbTask.UnitCharge * (dbo.tbTask.Quantity - ISNULL(dbo.vwTaskInvoicedQuantity.InvoiceQuantity,
                        0))) * vwSystemTaxRates.TaxRate ELSE dbo.tbTask.UnitCharge * (dbo.tbTask.Quantity - ISNULL(dbo.vwTaskInvoicedQuantity.InvoiceQuantity, 0)) 
                       * vwSystemTaxRates.TaxRate * - 1 END <> 0) AND (dbo.tbTask.PaymentOn <= DATEADD(d, dbo.fnSystemTaxHorizon(), GETDATE()))
-
 GO
-

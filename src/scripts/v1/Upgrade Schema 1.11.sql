@@ -5,22 +5,15 @@
 * Description: Sql Server Upgrade Script - Encrypted Distribution Schema
 * Data Version: 1.11
 * Release Date: TBC
-* Confidential Information
 ************************************************************/
 
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
-ALTER PROCEDURE [dbo].[spTaskCost] 
+CREATE OR ALTER PROCEDURE [dbo].[spTaskCost] 
 	(
 	@ParentTaskCode nvarchar(20),
 	@TotalCost money = 0 output
 	)
 
-WITH ENCRYPTION AS
+AS
 declare @TaskCode nvarchar(20)
 declare @TotalCharge money
 declare @CashModeCode smallint
@@ -46,7 +39,6 @@ declare @CashModeCode smallint
 	
 	RETURN
 GO
-
 ALTER FUNCTION dbo.fnTaskProfitCost
 	(
 	@ParentTaskCode nvarchar(20),
@@ -59,7 +51,7 @@ RETURNS @tbCost TABLE (
 	InvoicedCost money,
 	InvoicedCostPaid money
 	)
-WITH ENCRYPTION AS
+AS
 	BEGIN
 declare @TaskCode nvarchar(20)
 declare @TotalCharge money
@@ -108,24 +100,11 @@ declare @CashModeCode smallint
 	RETURN
 	END
 GO
-
-SET ANSI_NULLS OFF
-GO
-SET QUOTED_IDENTIFIER OFF
-GO
-
 ALTER TABLE dbo.tbOrg WITH NOCHECK ADD
 	PayDaysFromMonthEnd bit NOT NULL CONSTRAINT DF_tbOrg_PayDaysFromMonthEnd DEFAULT (0)
 GO
-
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
 ALTER VIEW [dbo].[vwOrgDatasheet]
-WITH ENCRYPTION AS
+AS
 SELECT     dbo.tbOrg.AccountCode, dbo.tbOrg.AccountName, ISNULL(dbo.vwOrgTaskCount.TaskCount, 0) AS Tasks, dbo.tbOrg.OrganisationTypeCode, 
                       dbo.tbOrgType.OrganisationType, dbo.tbOrgType.CashModeCode, dbo.tbOrg.OrganisationStatusCode, dbo.tbOrgStatus.OrganisationStatus, 
                       dbo.tbOrgAddress.Address, dbo.tbSystemTaxCode.TaxDescription, dbo.tbOrg.TaxCode, dbo.tbOrg.AddressCode, dbo.tbOrg.AreaCode, 
@@ -141,14 +120,13 @@ FROM         dbo.tbOrg INNER JOIN
                       dbo.tbOrgAddress ON dbo.tbOrg.AddressCode = dbo.tbOrgAddress.AddressCode LEFT OUTER JOIN
                       dbo.vwOrgTaskCount ON dbo.tbOrg.AccountCode = dbo.vwOrgTaskCount.AccountCode
 GO
-
 CREATE FUNCTION [dbo].[fnTaskDefaultPaymentOn]
 	(
 		@AccountCode nvarchar(10),
 		@ActionOn datetime
 	)
 RETURNS datetime
-WITH ENCRYPTION AS
+AS
 	BEGIN
 	DECLARE @PaymentOn datetime
 	DECLARE @PaymentDays smallint
@@ -173,31 +151,23 @@ WITH ENCRYPTION AS
 	RETURN @PaymentOn
 	END
 GO
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
 ALTER PROCEDURE [dbo].[spTaskDefaultPaymentOn]
 	(
 		@AccountCode nvarchar(10),
 		@ActionOn datetime,
 		@PaymentOn datetime output
 	)
-WITH ENCRYPTION AS
+AS
 
 	SET @PaymentOn = dbo.fnTaskDefaultPaymentOn(@AccountCode, @ActionOn)
 	
 	RETURN
 GO
-
-
 ALTER  PROCEDURE [dbo].[spTaskConfigure] 
 	(
 	@ParentTaskCode nvarchar(20)
 	)
-WITH ENCRYPTION AS
+AS
 declare @StepNumber smallint
 declare @TaskCode nvarchar(20)
 declare @UserId nvarchar(10)
@@ -333,14 +303,12 @@ declare @ActivityCode nvarchar(50)
 
 	RETURN
 GO
-
-
 ALTER  PROCEDURE dbo.spTaskSchedule
 	(
 	@ParentTaskCode nvarchar(20),
 	@ActionOn datetime = null output
 	)
- WITH ENCRYPTION  AS
+AS
 declare @UserId nvarchar(10)
 declare @AccountCode nvarchar(10)
 declare @StepNumber smallint
@@ -419,17 +387,14 @@ declare @PaymentOn datetime
 	deallocate curAct	
 	
 	RETURN
-
 GO
-
-
 ALTER  PROCEDURE dbo.spInvoiceRaise
 	(
 	@TaskCode nvarchar(20),
 	@InvoiceTypeCode smallint,
 	@InvoiceNumber nvarchar(20) = null output
 	)
-WITH ENCRYPTION AS
+AS
 declare @UserId nvarchar(10)
 declare @NextNumber int
 declare @InvoiceSuffix nvarchar(4)
@@ -491,11 +456,9 @@ declare @InvoicedOn datetime
 	commit tran Invoice
 	
 	RETURN
-
 GO
-
 ALTER PROCEDURE [dbo].[spStatementRescheduleOverdue]
-WITH ENCRYPTION AS
+AS
 	UPDATE tbTask
 	SET tbTask.PaymentOn = dbo.fnTaskDefaultPaymentOn(tbTask.AccountCode, getdate()) 
 	FROM         tbTask INNER JOIN
@@ -517,11 +480,7 @@ WITH ENCRYPTION AS
 	
 	
 	RETURN
-
 GO
-
-
-
 ALTER FUNCTION [dbo].[fnStatementVat]
 	()
 RETURNS @tbVat TABLE (
@@ -533,7 +492,7 @@ RETURNS @tbVat TABLE (
 	PayIn money,
 	CashCode nvarchar(50)
 	)
-WITH ENCRYPTION AS
+AS
 	BEGIN
 	declare @LastBalanceOn datetime
 	declare @VatDueOn datetime
@@ -569,9 +528,7 @@ WITH ENCRYPTION AS
 	
 	RETURN
 	END
-
 GO
-
 ALTER FUNCTION [dbo].[fnStatementCompany]
 	(
 	@IncludeForecasts bit = 0,
@@ -587,7 +544,7 @@ RETURNS @tbStatement TABLE (
 	Balance money,
 	CashCode nvarchar(50)
 	) 
- WITH ENCRYPTION AS
+AS
 	BEGIN
 	declare @ReferenceCode nvarchar(20) 
 	declare @AccountCode nvarchar(10)
@@ -699,20 +656,12 @@ RETURNS @tbStatement TABLE (
 		
 	RETURN
 	END
-
 GO
-SET ANSI_NULLS OFF
-GO
-SET QUOTED_IDENTIFIER OFF
-GO
-
 ALTER TABLE dbo.tbSystemYearPeriod WITH NOCHECK ADD
 	TaxAdjustment money NOT NULL CONSTRAINT DF_tbSystemYearPeriod_TaxAdjustment DEFAULT (0)
 GO
-
-
 ALTER VIEW [dbo].[vwTaxCorpTotals]
-WITH ENCRYPTION AS
+AS
 SELECT     TOP 100 PERCENT dbo.vwCorpTaxInvoice.StartOn, YEAR(dbo.tbSystemYearPeriod.StartOn) AS PeriodYear, dbo.tbSystemYear.Description, 
                       dbo.tbSystemMonth.MonthName, SUM(dbo.vwCorpTaxInvoice.NetProfit) AS NetProfit, SUM(dbo.vwCorpTaxInvoice.CorporationTax) 
                       AS CorporationTax
@@ -723,18 +672,14 @@ FROM         dbo.vwCorpTaxInvoice INNER JOIN
 GROUP BY dbo.tbSystemYear.Description, dbo.tbSystemMonth.MonthName, dbo.vwCorpTaxInvoice.StartOn, YEAR(dbo.tbSystemYearPeriod.StartOn)
 ORDER BY dbo.vwCorpTaxInvoice.StartOn
 GO
-
-
 ALTER VIEW [dbo].[vwCorpTaxInvoice]
-WITH ENCRYPTION AS
+AS
 SELECT     TOP 100 PERCENT dbo.tbSystemYearPeriod.StartOn, dbo.vwCorpTaxInvoiceBase.NetProfit, 
                       dbo.vwCorpTaxInvoiceBase.NetProfit * dbo.tbSystemYearPeriod.CorporationTaxRate + dbo.tbSystemYearPeriod.TaxAdjustment AS CorporationTax
 FROM         dbo.vwCorpTaxInvoiceBase INNER JOIN
                       dbo.tbSystemYearPeriod ON dbo.vwCorpTaxInvoiceBase.StartOn = dbo.tbSystemYearPeriod.StartOn
 ORDER BY dbo.tbSystemYearPeriod.StartOn
 GO
-
-
 ALTER FUNCTION [dbo].[fnStatementCorpTax]
 	()
 RETURNS @tbCorpTax TABLE (
@@ -747,7 +692,7 @@ RETURNS @tbCorpTax TABLE (
 	CashCode nvarchar(50)
 	
 	)
- WITH ENCRYPTION AS
+AS
 	BEGIN
 	declare @StartOn datetime
 	declare @Balance money
@@ -790,16 +735,14 @@ RETURNS @tbCorpTax TABLE (
 	
 	RETURN
 	END
-
 GO
-
 CREATE PROCEDURE dbo.spTaskFullyInvoiced
 	(
 	@TaskCode nvarchar(20),
 	@IsFullyInvoiced bit = 0 output
 	)
 
-WITH ENCRYPTION AS
+AS
 declare @InvoiceValue money
 declare @TotalCharge money
 
@@ -819,12 +762,11 @@ declare @TotalCharge money
 		
 	RETURN
 GO
-
 CREATE PROCEDURE dbo.spTaskReconcileCharge
 	(
 	@TaskCode nvarchar(20)
 	)
-WITH ENCRYPTION AS
+AS
 declare @InvoiceValue money
 
 	SELECT @InvoiceValue = SUM(InvoiceValue)
@@ -837,23 +779,10 @@ declare @InvoiceValue money
 	
 	RETURN
 GO
-
-SET ANSI_NULLS OFF
-GO
-SET QUOTED_IDENTIFIER OFF
-GO
-
 insert into [tbProfileText] ([TextId], [Message], [Arguments]) values (1217, 'Order charge differs from the invoice. Reconcile <1>?', 1)
 GO
-
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
 ALTER VIEW [dbo].[vwOrgRebuildInvoicedItems]
-WITH ENCRYPTION AS
+AS
 SELECT     dbo.tbInvoice.AccountCode, dbo.tbInvoiceType.CashModeCode, dbo.tbInvoice.CollectOn, dbo.tbInvoiceItem.InvoiceNumber, 
                       dbo.tbInvoiceItem.CashCode, '' AS TaskCode, dbo.tbInvoiceItem.InvoiceValue, dbo.tbInvoiceItem.TaxValue, dbo.tbInvoiceItem.PaidValue, 
                       dbo.tbInvoiceItem.PaidTaxValue
@@ -861,20 +790,8 @@ FROM         dbo.tbInvoiceItem INNER JOIN
                       dbo.tbInvoice ON dbo.tbInvoiceItem.InvoiceNumber = dbo.tbInvoice.InvoiceNumber INNER JOIN
                       dbo.tbInvoiceType ON dbo.tbInvoice.InvoiceTypeCode = dbo.tbInvoiceType.InvoiceTypeCode
 GO
-
-SET ANSI_NULLS OFF
-GO
-SET QUOTED_IDENTIFIER OFF
-GO
-
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
 ALTER VIEW [dbo].[vwOrgRebuildInvoicedTasks]
-WITH ENCRYPTION AS
+AS
 SELECT     dbo.tbInvoice.AccountCode, dbo.tbInvoiceType.CashModeCode, dbo.tbInvoice.CollectOn, dbo.tbInvoiceTask.InvoiceNumber, 
                       dbo.tbInvoiceTask.CashCode, dbo.tbInvoiceTask.TaskCode, dbo.tbInvoiceTask.InvoiceValue, dbo.tbInvoiceTask.TaxValue, 
                       dbo.tbInvoiceTask.PaidValue, dbo.tbInvoiceTask.PaidTaxValue
@@ -882,43 +799,19 @@ FROM         dbo.tbInvoiceTask INNER JOIN
                       dbo.tbInvoice ON dbo.tbInvoiceTask.InvoiceNumber = dbo.tbInvoice.InvoiceNumber INNER JOIN
                       dbo.tbInvoiceType ON dbo.tbInvoice.InvoiceTypeCode = dbo.tbInvoiceType.InvoiceTypeCode
 GO
-
-SET ANSI_NULLS OFF
-GO
-SET QUOTED_IDENTIFIER OFF
-GO
-
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
 ALTER VIEW [dbo].[vwOrgRebuildInvoices]
-WITH ENCRYPTION AS
+AS
 SELECT     AccountCode, CashModeCode, CollectOn, InvoiceNumber, CashCode, TaskCode, InvoiceValue, TaxValue, PaidValue, PaidTaxValue
 FROM         dbo.vwOrgRebuildInvoicedTasks
 UNION
 SELECT     AccountCode, CashModeCode, CollectOn, InvoiceNumber, CashCode, TaskCode, InvoiceValue, TaxValue, PaidValue, PaidTaxValue
 FROM         dbo.vwOrgRebuildInvoicedItems
 GO
-
-SET ANSI_NULLS OFF
-GO
-SET QUOTED_IDENTIFIER OFF
-GO
-
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
 ALTER PROCEDURE [dbo].[spOrgRebuild]
 	(
 		@AccountCode nvarchar(10)
 	)
-WITH ENCRYPTION AS
+AS
 declare @PaidBalance money
 declare @InvoicedBalance money
 declare @Balance money
@@ -1094,20 +987,8 @@ declare @TaxRate float
 
 	RETURN
 GO
-
-SET ANSI_NULLS OFF
-GO
-SET QUOTED_IDENTIFIER OFF
-GO
-
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
 ALTER VIEW [dbo].[vwInvoiceOutstanding]
-WITH ENCRYPTION AS
+AS
 SELECT     TOP 100 PERCENT dbo.tbInvoice.AccountCode, dbo.tbInvoice.CollectOn, dbo.tbInvoice.InvoiceNumber, dbo.vwInvoiceOutstandingBase.TaskCode, 
                       dbo.tbInvoice.InvoiceStatusCode, dbo.tbInvoiceType.CashModeCode, dbo.vwInvoiceOutstandingBase.CashCode, 
                       dbo.vwInvoiceOutstandingBase.TaxCode, dbo.vwInvoiceOutstandingBase.TaxRate, 
@@ -1118,24 +999,12 @@ FROM         dbo.vwInvoiceOutstandingBase INNER JOIN
 WHERE     (dbo.tbInvoice.InvoiceStatusCode = 2) OR
                       (dbo.tbInvoice.InvoiceStatusCode = 3)
 GO
-
-SET ANSI_NULLS OFF
-GO
-SET QUOTED_IDENTIFIER OFF
-GO
-
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
 ALTER PROCEDURE [dbo].[spPaymentPostPaidIn]
 	(
 	@PaymentCode nvarchar(20),
 	@CurrentBalance money output 
 	)
-WITH ENCRYPTION AS
+AS
 --invoice values
 declare @InvoiceNumber nvarchar(20)
 declare @TaskCode nvarchar(20)
@@ -1218,24 +1087,12 @@ declare @TaxOutValue money
 			
 	RETURN
 GO
-
-SET ANSI_NULLS OFF
-GO
-SET QUOTED_IDENTIFIER OFF
-GO
-
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
 ALTER PROCEDURE [dbo].[spPaymentPostPaidOut]
 	(
 	@PaymentCode nvarchar(20),
 	@CurrentBalance money output 
 	)
-WITH ENCRYPTION AS
+AS
 --invoice values
 declare @InvoiceNumber nvarchar(20)
 declare @TaskCode nvarchar(20)
@@ -1316,20 +1173,8 @@ declare @TaxOutValue money
 	
 	RETURN
 GO
-
-SET ANSI_NULLS OFF
-GO
-SET QUOTED_IDENTIFIER OFF
-GO
-
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
 ALTER VIEW [dbo].[vwDocInvoiceTask]
-WITH ENCRYPTION AS
+AS
 SELECT     dbo.tbInvoiceTask.InvoiceNumber, dbo.tbInvoiceTask.TaskCode, dbo.tbTask.TaskTitle, dbo.tbTask.ActivityCode, dbo.tbInvoiceTask.CashCode, 
                       dbo.tbCashCode.CashDescription, dbo.tbTask.ActionedOn, dbo.tbInvoiceTask.Quantity, dbo.tbActivity.UnitOfMeasure, dbo.tbInvoiceTask.InvoiceValue, 
                       dbo.tbInvoiceTask.TaxValue, dbo.tbInvoiceTask.TaxCode, dbo.tbTask.SecondReference
@@ -1338,9 +1183,3 @@ FROM         dbo.tbInvoiceTask INNER JOIN
                       dbo.tbCashCode ON dbo.tbInvoiceTask.CashCode = dbo.tbCashCode.CashCode INNER JOIN
                       dbo.tbActivity ON dbo.tbTask.ActivityCode = dbo.tbActivity.ActivityCode
 GO
-
-SET ANSI_NULLS OFF
-GO
-SET QUOTED_IDENTIFIER OFF
-GO
-

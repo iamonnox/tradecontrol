@@ -3,7 +3,7 @@ ALTER PROCEDURE dbo.spInvoicePay
 	@InvoiceNumber nvarchar(20),
 	@Now datetime
 	)
-WITH ENCRYPTION AS
+AS
 DECLARE @PaidOut money
 DECLARE @PaidIn money
 DECLARE @TaskOutstanding money

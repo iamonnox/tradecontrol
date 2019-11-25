@@ -5,14 +5,42 @@
 * Description: Sql Server Upgrade Script - Encrypted Distribution Schema
 * Data Version: 1.12
 * Release Date: 19 Feb 2010
-* Confidential Information
 ************************************************************/
+CREATE OR ALTER FUNCTION dbo.fnTaskDefaultPaymentOn
+	(
+		@AccountCode nvarchar(10),
+		@ActionOn datetime
+	)
+RETURNS datetime
+AS
+	BEGIN
+	DECLARE @PaymentOn datetime
+	DECLARE @PaymentDays smallint
+	DECLARE @UserId nvarchar(10)
+	DECLARE @PayDaysFromMonthEnd bit
+
+
+	SELECT @UserId = UserId FROM dbo.vwUserCredentials
+	
+	SELECT @PaymentDays = PaymentDays, @PayDaysFromMonthEnd = PayDaysFromMonthEnd
+	FROM         tbOrg
+	WHERE     (AccountCode = @AccountCode)
+	
+	IF (@PayDaysFromMonthEnd <> 0)
+		set @PaymentOn = dateadd(d, @PaymentDays, dateadd(d, ((day(@ActionOn) - 1) + 1) * -1, dateadd(m, 1, @ActionOn)))
+	ELSE
+		set @PaymentOn = dateadd(d, @PaymentDays, @ActionOn)
+		
+	set @PaymentOn = dbo.fnSystemAdjustToCalendar(@UserId, @PaymentOn, 0)	
+	
+	
+	RETURN @PaymentOn
+	END
+GO	
 
 ALTER TABLE tbSystemOptions WITH NOCHECK ADD
 	ScheduleOps bit NOT NULL CONSTRAINT DF_tbSystemOptions_ScheduleOps DEFAULT (1)
 GO
-
-
 ALTER TRIGGER Trigger_tbTask_Update
 ON dbo.tbTask 
 FOR UPDATE
@@ -75,34 +103,3 @@ AS
 			END
 		end
 GO
-
-ALTER FUNCTION dbo.fnTaskDefaultPaymentOn
-	(
-		@AccountCode nvarchar(10),
-		@ActionOn datetime
-	)
-RETURNS datetime
-WITH ENCRYPTION AS
-	BEGIN
-	DECLARE @PaymentOn datetime
-	DECLARE @PaymentDays smallint
-	DECLARE @UserId nvarchar(10)
-	DECLARE @PayDaysFromMonthEnd bit
-
-
-	SELECT @UserId = UserId FROM dbo.vwUserCredentials
-	
-	SELECT @PaymentDays = PaymentDays, @PayDaysFromMonthEnd = PayDaysFromMonthEnd
-	FROM         tbOrg
-	WHERE     (AccountCode = @AccountCode)
-	
-	IF (@PayDaysFromMonthEnd <> 0)
-		set @PaymentOn = dateadd(d, @PaymentDays, dateadd(d, ((day(@ActionOn) - 1) + 1) * -1, dateadd(m, 1, @ActionOn)))
-	ELSE
-		set @PaymentOn = dateadd(d, @PaymentDays, @ActionOn)
-		
-	set @PaymentOn = dbo.fnSystemAdjustToCalendar(@UserId, @PaymentOn, 0)	
-	
-	
-	RETURN @PaymentOn
-	END

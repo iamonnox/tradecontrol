@@ -279,9 +279,9 @@ FROM         Invoice.vwSummaryMargin
 GO
 ALTER AUTHORIZATION ON Invoice.vwSummary TO  SCHEMA OWNER 
 GO
-SET ANSI_NULLS ON
+
 GO
-SET QUOTED_IDENTIFIER ON
+
 GO
 
 

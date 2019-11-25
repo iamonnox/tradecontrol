@@ -5,7 +5,6 @@
 * Description: Sql Server Upgrade Script - Encrypted Distribution Schema
 * Data Version: 2.02
 * Release Date: 1.02.12
-* Confidential Information
 ************************************************************/
 
 DELETE FROM tbProfileText
@@ -17,7 +16,7 @@ ALTER PROCEDURE [dbo].[spCashCopyForecastToLiveCashCode]
 	@StartOn datetime
 	)
 
-  WITH ENCRYPTION AS
+AS
 	UPDATE tbCashPeriod
 	SET     InvoiceValue = ForecastValue, InvoiceTax = ForecastTax
 	FROM         tbCashPeriod
@@ -30,14 +29,13 @@ ALTER PROCEDURE dbo.spCashCopyForecastToLiveCategory
 	@StartOn datetime
 	)
 
- WITH ENCRYPTION AS
+AS
 	UPDATE tbCashPeriod
 	SET     InvoiceValue = ForecastValue, InvoiceTax = ForecastTax
 	FROM         tbCashPeriod INNER JOIN
 	                      tbCashCode ON tbCashPeriod.CashCode = tbCashCode.CashCode
 	WHERE     (tbCashPeriod.StartOn = @StartOn) AND (tbCashCode.CategoryCode = @CategoryCode)
 GO
-
 ALTER PROCEDURE dbo.spCashCopyLiveToForecastCashCode
 	(
 	@CashCode nvarchar(50),
@@ -45,7 +43,7 @@ ALTER PROCEDURE dbo.spCashCopyLiveToForecastCashCode
 	@UseLastPeriod bit = 0
 	)
 
-WITH ENCRYPTION AS
+AS
 declare @SystemStartOn datetime
 declare @EndPeriod datetime
 declare @StartPeriod datetime
@@ -146,7 +144,7 @@ declare @Idx integer
 	return
 GO
 ALTER VIEW dbo.vwCashCodeForecastSummary
-WITH ENCRYPTION AS
+AS
 SELECT        dbo.tbTask.CashCode, dbo.fnAccountPeriod(dbo.tbTask.ActionOn) AS StartOn, SUM(dbo.tbTask.TotalCharge) AS ForecastValue, 
                          SUM(dbo.tbTask.TotalCharge * ISNULL(dbo.vwSystemTaxRates.TaxRate, 0)) AS ForecastTax
 FROM            dbo.tbTask INNER JOIN
@@ -156,7 +154,7 @@ FROM            dbo.tbTask INNER JOIN
 GROUP BY dbo.tbTask.CashCode, dbo.fnAccountPeriod(dbo.tbTask.ActionOn)
 GO
 ALTER VIEW dbo.vwCashCodeInvoiceSummary
-WITH ENCRYPTION AS
+AS
 SELECT     dbo.vwInvoiceRegisterDetail.CashCode, dbo.vwInvoiceRegisterDetail.StartOn, ABS(SUM(dbo.vwInvoiceRegisterDetail.InvoiceValue)) AS InvoiceValue, 
                       ABS(SUM(dbo.vwInvoiceRegisterDetail.TaxValue)) AS TaxValue
 FROM         dbo.vwInvoiceRegisterDetail INNER JOIN
@@ -166,13 +164,13 @@ WHERE     (dbo.tbCashCategory.CashTypeCode = 1)
 GROUP BY dbo.vwInvoiceRegisterDetail.StartOn, dbo.vwInvoiceRegisterDetail.CashCode
 GO
 CREATE VIEW dbo.vwTaskInvoiceValue
-WITH ENCRYPTION AS
+AS
 SELECT        TaskCode, SUM(InvoiceValue) AS InvoiceValue, SUM(TaxValue) AS InvoiceTax
 FROM            dbo.tbInvoiceTask
 GROUP BY TaskCode
 GO
 CREATE VIEW dbo.vwCashCodeOrderSummary
-WITH ENCRYPTION AS
+AS
 SELECT        dbo.tbTask.CashCode, dbo.fnAccountPeriod(dbo.tbTask.ActionOn) AS StartOn, SUM(dbo.tbTask.TotalCharge) - ISNULL(dbo.vwTaskInvoiceValue.InvoiceValue, 0) 
                          AS InvoiceValue, SUM(dbo.tbTask.TotalCharge * ISNULL(dbo.vwSystemTaxRates.TaxRate, 0)) - ISNULL(dbo.vwTaskInvoiceValue.InvoiceTax, 0) AS InvoiceTax
 FROM            dbo.tbTask INNER JOIN
@@ -183,9 +181,8 @@ WHERE        (dbo.tbTask.TaskStatusCode = 2) OR
                          (dbo.tbTask.TaskStatusCode = 3)
 GROUP BY dbo.tbTask.CashCode, dbo.fnAccountPeriod(dbo.tbTask.ActionOn), dbo.vwTaskInvoiceValue.InvoiceValue, dbo.vwTaskInvoiceValue.InvoiceTax
 GO
-
 ALTER PROCEDURE dbo.spSystemPeriodClose
- WITH ENCRYPTION AS
+AS
 
 	if exists(select * from dbo.fnSystemActivePeriod())
 		begin
@@ -229,7 +226,7 @@ ALTER PROCEDURE dbo.spSystemPeriodClose
 	RETURN
 GO
 ALTER VIEW dbo.vwCashFlowNITotals
-WITH ENCRYPTION AS
+AS
 SELECT        dbo.tbCashPeriod.StartOn, SUM(dbo.tbCashPeriod.ForecastTax) AS ForecastNI, SUM(dbo.tbCashPeriod.InvoiceTax) AS InvoiceNI
 FROM            dbo.tbCashPeriod INNER JOIN
                          dbo.tbCashCode ON dbo.tbCashPeriod.CashCode = dbo.tbCashCode.CashCode INNER JOIN
@@ -238,7 +235,7 @@ WHERE        (dbo.tbSystemTaxCode.TaxTypeCode = 3)
 GROUP BY dbo.tbCashPeriod.StartOn
 GO
 ALTER  PROCEDURE [dbo].[spCashFlowInitialise]
-   WITH ENCRYPTION AS
+AS
 declare @CashCode nvarchar(25)
 		
 	exec dbo.spCashGeneratePeriods
@@ -312,10 +309,8 @@ declare @CashCode nvarchar(25)
 	
 	RETURN 
 GO
-
-
 ALTER VIEW dbo.vwCashPolarData
-WITH ENCRYPTION AS
+AS
 SELECT        dbo.tbCashPeriod.CashCode, dbo.tbCashCategory.CashTypeCode, dbo.tbCashPeriod.StartOn, dbo.tbCashPeriod.ForecastValue, dbo.tbCashPeriod.ForecastTax, 
                          dbo.tbCashPeriod.InvoiceValue, dbo.tbCashPeriod.InvoiceTax
 FROM            dbo.tbCashPeriod INNER JOIN
@@ -326,7 +321,7 @@ FROM            dbo.tbCashPeriod INNER JOIN
 WHERE        (dbo.tbSystemYear.CashStatusCode < 4)
 GO
 ALTER VIEW [dbo].[vwCashFlowData]
-   WITH ENCRYPTION AS
+AS
 SELECT        dbo.tbSystemYearPeriod.YearNumber, dbo.tbSystemYearPeriod.StartOn, dbo.vwCashPolarData.CashCode, dbo.vwCashPolarData.InvoiceValue, 
                          dbo.vwCashPolarData.InvoiceTax, dbo.vwCashPolarData.ForecastValue, dbo.vwCashPolarData.ForecastTax
 FROM            dbo.tbSystemYearPeriod INNER JOIN
@@ -335,16 +330,12 @@ GO
 DROP VIEW [dbo].[vwCashFlowForecastData]
 DROP VIEW dbo.vwCashFlowActualData
 GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
 ALTER PROCEDURE [dbo].[spCashCodeValues]
 	(
 	@CashCode nvarchar(50),
 	@YearNumber smallint
 	)
-   WITH ENCRYPTION AS
+AS
 	SELECT        vwCashFlowData.StartOn, vwCashFlowData.InvoiceValue, vwCashFlowData.InvoiceTax, vwCashFlowData.ForecastValue, vwCashFlowData.ForecastTax
 	FROM            tbSystemYearPeriod INNER JOIN
 	                         vwCashFlowData ON tbSystemYearPeriod.StartOn = vwCashFlowData.StartOn
@@ -353,22 +344,16 @@ ALTER PROCEDURE [dbo].[spCashCodeValues]
 	
 	RETURN 
 GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
 ALTER PROCEDURE [dbo].[spCashCategoryCashCodes]
 	(
 	@CategoryCode nvarchar(10)
 	)
-   WITH ENCRYPTION AS
+AS
 	SELECT     CashCode, CashDescription
 	FROM         tbCashCode
 	WHERE     (CategoryCode = @CategoryCode)
 	ORDER BY CashDescription
 	RETURN 
-
 GO
 DROP PROCEDURE dbo.spSystemPeriodTransferAll
 DROP PROCEDURE dbo.spSystemPeriodTransfer

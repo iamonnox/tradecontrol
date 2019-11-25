@@ -5,17 +5,13 @@
 * Description: Sql Server Upgrade Script - Encrypted Distribution Schema
 * Data Version: 1.16
 * Release Date: 1 August 2010
-* Confidential Information
 ************************************************************/
 
 
-DROP PROCEDURE dbo.spStatementCompany
-GO
-
-ALTER FUNCTION dbo.fnSystemCorpTaxBalance
+CREATE OR ALTER FUNCTION dbo.fnSystemCorpTaxBalance
 	()
 RETURNS money
-WITH ENCRYPTION AS
+AS
 	BEGIN
 	declare @Balance money
 	SELECT  @Balance = SUM(CorporationTax)
@@ -30,13 +26,11 @@ WITH ENCRYPTION AS
 		
 	RETURN isnull(@Balance, 0)
 	END
-
 GO
-
-CREATE FUNCTION dbo.fnCashReserveBalance
+CREATE OR ALTER FUNCTION dbo.fnCashReserveBalance
 	()
 RETURNS money
-WITH ENCRYPTION AS
+AS
 	BEGIN
 	declare @CurrentBalance money
 	
@@ -48,8 +42,7 @@ WITH ENCRYPTION AS
 	RETURN isnull(@CurrentBalance, 0)
 	END
 GO
-
-ALTER FUNCTION dbo.fnCashCompanyBalance
+CREATE OR ALTER FUNCTION dbo.fnCashCompanyBalance
 	()
 RETURNS money
   AS
@@ -64,9 +57,8 @@ RETURNS money
 	RETURN isnull(@CurrentBalance, 0)
 	END
 GO
-
-ALTER VIEW dbo.vwTaskVatConfirmed
-WITH ENCRYPTION AS
+CREATE OR ALTER VIEW dbo.vwTaskVatConfirmed
+AS
 SELECT     dbo.fnAccountPeriod(dbo.tbTask.PaymentOn) AS StartOn, 
                       CASE WHEN tbCashCategory.CashModeCode = 1 THEN (dbo.tbTask.UnitCharge * (dbo.tbTask.Quantity - ISNULL(dbo.vwTaskInvoicedQuantity.InvoiceQuantity,
                        0))) * tbSystemTaxCode.TaxRate * - 1 ELSE dbo.tbTask.UnitCharge * (dbo.tbTask.Quantity - ISNULL(dbo.vwTaskInvoicedQuantity.InvoiceQuantity, 0)) 
@@ -81,8 +73,7 @@ WHERE     (dbo.tbSystemTaxCode.TaxTypeCode = 2) AND (dbo.tbTask.TaskStatusCode >
                        0))) * tbSystemTaxCode.TaxRate ELSE dbo.tbTask.UnitCharge * (dbo.tbTask.Quantity - ISNULL(dbo.vwTaskInvoicedQuantity.InvoiceQuantity, 0)) 
                       * tbSystemTaxCode.TaxRate * - 1 END <> 0)
 GO
-
-ALTER FUNCTION [dbo].[fnStatementCompany]()
+CREATE OR ALTER FUNCTION [dbo].[fnStatementCompany]()
 RETURNS @tbStatement TABLE (
 	ReferenceCode nvarchar(20), 
 	AccountCode nvarchar(10),
@@ -248,15 +239,9 @@ RETURNS @tbStatement TABLE (
 		
 	RETURN
 	END
-
-GO
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
 GO
 CREATE VIEW [dbo].[vwStatement]
-WITH ENCRYPTION AS
+AS
 SELECT     TOP (100) PERCENT fnStatementCompany.TransactOn, fnStatementCompany.CashEntryTypeCode, fnStatementCompany.ReferenceCode, 
                       fnStatementCompany.AccountCode, dbo.tbOrg.AccountName, dbo.tbCashEntryType.CashEntryType, fnStatementCompany.PayOut, 
                       fnStatementCompany.PayIn, fnStatementCompany.Balance, dbo.tbCashCode.CashCode, dbo.tbCashCode.CashDescription
@@ -265,9 +250,7 @@ FROM         dbo.fnStatementCompany() AS fnStatementCompany INNER JOIN
                       dbo.tbOrg ON fnStatementCompany.AccountCode = dbo.tbOrg.AccountCode LEFT OUTER JOIN
                       dbo.tbCashCode ON fnStatementCompany.CashCode = dbo.tbCashCode.CashCode
 ORDER BY fnStatementCompany.TransactOn, fnStatementCompany.CashEntryTypeCode, fnStatementCompany.ReferenceCode, fnStatementCompany.CashCode
-
 GO
-
 INSERT INTO tbProfileText
                       (TextId, Message, Arguments)
 VALUES     (1219, 'Reserve Account', 0)
@@ -275,12 +258,11 @@ INSERT INTO tbProfileText
                       (TextId, Message, Arguments)
 VALUES     (1218, 'Raise invoice and pay expenses now?', 0)
 GO
-
 CREATE PROCEDURE dbo.spInvoicePay
 	(
 	@InvoiceNumber nvarchar(20)
 	)
-WITH ENCRYPTION AS
+AS
 DECLARE @PaidOut money
 DECLARE @PaidIn money
 DECLARE @TaskOutstanding money

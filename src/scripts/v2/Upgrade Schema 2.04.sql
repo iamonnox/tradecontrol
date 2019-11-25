@@ -5,18 +5,12 @@
 * Description: Sql Server Upgrade Script - Encrypted Distribution Schema
 * Data Version: 2.04
 * Release Date: 27.02.12
-* Confidential Information
 ************************************************************/
 ALTER TABLE tbInvoice WITH NOCHECK ADD
 	Spooled BIT NOT NULL CONSTRAINT DF_tbInvoice_Spooled DEFAULT (0)
 GO
 ALTER TABLE tbTask WITH NOCHECK ADD
 	Spooled BIT NOT NULL CONSTRAINT DF_tbTask_Spooled DEFAULT (0)
-GO
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[tbSystemDocSpool](
 	[UserName] [nvarchar](50) NOT NULL CONSTRAINT [DF_tbSystemDocSpool_UserName]  DEFAULT (suser_sname()),
@@ -30,9 +24,7 @@ CREATE TABLE [dbo].[tbSystemDocSpool](
 	[DocumentNumber] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON, FILLFACTOR = 90) ON [PRIMARY]
 ) ON [PRIMARY]
-
 GO
-
 CREATE NONCLUSTERED INDEX [RDX_tbSystemDocSpool_DocTypeCode] ON [dbo].[tbSystemDocSpool] 
 (
 	[DocTypeCode] ASC
@@ -48,7 +40,7 @@ CREATE FUNCTION dbo.fnSystemDocInvoiceType
 	@InvoiceTypeCode SMALLINT
 	)
 RETURNS SMALLINT
-WITH ENCRYPTION AS
+AS
 	BEGIN
 	DECLARE @DocTypeCode SMALLINT
 	
@@ -61,10 +53,6 @@ WITH ENCRYPTION AS
 	
 	RETURN @DocTypeCode
 	END
-GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
 GO
 CREATE TRIGGER [dbo].[tbInvoice_TriggerUpdate]
 ON [dbo].[tbInvoice]
@@ -89,7 +77,7 @@ CREATE FUNCTION dbo.fnSystemDocTaskType
 	@TaskCode NVARCHAR(20)
 	)
 RETURNS SMALLINT
-WITH ENCRYPTION AS
+AS
 	BEGIN
 	DECLARE @DocTypeCode SMALLINT
 	DECLARE @TaskStatusCode SMALLINT
@@ -113,10 +101,6 @@ WITH ENCRYPTION AS
 	RETURN @DocTypeCode
 	END
 GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
 CREATE TRIGGER [dbo].[tbTask_TriggerUpdate]
 ON [dbo].[tbTask]
 FOR UPDATE
@@ -136,7 +120,7 @@ AS
 		END
 GO
 ALTER VIEW dbo.vwTasks
-WITH ENCRYPTION AS
+AS
 SELECT     dbo.tbTask.TaskCode, dbo.tbTask.UserId, dbo.tbTask.AccountCode, dbo.tbTask.ContactName, dbo.tbTask.ActivityCode, dbo.tbTask.TaskTitle, 
                       dbo.tbTask.TaskStatusCode, dbo.tbTask.ActionById, dbo.tbTask.ActionOn, dbo.tbTask.ActionedOn, dbo.tbTask.PaymentOn, dbo.tbTask.SecondReference, 
                       dbo.tbTask.TaskNotes, dbo.tbTask.TaxCode, dbo.tbTask.Quantity, dbo.tbTask.UnitCharge, dbo.tbTask.TotalCharge, dbo.tbTask.AddressCodeFrom, 
@@ -159,7 +143,7 @@ FROM         dbo.tbUser INNER JOIN
                       dbo.tbCashCategory ON dbo.tbCashCode.CategoryCode = dbo.tbCashCategory.CategoryCode
 GO
 CREATE VIEW dbo.vwSystemDocSpool
-WITH ENCRYPTION AS
+AS
 SELECT     DocTypeCode, DocumentNumber
 FROM         tbSystemDocSpool
 WHERE     (UserName = SUSER_SNAME())
@@ -173,7 +157,7 @@ CREATE PROCEDURE dbo.spSystemDocDespool
 	(
 	@DocTypeCode SMALLINT
 	)
-WITH ENCRYPTION AS
+AS
 	IF @DocTypeCode = 1
 		GOTO Quotations
 	ELSE IF @DocTypeCode = 2
@@ -251,7 +235,7 @@ CREATE PROCEDURE dbo.spSystemPeriodGetYear
 	@StartOn DATETIME,
 	@YearNumber INTEGER OUTPUT
 	)
-WITH ENCRYPTION AS
+AS
 	SELECT @YearNumber = YearNumber
 	FROM            tbSystemYearPeriod
 	WHERE        (StartOn = @StartOn)
@@ -261,12 +245,8 @@ WITH ENCRYPTION AS
 		
 	RETURN
 GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
 ALTER VIEW [dbo].[vwTaskOps]
-WITH ENCRYPTION AS
+AS
 SELECT        dbo.tbTaskOp.TaskCode, dbo.tbTaskOp.OperationNumber, dbo.vwTaskOpBucket.Period, dbo.tbSystemBucket.BucketId, dbo.tbTaskOp.UserId, 
                          dbo.tbTaskOp.OpTypeCode, dbo.tbTaskOp.OpStatusCode, dbo.tbTaskOp.Operation, dbo.tbTaskOp.Note, dbo.tbTaskOp.StartOn, dbo.tbTaskOp.EndOn, 
                          dbo.tbTaskOp.Duration, dbo.tbTaskOp.OffsetDays, dbo.tbTaskOp.InsertedBy, dbo.tbTaskOp.InsertedOn, dbo.tbTaskOp.UpdatedBy, dbo.tbTaskOp.UpdatedOn, 
@@ -286,7 +266,7 @@ GO
 CREATE FUNCTION dbo.fnCashCurrentBalance
 	()
 RETURNS money
-WITH ENCRYPTION AS
+AS
 	BEGIN
 	declare @CurrentBalance money
 	
@@ -309,7 +289,7 @@ RETURNS @tbStatement TABLE (
 	Balance money,
 	CashCode nvarchar(50)
 	) 
- WITH ENCRYPTION AS
+AS
 	BEGIN
 	declare @ReferenceCode nvarchar(20) 
 	declare @CashCode nvarchar(50)
@@ -419,14 +399,9 @@ RETURNS @tbStatement TABLE (
 		
 	RETURN
 	END
-
-GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
 GO
 ALTER VIEW [dbo].[vwTaxVatTotals]
-WITH ENCRYPTION AS
+AS
 SELECT     TOP 100 PERCENT dbo.tbSystemYear.YearNumber, dbo.tbSystemYear.Description, 
                       dbo.tbSystemMonth.MonthName + ' ' + LTRIM(STR(YEAR(dbo.tbSystemYearPeriod.StartOn))) AS Period, fnTaxVatTotals.StartOn, fnTaxVatTotals.HomeSales, 
                       fnTaxVatTotals.HomePurchases, fnTaxVatTotals.ExportSales, fnTaxVatTotals.ExportPurchases, fnTaxVatTotals.HomeSalesVat, fnTaxVatTotals.HomePurchasesVat, 
@@ -441,7 +416,7 @@ ORDER BY fnTaxVatTotals.StartOn
 GO
 CREATE FUNCTION dbo.fnSystemHistoryStartOn()
 RETURNS DATETIME
-WITH ENCRYPTION AS
+AS
 	BEGIN
 	DECLARE @StartOn DATETIME
 	SELECT  @StartOn = MIN(tbSystemYearPeriod.StartOn)
@@ -452,23 +427,15 @@ WITH ENCRYPTION AS
 	RETURN @StartOn
 	END
 GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
 ALTER VIEW [dbo].[vwTaxVatStatement]
-WITH ENCRYPTION AS
+AS
 SELECT        TOP 100 PERCENT StartOn, VatDue, VatPaid, Balance
 FROM            dbo.fnTaxVatStatement() AS fnTaxVatStatement
 WHERE        (StartOn > dbo.fnSystemHistoryStartOn())
 ORDER BY StartOn, VatDue
 GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
 ALTER VIEW [dbo].[vwTaxCorpTotals]
-WITH ENCRYPTION AS
+AS
 SELECT     TOP 100 PERCENT vwCorpTaxInvoice.StartOn, YEAR(tbSystemYearPeriod.StartOn) AS PeriodYear, tbSystemYear.Description, 
                       tbSystemMonth.MonthName + ' ' + LTRIM(STR(YEAR(tbSystemYearPeriod.StartOn))) AS Period, tbSystemYearPeriod.CorporationTaxRate, 
                       tbSystemYearPeriod.TaxAdjustment, SUM(vwCorpTaxInvoice.NetProfit) AS NetProfit, SUM(vwCorpTaxInvoice.CorporationTax) AS CorporationTax
@@ -482,27 +449,15 @@ GROUP BY tbSystemYear.Description, tbSystemMonth.MonthName, vwCorpTaxInvoice.Sta
                       tbSystemYearPeriod.TaxAdjustment
 ORDER BY vwCorpTaxInvoice.StartOn
 GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
 ALTER VIEW [dbo].[vwTaxCorpStatement]
-WITH ENCRYPTION AS
+AS
 SELECT     TOP 100 PERCENT StartOn, TaxDue, TaxPaid, Balance
 FROM         dbo.fnTaxCorpStatement() AS fnTaxCorpStatement
 WHERE     (StartOn > dbo.fnSystemHistoryStartOn())
 ORDER BY StartOn, TaxDue
 GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
 ALTER VIEW [dbo].[vwInvoiceSummaryItems]
-WITH ENCRYPTION AS
+AS
 SELECT     dbo.fnAccountPeriod(dbo.tbInvoice.InvoicedOn) AS StartOn, 
                       CASE WHEN tbInvoice.InvoiceTypeCode = 2 THEN 1 ELSE CASE WHEN tbInvoice.InvoiceTypeCode = 4 THEN 3 ELSE tbInvoice.InvoiceTypeCode END END AS InvoiceTypeCode,
                        CASE WHEN tbInvoiceType.CashModeCode = 1 THEN dbo.tbInvoiceItem.InvoiceValue * - 1 ELSE dbo.tbInvoiceItem.InvoiceValue END AS InvoiceValue, 
@@ -512,12 +467,8 @@ FROM         dbo.tbInvoiceItem INNER JOIN
                       dbo.tbInvoiceType ON dbo.tbInvoice.InvoiceTypeCode = dbo.tbInvoiceType.InvoiceTypeCode
 WHERE     (dbo.tbInvoice.InvoicedOn >= dbo.fnSystemHistoryStartOn())
 GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
 ALTER VIEW [dbo].[vwInvoiceSummaryTasks]
-WITH ENCRYPTION AS
+AS
 SELECT     dbo.fnAccountPeriod(dbo.tbInvoice.InvoicedOn) AS StartOn, 
                       CASE WHEN tbInvoice.InvoiceTypeCode = 2 THEN 1 ELSE CASE WHEN tbInvoice.InvoiceTypeCode = 4 THEN 3 ELSE tbInvoice.InvoiceTypeCode END END AS InvoiceTypeCode,
                        CASE WHEN tbInvoiceType.CashModeCode = 1 THEN dbo.tbInvoiceTask.InvoiceValue * - 1 ELSE dbo.tbInvoiceTask.InvoiceValue END AS InvoiceValue, 
@@ -528,7 +479,7 @@ FROM         dbo.tbInvoiceTask INNER JOIN
 WHERE     (dbo.tbInvoice.InvoicedOn >= dbo.fnSystemHistoryStartOn())
 GO
 ALTER VIEW [dbo].[vwInvoiceSummary]
-WITH ENCRYPTION AS
+AS
 SELECT     DATENAME(yyyy, StartOn) + '/' + CAST(dbo.fnPad(MONTH(StartOn), 2) AS nvarchar) AS PeriodOn, StartOn, InvoiceTypeCode, InvoiceType AS InvoiceType, 
                       ABS(TotalInvoiceValue) AS TotalInvoiceValue, ABS(TotalTaxValue) AS TotalTaxValue
 FROM         dbo.vwInvoiceSummaryTotals
@@ -538,7 +489,7 @@ SELECT     DATENAME(yyyy, StartOn) + '/' + CAST(dbo.fnPad(MONTH(StartOn), 2) AS 
 FROM         dbo.vwInvoiceSummaryMargin
 GO
 ALTER VIEW [dbo].[vwInvoiceRegisterExpenses]
-WITH ENCRYPTION AS
+AS
 SELECT     vwInvoiceRegisterTasks.StartOn, vwInvoiceRegisterTasks.InvoiceNumber, vwInvoiceRegisterTasks.TaskCode, tbSystemYearPeriod.YearNumber, 
                       tbSystemYear.Description, tbSystemMonth.MonthName + ' ' + LTRIM(STR(YEAR(tbSystemYearPeriod.StartOn))) AS Period, vwInvoiceRegisterTasks.TaskTitle, 
                       vwInvoiceRegisterTasks.CashCode, vwInvoiceRegisterTasks.CashDescription, vwInvoiceRegisterTasks.TaxCode, vwInvoiceRegisterTasks.TaxDescription, 
@@ -554,12 +505,8 @@ FROM         vwInvoiceRegisterTasks INNER JOIN
                       tbSystemMonth ON tbSystemYearPeriod.MonthNumber = tbSystemMonth.MonthNumber
 WHERE     (dbo.fnTaskIsExpense(vwInvoiceRegisterTasks.TaskCode) = 1)
 GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
 ALTER VIEW [dbo].[vwTaskProfitOrders]
-WITH ENCRYPTION AS
+AS
 SELECT     dbo.fnAccountPeriod(dbo.tbTask.ActionOn) AS StartOn, dbo.tbTask.TaskCode, 
                       CASE WHEN dbo.tbCashCategory.CashModeCode = 1 THEN dbo.tbTask.TotalCharge * - 1 ELSE dbo.tbTask.TotalCharge END AS TotalCharge
 FROM         dbo.tbCashCode INNER JOIN
@@ -571,12 +518,8 @@ WHERE     (dbo.tbTask.TaskStatusCode > 1) AND (dbo.tbTaskFlow.ParentTaskCode IS 
                       (dbo.tbTask.ActionOn >= dbo.fnSystemHistoryStartOn()) OR
                       (dbo.tbTask.TaskStatusCode > 1) AND (tbTask_1.CashCode IS NULL) AND (dbo.tbTask.TaskStatusCode < 5) AND (dbo.tbTask.ActionOn >= dbo.fnSystemHistoryStartOn())
 GO
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
 ALTER VIEW [dbo].[vwTaskProfit]
-WITH ENCRYPTION AS
+AS
 SELECT     TOP 100 PERCENT fnTaskProfit_1.StartOn, dbo.tbOrg.AccountCode, dbo.tbTask.TaskCode, dbo.tbSystemYearPeriod.YearNumber, dbo.tbSystemYear.Description, 
                       dbo.tbSystemMonth.MonthName + ' ' + LTRIM(STR(YEAR(dbo.tbSystemYearPeriod.StartOn))) AS Period, dbo.tbTask.ActivityCode, dbo.tbCashCode.CashCode, 
                       dbo.tbTask.TaskTitle, dbo.tbOrg.AccountName, dbo.tbCashCode.CashDescription, dbo.tbTaskStatus.TaskStatus, fnTaskProfit_1.TotalCharge, 

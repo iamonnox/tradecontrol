@@ -5,23 +5,13 @@
 * Description: Sql Server Upgrade Script - Encrypted Distribution Schema
 * Data Version: 1.07.2
 * Release Date: TBC
-* Confidential Information
 ************************************************************/
-
-if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[spPaymentDelete]') and OBJECTPROPERTY(id, N'IsProcedure') = 1)
-drop procedure [dbo].[spPaymentDelete]
 GO
-
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE PROCEDURE [dbo].[spPaymentDelete]
+CREATE OR ALTER PROCEDURE [dbo].[spPaymentDelete]
 	(
 	@PaymentCode nvarchar(20)
 	)
-WITH ENCRYPTION AS
+AS
 declare @AccountCode nvarchar(10)
 declare @CashAccountCode nvarchar(10)
 
@@ -37,19 +27,12 @@ declare @CashAccountCode nvarchar(10)
 	
 
 	RETURN 
-
 GO
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
 ALTER  PROCEDURE [dbo].[spPaymentPostMisc]
 	(
 	@PaymentCode nvarchar(20) 
 	)
-WITH ENCRYPTION AS
+AS
 declare @InvoiceNumber nvarchar(20)
 declare @UserId nvarchar(10)
 declare @NextNumber int
@@ -130,20 +113,13 @@ declare @InvoiceTypeCode smallint
 	WHERE     (PaymentCode = @PaymentCode)
 	
 	RETURN
-
 GO
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
 ALTER PROCEDURE [dbo].[spPaymentPostPaidIn]
 	(
 	@PaymentCode nvarchar(20),
 	@CurrentBalance money output 
 	)
-WITH ENCRYPTION AS
+AS
 --invoice values
 declare @InvoiceNumber nvarchar(20)
 declare @TaskCode nvarchar(20)
@@ -225,19 +201,13 @@ declare @TaxOutValue money
 
 			
 	RETURN
-
-GO
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
 GO
 ALTER PROCEDURE [dbo].[spPaymentPostPaidOut]
 	(
 	@PaymentCode nvarchar(20),
 	@CurrentBalance money output 
 	)
-WITH ENCRYPTION AS
+AS
 --invoice values
 declare @InvoiceNumber nvarchar(20)
 declare @TaskCode nvarchar(20)
@@ -318,17 +288,11 @@ declare @TaxOutValue money
 	
 	RETURN
 GO
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
 ALTER PROCEDURE [dbo].[spOrgRebuild]
 	(
 		@AccountCode nvarchar(10)
 	)
-WITH ENCRYPTION AS
+AS
 declare @PaidBalance money
 declare @InvoicedBalance money
 declare @Balance money
@@ -503,14 +467,7 @@ declare @TaxRate float
 	
 
 	RETURN 
-
 GO
-
-SET QUOTED_IDENTIFIER ON 
-GO
-SET ANSI_NULLS ON 
-GO
-
 ALTER  VIEW dbo.vwInvoiceVatTasks
 AS
 SELECT     dbo.fnAccountPeriod(dbo.tbInvoice.InvoicedOn) AS StartOn, dbo.tbInvoiceTask.InvoiceNumber, dbo.tbInvoice.InvoiceTypeCode, 
@@ -520,18 +477,7 @@ FROM         dbo.tbInvoiceTask INNER JOIN
                       dbo.tbOrg ON dbo.tbInvoice.AccountCode = dbo.tbOrg.AccountCode INNER JOIN
                       dbo.tbSystemTaxCode ON dbo.tbInvoiceTask.TaxCode = dbo.tbSystemTaxCode.TaxCode
 WHERE     (dbo.tbSystemTaxCode.TaxTypeCode = 2)
-
 GO
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS ON 
-GO
-
-SET QUOTED_IDENTIFIER ON 
-GO
-SET ANSI_NULLS ON 
-GO
-
 ALTER  VIEW dbo.vwInvoiceVatItems
 AS
 SELECT     TOP 100 PERCENT dbo.fnAccountPeriod(dbo.tbInvoice.InvoicedOn) AS StartOn, dbo.tbInvoice.InvoiceNumber, dbo.tbInvoice.InvoiceTypeCode, 
@@ -542,18 +488,7 @@ FROM         dbo.tbInvoiceItem INNER JOIN
                       dbo.tbSystemTaxCode ON dbo.tbInvoiceItem.TaxCode = dbo.tbSystemTaxCode.TaxCode
 WHERE     (dbo.tbSystemTaxCode.TaxTypeCode = 2)
 ORDER BY dbo.fnAccountPeriod(dbo.tbInvoice.InvoicedOn)
-
 GO
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS ON 
-GO
-
-SET QUOTED_IDENTIFIER ON 
-GO
-SET ANSI_NULLS ON 
-GO
-
 ALTER  VIEW dbo.vwInvoiceVatBase
 AS
 SELECT DISTINCT StartOn, InvoiceNumber, InvoiceTypeCode, TaxCode, InvoiceValue, TaxValue, ForeignJurisdiction
@@ -561,22 +496,11 @@ FROM         dbo.vwInvoiceVatItems
 UNION
 SELECT DISTINCT StartOn, InvoiceNumber, InvoiceTypeCode, TaxCode, InvoiceValue, TaxValue, ForeignJurisdiction
 FROM         dbo.vwInvoiceVatTasks
-
 GO
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS ON 
-GO
-
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS OFF 
-GO
-
 ALTER  FUNCTION dbo.fnTaxTypeDueDates
 	(@TaxTypeCode smallint)
 RETURNS @tbDueDate TABLE (PayOn datetime, PayFrom datetime, PayTo datetime)
-WITH ENCRYPTION AS
+AS
 	BEGIN
 	declare @MonthNumber smallint
 	declare @RecurrenceCode smallint
@@ -708,17 +632,9 @@ VatTax:
 	RETURN
 	
 	END
-
-
-
 GO
-SET QUOTED_IDENTIFIER OFF 
-GO
-SET ANSI_NULLS ON 
-GO
-
 ALTER VIEW dbo.vwTaxCorpTotals
-WITH ENCRYPTION AS
+AS
 SELECT     dbo.tbSystemYear.[Description], dbo.tbSystemMonth.MonthName, dbo.vwCorpTaxInvoice.StartOn, SUM(dbo.vwCorpTaxInvoice.NetProfit) AS NetProfit, 
                       SUM(dbo.vwCorpTaxInvoice.CorporationTax) AS CorporationTax
 FROM         dbo.vwCorpTaxInvoice INNER JOIN

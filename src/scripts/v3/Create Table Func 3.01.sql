@@ -112,9 +112,9 @@ WHERE        (Task.tbTask.TaskStatusCode > 1) AND (Task.tbTask.TaskStatusCode < 
 GO
 ALTER AUTHORIZATION ON Cash.vwCorpTaxConfirmedBase TO  SCHEMA OWNER 
 GO
-SET ANSI_NULLS ON
+
 GO
-SET QUOTED_IDENTIFIER ON
+
 GO
 CREATE VIEW Cash.vwCorpTaxConfirmed
 AS

@@ -1,6 +1,6 @@
 CREATE FUNCTION dbo.fnSystemCompanyAccount()
 RETURNS NVARCHAR(10)
-WITH ENCRYPTION AS
+AS
 	BEGIN
 	DECLARE @AccountCode NVARCHAR(10)
 	SELECT @AccountCode = AccountCode FROM tbSystemOptions
@@ -8,7 +8,7 @@ WITH ENCRYPTION AS
 	END
 GO
 ALTER VIEW dbo.vwInvoiceRegister
-WITH ENCRYPTION AS
+AS
 SELECT     dbo.fnAccountPeriod(dbo.tbInvoice.InvoicedOn) AS StartOn, dbo.tbInvoice.InvoiceNumber, dbo.tbInvoice.AccountCode, dbo.tbInvoice.InvoiceTypeCode, 
                       dbo.tbInvoice.InvoiceStatusCode, dbo.tbInvoice.InvoicedOn, 
                       CASE WHEN tbInvoiceType.CashModeCode = 1 THEN dbo.tbInvoice.InvoiceValue * - 1 ELSE dbo.tbInvoice.InvoiceValue END AS InvoiceValue, 
@@ -28,7 +28,7 @@ ALTER PROCEDURE [dbo].[spPaymentPostMisc]
 	(
 	@PaymentCode nvarchar(20) 
 	)
-WITH ENCRYPTION AS
+AS
 declare @InvoiceNumber nvarchar(20)
 declare @UserId nvarchar(10)
 declare @NextNumber int
@@ -111,7 +111,7 @@ declare @InvoiceTypeCode smallint
 	RETURN
 GO
 ALTER  PROCEDURE [dbo].[spCashFlowInitialise]
- WITH ENCRYPTION  AS
+AS
 declare @CashCode nvarchar(25)
 		
 	exec dbo.spCashGeneratePeriods

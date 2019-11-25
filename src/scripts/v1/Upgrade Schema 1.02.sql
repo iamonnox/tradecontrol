@@ -5,13 +5,12 @@
 * Description: Sql Server Upgrade Script - Encrypted Distribution Schema
 * Data Version: 1.02
 * Release Date: tbc
-* Confidential Information
 ************************************************************/
 
 ALTER FUNCTION dbo.fnCashCompanyBalance
 	()
 RETURNS money
-WITH ENCRYPTION AS
+AS
 	BEGIN
 	declare @CurrentBalance money
 	
@@ -23,7 +22,6 @@ WITH ENCRYPTION AS
 	RETURN isnull(@CurrentBalance, 0)
 	END
 GO
-
 UPDATE tbProfileText
 SET [Message] = 'A/No:   <3>
 Ref.:   <2>

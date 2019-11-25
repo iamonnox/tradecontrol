@@ -5,12 +5,7 @@
 * Description: Sql Server Upgrade Script - Encrypted Distribution Schema
 * Data Version: 1.10
 * Release Date: TBC
-* Confidential Information
 ************************************************************/
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[tbActivityOpType](
 	[OpTypeCode] [smallint] NOT NULL,
@@ -21,14 +16,7 @@ CREATE TABLE [dbo].[tbActivityOpType](
 ) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-
-INSERT INTO [tbActivityOpType] (OpTypeCode, OpType) VALUES (1, 'Activity')
-INSERT INTO [tbActivityOpType] (OpTypeCode, OpType) VALUES (2, 'Call-off')
-GO
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
+INSERT INTO [tbActivityOpType] (OpTypeCode, OpType) VALUES (1, 'Activity'), (2, 'Call-off')
 GO
 CREATE TABLE [dbo].[tbActivityOp](
 	[ActivityCode] [nvarchar](50) NOT NULL,
@@ -47,7 +35,6 @@ CREATE TABLE [dbo].[tbActivityOp](
 	[OperationNumber] ASC
 ) ON [PRIMARY]
 ) ON [PRIMARY]
-
 GO
 ALTER TABLE [dbo].[tbActivityOp]  WITH CHECK ADD  CONSTRAINT [FK_tbActivityOp_tbActivity] FOREIGN KEY([ActivityCode])
 REFERENCES [dbo].[tbActivity] ([ActivityCode])
@@ -61,16 +48,10 @@ REFERENCES [dbo].[tbActivityOpType] ([OpTypeCode])
 GO
 ALTER TABLE [dbo].[tbActivityOp] CHECK CONSTRAINT [FK_tbActivityOp_tbActivityOpType]
 GO
-
 CREATE NONCLUSTERED INDEX [IX_tbActivityOp_Operation] ON [dbo].[tbActivityOp] 
 (
 	[Operation] ASC
 ) ON [PRIMARY]
-GO
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[tbTaskOpStatus](
 	[OpStatusCode] [smallint] NOT NULL,
@@ -81,15 +62,9 @@ CREATE TABLE [dbo].[tbTaskOpStatus](
 ) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-
 INSERT INTO tbTaskOpStatus (OpStatusCode, OpStatus) VALUES (1, 'Pending')
 INSERT INTO tbTaskOpStatus (OpStatusCode, OpStatus) VALUES (2, 'In-progress')
 INSERT INTO tbTaskOpStatus (OpStatusCode, OpStatus) VALUES (3, 'Complete')
-GO
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[tbTaskOp](
 	[TaskCode] [nvarchar](20) NOT NULL,
@@ -113,12 +88,8 @@ CREATE TABLE [dbo].[tbTaskOp](
 	[OperationNumber] ASC
 ) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
-
 GO
 /****** Object:  Table [dbo].[tbTaskQuote]    Script Date: 04/29/2009 12:44:09 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[tbTaskQuote](
 	[TaskCode] [nvarchar](20) NOT NULL,
@@ -138,16 +109,12 @@ CREATE TABLE [dbo].[tbTaskQuote](
 	[Quantity] ASC
 ) ON [PRIMARY]
 ) ON [PRIMARY]
-
 GO
-
 CREATE NONCLUSTERED INDEX [IX_tbTaskOp_OpStatusCode] ON [dbo].[tbTaskOp] 
 (
 	[OpStatusCode] ASC,
 	[StartOn] ASC
 ) ON [PRIMARY]
-
-
 GO
 CREATE NONCLUSTERED INDEX [IX_tbTaskOp_UserIdOpStatus] ON [dbo].[tbTaskOp] 
 (
@@ -156,7 +123,6 @@ CREATE NONCLUSTERED INDEX [IX_tbTaskOp_UserIdOpStatus] ON [dbo].[tbTaskOp]
 	[StartOn] ASC
 ) ON [PRIMARY]
 GO
-
 ALTER TABLE [dbo].[tbTaskOp]  WITH CHECK ADD  CONSTRAINT [FK_tbTaskOp_tbTask] FOREIGN KEY([TaskCode])
 REFERENCES [dbo].[tbTask] ([TaskCode])
 ON UPDATE CASCADE
@@ -164,7 +130,6 @@ ON DELETE CASCADE
 GO
 ALTER TABLE [dbo].[tbTaskOp] CHECK CONSTRAINT [FK_tbTaskOp_tbTask]
 GO
-
 ALTER TABLE [dbo].[tbTaskOp]  WITH CHECK ADD  CONSTRAINT [FK_tbTaskOp_tbTaskOpStatus] FOREIGN KEY([OpStatusCode])
 REFERENCES [dbo].[tbTaskOpStatus] ([OpStatusCode])
 GO
@@ -180,7 +145,6 @@ REFERENCES [dbo].[tbActivityOpType] ([OpTypeCode])
 GO
 ALTER TABLE [dbo].[tbTaskOp] CHECK CONSTRAINT [FK_tbTaskOp_tbActivityOpType]
 GO
-
 ALTER TABLE [dbo].[tbTaskQuote]  WITH CHECK ADD  CONSTRAINT [FK_tbTaskQuote_tbTask] FOREIGN KEY([TaskCode])
 REFERENCES [dbo].[tbTask] ([TaskCode])
 ON UPDATE CASCADE
@@ -188,14 +152,8 @@ ON DELETE CASCADE
 GO
 ALTER TABLE [dbo].[tbTaskQuote] CHECK CONSTRAINT [FK_tbTaskQuote_tbTask]
 GO
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
 ALTER VIEW [dbo].[vwTaskProfitOrders]
-WITH ENCRYPTION AS
+AS
 SELECT     dbo.fnAccountPeriod(dbo.tbTask.ActionOn) AS StartOn, dbo.tbTask.TaskCode, 
                       CASE WHEN dbo.tbCashCategory.CashModeCode = 1 THEN dbo.tbTask.TotalCharge * - 1 ELSE dbo.tbTask.TotalCharge END AS TotalCharge
 FROM         dbo.tbCashCode INNER JOIN
@@ -207,9 +165,6 @@ WHERE     (dbo.tbTask.TaskStatusCode > 1) AND (dbo.tbTaskFlow.ParentTaskCode IS 
                       (dbo.tbTask.TaskStatusCode < 5) OR
                       (dbo.tbTask.TaskStatusCode > 1) AND (tbTask_1.CashCode IS NULL) AND (dbo.tbTask.TaskStatusCode < 5)
 GO
-
-set ANSI_NULLS ON
-set QUOTED_IDENTIFIER ON
 go
 
 ALTER TRIGGER [dbo].[Trigger_tbTask_Update]
@@ -268,21 +223,14 @@ AS
 		select @TaskCode = TaskCode, @ActionOn = ActionOn from inserted		
 		exec dbo.spTaskScheduleOp @TaskCode, @ActionOn
 		end
-
-
-
-SET ANSI_NULLS OFF
 GO
-SET QUOTED_IDENTIFIER OFF
-GO
-
 ALTER  PROCEDURE dbo.spInvoiceRaise
 	(
 	@TaskCode nvarchar(20),
 	@InvoiceTypeCode smallint,
 	@InvoiceNumber nvarchar(20) = null output
 	)
-WITH ENCRYPTION AS
+AS
 declare @UserId nvarchar(10)
 declare @NextNumber int
 declare @InvoiceSuffix nvarchar(4)
@@ -345,19 +293,13 @@ declare @InvoicedOn datetime
 	commit tran Invoice
 	
 	RETURN
-
-GO
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
 GO
 CREATE PROCEDURE [dbo].[spActivityNextOperationNumber] 
 	(
 	@ActivityCode nvarchar(50),
 	@OperationNumber smallint = 10 output
 	)
-WITH ENCRYPTION AS
+AS
 	if exists(SELECT     TOP 1 OperationNumber
 	          FROM         tbActivityOp
 	          WHERE     (ActivityCode = @ActivityCode))
@@ -372,13 +314,12 @@ WITH ENCRYPTION AS
 		
 	RETURN
 GO
-
 CREATE PROCEDURE [dbo].[spTaskNextOperationNumber] 
 	(
 	@TaskCode nvarchar(20),
 	@OperationNumber smallint = 10 output
 	)
- WITH ENCRYPTION AS
+AS
 	if exists(SELECT     TOP 1 OperationNumber
 	          FROM         tbTaskOp
 	          WHERE     (TaskCode = @TaskCode))
@@ -393,14 +334,13 @@ CREATE PROCEDURE [dbo].[spTaskNextOperationNumber]
 		
 	RETURN
 GO
-
 CREATE PROCEDURE dbo.spSystemAdjustToCalendar
 	(
 	@SourceDate datetime,
 	@OffsetDays int,
 	@OutputDate datetime output
 	)
-WITH ENCRYPTION AS
+AS
 declare @UserId nvarchar(10)
 
 	SELECT @UserId = UserId
@@ -410,13 +350,11 @@ declare @UserId nvarchar(10)
 
 	RETURN
 GO
-
 ALTER TABLE dbo.tbTask WITH NOCHECK ADD
 	SecondReference nvarchar(20) NULL
 GO
-
 ALTER VIEW dbo.vwTasks
-WITH ENCRYPTION AS
+AS
 SELECT     dbo.tbTask.TaskCode, dbo.tbTask.UserId, dbo.tbTask.AccountCode, dbo.tbTask.ContactName, dbo.tbTask.ActivityCode, dbo.tbTask.TaskTitle, 
                       dbo.tbTask.TaskStatusCode, dbo.tbTask.ActionById, dbo.tbTask.ActionOn, dbo.tbTask.ActionedOn, dbo.tbTask.PaymentOn, 
                       dbo.tbTask.SecondReference, dbo.tbTask.TaskNotes, dbo.tbTask.TaxCode, dbo.tbTask.Quantity, dbo.tbTask.UnitCharge, dbo.tbTask.TotalCharge, 
@@ -438,14 +376,13 @@ FROM         dbo.tbUser INNER JOIN
                       dbo.tbCashCode ON dbo.tbTask.CashCode = dbo.tbCashCode.CashCode LEFT OUTER JOIN
                       dbo.tbCashCategory ON dbo.tbCashCode.CategoryCode = dbo.tbCashCategory.CategoryCode
 GO
-
 ALTER PROCEDURE dbo.spTaskCopy
 	(
 	@FromTaskCode nvarchar(20),
 	@ParentTaskCode nvarchar(20) = null,
 	@ToTaskCode nvarchar(20) = null output
 	)
-WITH ENCRYPTION AS
+AS
 declare @ActivityCode nvarchar(50)
 declare @Printed bit
 declare @ChildTaskCode nvarchar(20)
@@ -539,13 +476,12 @@ WHERE     (TaskCode = @FromTaskCode)
 		
 	RETURN
 GO
-
 CREATE PROCEDURE dbo.spTaskSetOpStatus
 	(
 		@TaskCode nvarchar(20),
 		@TaskStatusCode smallint
 	)
-WITH ENCRYPTION AS
+AS
 declare @OpStatusCode smallint
 declare @OperationNumber smallint
 	
@@ -579,12 +515,11 @@ declare @OperationNumber smallint
 		
 	RETURN
 GO
-
 ALTER PROCEDURE dbo.spTaskSetStatus
 	(
 		@TaskCode nvarchar(20)
 	)
- WITH ENCRYPTION AS
+AS
 declare @ChildTaskCode nvarchar(20)
 declare @TaskStatusCode smallint
 declare @CashCode nvarchar(20)
@@ -634,10 +569,7 @@ declare @IsOrder bit
 	deallocate curTask
 		
 	RETURN 
-
 GO
-
-
 ALTER PROCEDURE dbo.spTaskConfigure 
 	(
 	@ParentTaskCode nvarchar(20)
@@ -777,15 +709,13 @@ declare @ActivityCode nvarchar(50)
 
 
 	RETURN
-
 GO
-
 CREATE PROCEDURE dbo.spTaskScheduleOp
 	(
 	@TaskCode nvarchar(20),
 	@ActionOn datetime
 	)	
-WITH ENCRYPTION AS
+AS
 declare @OperationNumber smallint
 declare @OpStatusCode smallint
 declare @CallOffOpNo smallint
@@ -835,15 +765,13 @@ declare @UserId nvarchar(10)
 	deallocate curOp
 	
 	RETURN
-
 GO
-
 ALTER  PROCEDURE dbo.spTaskSchedule
 	(
 	@ParentTaskCode nvarchar(20),
 	@ActionOn datetime = null output
 	)
- WITH ENCRYPTION AS
+AS
 declare @UserId nvarchar(10)
 declare @StepNumber smallint
 declare @TaskCode nvarchar(20)
@@ -921,9 +849,7 @@ declare @PaymentOn datetime
 	deallocate curAct	
 	
 	RETURN
-
 GO
-
 ALTER TRIGGER Trigger_tbTask_Update
 ON dbo.tbTask 
 FOR UPDATE
@@ -981,12 +907,11 @@ AS
 		exec dbo.spTaskScheduleOp @TaskCode, @ActionOn
 		end
 GO
-
 CREATE PROCEDURE dbo.spTaskSetActionOn
 	(
 	@TaskCode nvarchar(20)
 	)
-WITH ENCRYPTION AS
+AS
 declare @OperationNumber smallint
 declare @OpTypeCode smallint
 declare @ActionOn datetime
@@ -1018,15 +943,8 @@ declare @ActionOn datetime
 		
 	RETURN
 GO
-
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
 ALTER VIEW [dbo].[vwDocTaskCode]
-WITH ENCRYPTION AS
+AS
 SELECT     dbo.fnTaskEmailAddress(dbo.tbTask.TaskCode) AS EmailAddress, dbo.tbTask.TaskCode, dbo.tbTask.TaskStatusCode, dbo.tbTaskStatus.TaskStatus, 
                       dbo.tbTask.ContactName, dbo.tbOrgContact.NickName, dbo.tbUser.UserName, dbo.tbOrg.AccountName, dbo.tbOrgAddress.Address AS InvoiceAddress, 
                       tbOrg_1.AccountName AS DeliveryAccountName, tbOrgAddress_1.Address AS DeliveryAddress, tbOrg_2.AccountName AS CollectionAccountName, 
@@ -1050,21 +968,11 @@ FROM         dbo.tbOrg AS tbOrg_2 RIGHT OUTER JOIN
                       dbo.tbTask.AccountCode = dbo.tbOrgContact.AccountCode LEFT OUTER JOIN
                       dbo.tbSystemTaxCode ON dbo.tbTask.TaxCode = dbo.tbSystemTaxCode.TaxCode
 GO
-
-SET ANSI_NULLS OFF
-GO
-SET QUOTED_IDENTIFIER OFF
-GO
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
 CREATE PROCEDURE [dbo].[spTaskOp]
 	(
 	@TaskCode nvarchar(20)
 	)
-WITH ENCRYPTION AS
+AS
 		IF EXISTS (SELECT     TaskCode
 	           FROM         tbTaskOp
 	           WHERE     (TaskCode = @TaskCode))
@@ -1083,24 +991,13 @@ WITH ENCRYPTION AS
 		
 	RETURN
 GO
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
 CREATE VIEW [dbo].[vwTaskOpBucket]
-WITH ENCRYPTION AS
+AS
 SELECT     TaskCode, OperationNumber, dbo.fnSystemDateBucket(GETDATE(), EndOn) AS Period
 FROM         dbo.tbTaskOp
-
-GO
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
 GO
 CREATE VIEW [dbo].[vwTaskOps]
-WITH ENCRYPTION AS
+AS
 SELECT     dbo.tbTaskOp.TaskCode, dbo.tbTaskOp.OperationNumber, dbo.vwTaskOpBucket.Period, dbo.tbSystemBucket.BucketId, dbo.tbTaskOp.UserId, 
                       dbo.tbTaskOp.OpTypeCode, dbo.tbTaskOp.OpStatusCode, dbo.tbTaskOp.Operation, dbo.tbTaskOp.Note, dbo.tbTaskOp.StartOn, dbo.tbTaskOp.EndOn, 
                       dbo.tbTaskOp.Duration, dbo.tbTaskOp.OffsetDays, dbo.tbTaskOp.InsertedBy, dbo.tbTaskOp.InsertedOn, dbo.tbTaskOp.UpdatedBy, 

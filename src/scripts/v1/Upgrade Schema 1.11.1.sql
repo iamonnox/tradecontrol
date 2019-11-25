@@ -1,10 +1,10 @@
-ALTER PROCEDURE dbo.spTaskCopy
+CREATE OR ALTER PROCEDURE dbo.spTaskCopy
 	(
 	@FromTaskCode nvarchar(20),
 	@ParentTaskCode nvarchar(20) = null,
 	@ToTaskCode nvarchar(20) = null output
 	)
-WITH ENCRYPTION AS
+AS
 declare @ActivityCode nvarchar(50)
 declare @Printed bit
 declare @ChildTaskCode nvarchar(20)

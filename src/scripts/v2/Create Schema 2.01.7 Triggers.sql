@@ -1,7 +1,4 @@
 /****** Object:  Trigger [tbOrgAddress_TriggerInsert]    Script Date: 01/11/2012 13:37:03 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
 GO
 CREATE TRIGGER [dbo].[tbOrgAddress_TriggerInsert]
 ON [dbo].[tbOrgAddress] 
@@ -20,9 +17,6 @@ AS
 		end
 GO
 /****** Object:  Trigger [tbOrgPayment_TriggerUpdate]    Script Date: 01/11/2012 13:37:03 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
 GO
 CREATE TRIGGER [dbo].[tbOrgPayment_TriggerUpdate]
 ON [dbo].[tbOrgPayment]
@@ -39,11 +33,7 @@ AS
 		
 		end
 GO
-
 /****** Object:  Trigger [Trigger_tbTask_Update]    Script Date: 01/11/2012 13:37:03 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
 GO
 CREATE TRIGGER [dbo].[Trigger_tbTask_Update]
 ON [dbo].[tbTask] 

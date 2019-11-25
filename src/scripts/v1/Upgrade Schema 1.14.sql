@@ -5,19 +5,14 @@
 * Description: Sql Server Upgrade Script - Encrypted Distribution Schema
 * Data Version: 1.14
 * Release Date: 2 June 2010
-* Confidential Information
 ************************************************************/
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
 GO
 CREATE FUNCTION [dbo].[fnTaskIsExpense]
 	(
 	@TaskCode nvarchar(20)
 	)
 RETURNS bit
-WITH ENCRYPTION AS
+AS
 	BEGIN
 	DECLARE @IsExpense bit
 	IF EXISTS (SELECT     tbTask.TaskCode
@@ -42,19 +37,11 @@ WITH ENCRYPTION AS
 	RETURN @IsExpense
 	END
 GO
-
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
 CREATE VIEW [dbo].[vwInvoiceRegisterExpenses]
-WITH ENCRYPTION AS
+AS
 SELECT     StartOn, InvoiceNumber, TaskCode, CashCode, CashDescription, TaxCode, TaxDescription, AccountCode, InvoiceTypeCode, InvoiceStatusCode, 
                       InvoicedOn, InvoiceValue, TaxValue, PaidValue, PaidTaxValue, PaymentTerms, Printed, AccountName, UserName, InvoiceStatus, CashModeCode, 
                       InvoiceType, (InvoiceValue + TaxValue) - (PaidValue + PaidTaxValue) AS UnpaidValue
 FROM         dbo.vwInvoiceRegisterTasks
 WHERE     (dbo.fnTaskIsExpense(TaskCode) = 1)
-
 GO
-
-
