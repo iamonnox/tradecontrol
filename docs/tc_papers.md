@@ -4,7 +4,7 @@ Before diving in, for clarity, I begin by distinguishing functions from concepts
 
 ## Functions v Concepts
 
-Any game consists of two elements: rules defining how it works and players that apply them. The rules are fixed and rigidly enforced lest the game lose its meaning. But, within the rules, the strategies and tactics of the players can be unlimited. Technological production is not a game, but it is similar in this respect. There are scientific and engineering functions, like rules, that must be applied for production to take place; and then there are concepts, like strategies and tactics, behind how and what is produced.
+Any game consists of two elements: rules defining how it works and players that apply them. The rules are fixed and rigidly enforced lest the game loses its meaning. But, within the rules, the strategies and tactics of the players can be unlimited. Technological production is not a game, but it is similar in this respect. There are scientific and engineering functions, like rules, that must be applied for production to take place; and then there are concepts, like strategies and tactics, behind how and what is produced.
 
 Broadly speaking, a function is the same from any perspective. You might need to take a certain perspective to understand and apply it, but there is only one that you can take, emphasizing the need for correctness. Concepts, on the other hand, can express different perspectives on the same thing. They may be mutually exclusive, but functionally, they do not contradict. In this way, technological functions reveal the object at hand (the product), whereas technological concepts reveal the subject (the producer).
 
