@@ -44,7 +44,7 @@ So, I maintained the Tru-Man production system and the factory's IT infrastructu
 
 ## Version 3
 
-Having been self-employed for over 25 years, my CV is somewhat self-referential. Without employment contracts, your commercial life can be difficult to explain. On a pragmatic level, the Version 3 open source release of Trade Control is both my alternative to an employee's CV and this, an attempt to stimulate some interest in the app. But, of course, it is more than that.
+Having been self-employed for over 25 years, my CV is somewhat self-referential. Without employment contracts, your commercial life can be difficult to explain. On a pragmatic level, the Version 3 open source release of Trade Control is my alternative to an employee's CV. But, of course, it is more than that.
 
 When the injection moulding factory closed, I stuck around to provide the receivers with information and help with the clean-up operation. Trucks from across the European continent hauled up to take away the auctioned off moulding machines, cranes, mould tools, lathes and so forth. The pile in the middle of the shop floor gradually evaporated until it opened out like the empty belly of a beached whale. 
 
