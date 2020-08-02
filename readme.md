@@ -1,6 +1,6 @@
 # Trade Control
 
-The Systems Engineering principles and history behind [Trade Control](https://github.com/tradecontrol) from the perspective of its creator. 
+The ideas and history behind [Trade Control](https://github.com/tradecontrol) from the perspective of its creator. 
 
 ## Code 
 
@@ -23,11 +23,14 @@ This repository also contains the digital version of [Trade Control Functions](h
 
 The digital format is not an easy read, having many internal links and references. If you are going to put the effort in to read it, the printed book is your best source.
 
-### Principles
+### Ideas
 
 The Trade Control project is rooted in a general theory of technological production.  If you are have no background in systems engineering, it would help if you [installed the app](https://github.com/tradecontrol/tc-nodecore) and [tried out the demos](https://github.com/tradecontrol/tc-office/blob/master/readme.md#demos).
 
-[paper](docs/tc_papers.md)
+[Intro](docs/tc_intro.md)
+
+[Functional Description of Technological Production](docs/tc_functions.md)
+
 
 ### History
 

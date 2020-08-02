@@ -9,7 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{A2CF2C96-F
 		..\readme.md = ..\readme.md
 		..\docs\tc_functions.md = ..\docs\tc_functions.md
 		..\docs\tc_history.md = ..\docs\tc_history.md
-		..\docs\tc_papers.md = ..\docs\tc_papers.md
+		..\docs\tc_intro.md = ..\docs\tc_intro.md
 	EndProjectSection
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "scripts", "scripts\scripts.sqlproj", "{76882F5E-F463-4574-877A-12931A289B3A}"

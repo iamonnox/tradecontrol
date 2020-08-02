@@ -1,4 +1,4 @@
-# Trade Control - Papers
+# Trade Control - Intro
 
 Before diving in, for clarity, I begin by distinguishing functions from concepts.
 

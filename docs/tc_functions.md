@@ -1,6 +1,6 @@
 # Trade Control - Functions
 
-Providing insight into the functional dimensions of the schema design and business logic of the [Trade Control Node Core](https://github.com/tradecontrol/tc-nodecore).
+Providing insight into the functional dimensions of the schema design and business logic of [Trade Control](https://github.com/tradecontrol).
 
 ## License
 
@@ -54,7 +54,7 @@ The Supply Chain in the above example is a sub-set, or instance, of Workflow. Th
 
 Trade Control is a production system. We tend to regard all technology from a user's perspective, not the producers. Indeed, the famous Turing Test for AI is viewed from this perspective, and we are going to provide a production-based alternative later. In the meantime, it is easy to understand that car drivers have a very different take on their vehicles to those responsible for its manufacture. The user perspective also results in a tendency to identify machines with technology generally, but a simple table is also technology, as is paint on the wall. Both car and table are assemblages made in the Secondary Industry sector; therefore, they are produced the same way, deploying very similar production systems in their factories (the production system for furniture manufacture is actually more complex than that used by the automotive industry, because its underlying data structure is not a simple tree). Furthermore, machines are not the same as technological systems, and nor are they the same as the materials that make them, which are also engineered. The need to provide clear, functional definitions is involved; nevertheless, applying Systems Engineering principles to the production process, we can do this quite simply.
 
-The kind of Workflow in the demo is taking place _inside_ the Node Core. However, it is possible to externalise the Workflow by connecting nodes in the form of a supply chain. To explain this capability, we are going to continue with the manufacturing theme, and look at the matter in terms of Assemblages. It will also apply to any kind of activity, but services tend to have convoluted supply chains, whereas in manufacturing they are very structured, and hence can be described with greater clarity. We can also example an object that is familiar to all: the car. Because Trade Control is a production system it is also recursive; so, if you have completed the demo, you will know in principle how to model and produce vehicles of any complexity. Trade Control will not, however, orchestrate production inside a real car factory, because it has had the manufacturing side removed. The [sharpNode](tc_history.md#sharpnode) schema 2002 could achieve this, although it is in an alien language that engineers would not currently appreciate. 
+The kind of Workflow in the demo is taking place _inside_ the Node. However, it is possible to externalise the Workflow by connecting nodes in the form of a supply chain. To explain this capability, we are going to continue with the manufacturing theme, and look at the matter in terms of Assemblages. It will also apply to any kind of activity, but services tend to have convoluted supply chains, whereas in manufacturing they are very structured, and hence can be described with greater clarity. We can also example an object that is familiar to all: the car. Because Trade Control is a production system it is also recursive; so, if you have completed the demo, you will know in principle how to model and produce vehicles of any complexity. Trade Control will not, however, orchestrate production inside a real car factory, because it has had the manufacturing side removed. The [sharpNode](tc_history.md#sharpnode) schema 2002 could achieve this, although it is in an alien language that engineers would not currently appreciate. 
 
 ### Assemblages
 
@@ -121,7 +121,7 @@ Our imagination has allowed us to find a new perspective on things; but this poe
 -	**Design and Development**: Products and services often have an involved history, as does [Trade Control itself](tc_history.md). This history emerges from ever increasingly abstract strata – the product’s current form, its version history, the range it belongs to, the company’s timeline, its evolving industry sector. Car manufacture can probably trace its history back to the Industrial Revolution. Then there are the ever-emerging technological developments, the application of science and engineering knowledge, the hard-earned skills of their creators…  
 -	**Governance**: a system of laws, rules and regulations is imposed to control the production process, at various levels of abstraction – international, national and industry sector. Most manufacturers will also have their own substantial Quality and System Engineering Manuals, to determine due process for both themselves and their suppliers. This framework of governance is ceaselessly evolving.
 
-Whilst these are prerequisites for advanced production, they do not particularly clarify the Node Core. What will help is an understanding of the different networks involved and how they interact. Before that, we need to understand materials and provide a formal, functional description of the technological component.
+Whilst these are prerequisites for advanced production, they do not particularly clarify the the Trade Control app. What will help is an understanding of the different networks involved and how they interact. Before that, we need to understand materials and provide a formal, functional description of the technological component.
 
 ### Materials
 
@@ -181,7 +181,9 @@ The blue line is the production of component structure following the direction o
 
 ## Networks
 
-In the section on [Assemblages](#assemblages) we imagined the entire structure and processes that make up a car modelled in a single Bill of Materials. In theory, you could render this model inside the Node Core, although in practice this is unrealistic; principally because of the fundamental nature of components, but also due to commercial techniques that exploit this. 
+In the section on [Assemblages](#assemblages) we imagined the entire structure and processes that make up a car modelled in a single Bill of Materials. In theory, you could render this model inside the Node, although in practice this is unrealistic; principally because of the fundamental nature of components, but also due to commercial techniques that exploit this. 
+
+The [Trade Control Network](https://github.com/tradecontrol/tc-network) is implemented in Ethereum.
 
 ### Consumer Networks
 
@@ -205,7 +207,7 @@ In the section on [Assemblages](#assemblages) we saw how it was possible to mode
 
 ### Production Networks
 
-There is, however, a second network that is vital for any kind of technology, but is seldom, if ever, mentioned. This network is inscribed in the originating [sharpNode](tc_history.md#sharpnode) schema but is not fully materialised in the Node Core, for reasons explained in [History](tc_history.md#version-1). 
+There is, however, a second network that is vital for any kind of technology, but is seldom, if ever, mentioned. This network is inscribed in the originating [sharpNode](tc_history.md#sharpnode) schema but is not fully materialised in the Node, for reasons explained in [History](tc_history.md#version-1). 
 
 From the [Component Definition](#component-definition), to make any component, both Primary and Secondary Industries must re-structure or transform the object at hand if they are to produce the required interface. In the definition, the component's User Interface is plugged back into itself at each point this process occurs (the layer shown in green). This connection forms the Production Network. Let's just recap here.
 
@@ -261,12 +263,12 @@ The complexity of technological strata is dependent upon the temporal and spatia
 
 Previously it was said that technological production is a function of the User Interface. The information that describes interface purpose cannot therefore be present in either the interface or its components. It is projected from outside Production and Consumer Networks by its users, to serve a desired process. In terms of Spatial Workflow, at any level of component assemblage (BOM Depth), interface purpose is always described (present) at a higher level of abstraction (not in the component itself). In terms of Temporal Workflow, at any point during the information stream, production purpose is always located downstream, concealing purpose in Time.
 
-We of course have access to this information, because we are the users. Users project demand, and this fact is modelled in the TC-Node Core in terms of Organisations.
+We of course have access to this information, because we are the users. Users project demand, and this fact is modelled in the Node in terms of Organisations.
 
 
 ## Organisations
 
-In the originating [sharpNode](tc_history.md#sharpnode) schema design of 2002, organisations and their people are expressed as components in a projected namespace. This has been removed in the TC-Node Core because it confused the users. Perhaps there may be a way to re-introduce it without alarming them, but it is instructive to explore the original approach.    
+In the originating [sharpNode](tc_history.md#sharpnode) schema design of 2002, organisations and their people are expressed as components in a projected namespace. This has been removed from Trade Control because it confused the users. Instead, an organisation's namespace has been implemented in the [HD Wallet for Bitcoin](https://github.com/tradecontrol/tc-bitcoin). 
 
 ### Namespaces
 
@@ -362,7 +364,7 @@ These are complicated words with disputed interpretations and usages that are bo
 
 > Technological object production supplies the User Interfaces projected by its subjects.
 
-So, there are three _jacere_ (Latin for _to throw_) in our definition: Ob, Sub and Pro. We need all three to model and process component production. The object is the Spatial Workflow, project is the Temporal Workflow, and subjects are Organisations. These are explicitly modelled by the [TC-Node Core](https://github.com/tradecontrol/tc-nodecore) in schemas **Activity**, **Org** and **Task** respectively. It is, however, possible to encapsulate all three _jacere_ inside a recursive component network, as was the case in the [sharpNode](tc_history.md#sharpnode) schema. User comprehension aside, there are good reasons for doing that. For example, we could easily reverse the sample usages above: (the subjective universe contains objects...) or (the subject of our discussion is the following object...).
+So, there are three _jacere_ (Latin for _to throw_) in our definition: Ob, Sub and Pro. We need all three to model and process component production. The object is the Spatial Workflow, project is the Temporal Workflow, and subjects are Organisations. These are explicitly modelled by the [Trade Control Node](https://github.com/tradecontrol/tc-nodecore) in schemas **Activity**, **Org** and **Task** respectively. It is, however, possible to encapsulate all three _jacere_ inside a recursive component network, as was the case in the [sharpNode](tc_history.md#sharpnode) schema. User comprehension aside, there are good reasons for doing that. For example, we could easily reverse the sample usages above: (the subjective universe contains objects...) or (the subject of our discussion is the following object...).
 
 Objects are generally considered to be either physical or psychical, with no third term. The former exists in the Objective Universe, whilst the latter exists in Subjective Minds. This dualism is not present in the above definition, and yet still we are able to functionally express their relation. In so doing, like the bell foundry, subjects too can be engineered by projecting interfaces onto themselves.
 
