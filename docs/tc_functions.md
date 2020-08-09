@@ -265,7 +265,6 @@ Previously it was said that technological production is a function of the User I
 
 We of course have access to this information, because we are the users. Users project demand, and this fact is modelled in the Node in terms of Organisations.
 
-
 ## Organisations
 
 In the originating [sharpNode](tc_history.md#sharpnode) schema design of 2002, organisations and their people are expressed as components in a projected namespace. This has been removed from Trade Control because it confused the users. Instead, an organisation's namespace has been implemented in the [HD Wallet for Bitcoin](https://github.com/tradecontrol/tc-bitcoin). 

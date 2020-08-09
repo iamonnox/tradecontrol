@@ -31,6 +31,7 @@ The Trade Control project is rooted in a general theory of technological product
 
 [Functional Description of Technological Production](docs/tc_functions.md)
 
+[Bitcoin as Unit of Account](docs/tc_bitcoin.md)
 
 ### History
 
