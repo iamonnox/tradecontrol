@@ -7,6 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{A2CF2C96-F
 	ProjectSection(SolutionItems) = preProject
 		..\docs\diagrams.docx = ..\docs\diagrams.docx
 		..\readme.md = ..\readme.md
+		..\docs\tc_balance_sheet.md = ..\docs\tc_balance_sheet.md
 		..\docs\tc_bitcoin.md = ..\docs\tc_bitcoin.md
 		..\docs\tc_functions.md = ..\docs\tc_functions.md
 		..\docs\tc_history.md = ..\docs\tc_history.md
@@ -17,6 +18,9 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "scripts", "scripts\scripts.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "img", "img", "{0A1DCD54-7EEB-4135-8DE3-19EA18086513}"
 	ProjectSection(SolutionItems) = preProject
+		..\img\balance_sheet_cash_statement.png = ..\img\balance_sheet_cash_statement.png
+		..\img\balance_sheet_full.png = ..\img\balance_sheet_full.png
+		..\img\balance_sheet_org_statement.png = ..\img\balance_sheet_org_statement.png
 		..\img\functions_component.jpg = ..\img\functions_component.jpg
 		..\img\functions_consumer_network.jpg = ..\img\functions_consumer_network.jpg
 		..\img\functions_exchange_polarity.jpg = ..\img\functions_exchange_polarity.jpg

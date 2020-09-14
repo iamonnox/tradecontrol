@@ -61,6 +61,7 @@
     <Folder Include="v3" />
     <Folder Include="v3\conversion" />
     <Folder Include="sharpNode" />
+    <Folder Include="script" />
   </ItemGroup>
   <ItemGroup>
     <None Include="v1\Create_Schema_1.01.sql" />
@@ -186,5 +187,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="sharpNode\sharpNode.bak" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="script\tc_balance_projection.sql" />
   </ItemGroup>
 </Project>

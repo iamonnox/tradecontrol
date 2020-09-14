@@ -2,7 +2,7 @@
 
 Providing insight into the functional dimensions of the schema design and business logic of [Trade Control](https://github.com/tradecontrol).
 
-## License
+## Licence
 
 ![Creative Commons](https://i.creativecommons.org/l/by-nd/4.0/88x31.png) 
 
@@ -143,7 +143,7 @@ Materials have an interface when they can be used to power a user process (like 
 
 To understand the material supply loop, we need a more complex process; so let's take for our example the afore mentioned philosopher's table and make it out of Medium Density Fibre board (MDF). If you research this board, you will find its manufacture is very involved. Here is a picture of an MDF production plant:
 
-![MDF Plant](../img/functions_mdf_production_plant.jpg)
+![citapia.com.mx](../img/functions_mdf_production_plant.jpg)
 
 It is not the only plant required, and they all look similar: chimney stacks, piping, tanks and so on, like a chemical laboratory for giants.  These plants are supplied by the Secondary Industry, folded back around its inputs (the green arrow in **Figure 5**). **Figure 4** describes how the Primary Industry puts together this ubiquitous material.
 
