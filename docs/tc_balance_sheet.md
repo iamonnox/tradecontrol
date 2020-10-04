@@ -4,7 +4,7 @@
 
 The literature on capitalism is vast, but seldom are balance sheets even mentioned. This is a remarkable fact because capital is calculated on the balance sheet. Without balance sheets, financial markets would lose their purpose and the rich would lose access to much of their wealth. The concepts behind capitalism must be implemented functionally, and the calculation of capital is its central pillar. Therefore, to understand how it works, the balance sheet is the place to start. 
 
-Balance sheets have been generated in the same way for hundreds of years. I have applied a different method. Here I explain how and why.
+Balance sheets have been generated in the same way for hundreds of years. I have applied a different method. Here I explain how. The reason why I have re-wired the root code of the capitalist system can be inferred from the conclusion.
 
 ## Demo
 
@@ -184,11 +184,9 @@ The Organisation Statement is presented in the Enquiry form, showing invoices ag
 
 ![Org Statement](../img/balance_sheet_org_statement.png)
 
-The last balance in each month is the asset value. However, we must modify the statement to remove tax, which is owned by the government. Otherwise it is identical. 
+The last balance in each month contains the asset value, but also tax. To subtract the tax, the corresponding period-end balance on the [Vat Statement](#tax) is also entered on the balance sheet. 
 
-[Org.vwAssetStatement](https://github.com/tradecontrol/tc-nodecore/blob/master/src/tcNodeDb/Org/Views/vwAssetStatement.sql)
-
-To obtain the asset value of debtors and creditors, we apply the [asset charge](#asset-charge) routine to each organisation statement. Where organisation polarity is negative, the balance is subtracted from the balance sheet creditor account; when positive it is added to the debtors. Because the Organisation Statement is from the perspective of the organisation, we must first apply the -1 multiplier. Finally, we summate the period-end balances of each organisation, grouped by polarity, assigning the asset type.
+To obtain the asset value of debtors and creditors, the [asset charge](#asset-charge) routine is applied to each organisation statement. Where organisation polarity is negative, the balance is subtracted from the balance sheet creditor account; when positive it is added to the debtors. Because the Organisation Statement is from the perspective of the organisation, we must first apply the -1 multiplier. Finally, we summate the period-end balances of each organisation, grouped by polarity, assigning the asset type.
 
 [Cash.vwBalanceSheetOrgs](https://github.com/tradecontrol/tc-nodecore/blob/master/src/tcNodeDb/Cash/Views/vwBalanceSheetOrgs.sql)
 
@@ -246,11 +244,11 @@ In fact, we would only need to check two things:
 1. Are the current closing balances of the bank accounts equal to those on the corresponding cash accounts?
 2. Do the unpaid invoices reflect current obligations?
 
-The reason is simply that our balance sheet is constructed from two auditable sources.
+The reason is simply that our balance sheet is constructed from two auditable sources and two derived tax statements.
 
 #### Cash Account Statement
 
-The opening statement of [Cash.vwAccountStatement](https://github.com/tradecontrol/tc-nodecore/blob/master/src/tcNodeDb/Cash/Views/vwAccountStatement.sql) selects all non-pending payments for open accounts and adds the original opening balance as the first entry. The opening balance would be zero for a startup. It then proceeds to construct the account balance from the very first entry to the last with an Sql Windows function.
+The opening statement of [Cash.vwAccountStatement](https://github.com/tradecontrol/tc-nodecore/blob/master/src/tcNodeDb/Cash/Views/vwAccountStatement.sql) selects all non-pending payments for open accounts and adds the original opening balance as the first entry. The opening balance would be zero for a start-up. It then proceeds to construct the account balance from the very first entry to the last with an Sql Windows function.
 
 ``` sql
 SELECT CashAccountCode, CashCode, EntryNumber, PaymentCode, PaidOn, 
@@ -264,9 +262,21 @@ Therefore, any anomalies or changes to the statement at any point in time would 
 
 #### Organisation Statement
 
-The [Org.vwStatement](https://github.com/tradecontrol/tc-nodecore/blob/master/src/tcNodeDb/Org/Views/vwStatement.sql) matches invoices to payments using [cash polarity](tc_functions.md#cash-polarity). Invoices with a postive polarity are deducted from the organisation's statement (because they owe you) and added when negative (because you owe them). Payments are the other way around. Because the entry is on the basis of polarity rather than invoice type, debit and credit notes are treated in the same way.  Whenever a payment is received without a corresponding cash code, the algorithm matches the amount to invoices outstanding on a FIFO basis and sets them to partial or totally paid. Adopting the belt and braces approach by [running a rebuild](https://github.com/tradecontrol/tc-nodecore/blob/master/src/tcNodeDb/App/Stored%20Procedures/proc_SystemRebuild.sql) from Cash Statements at period-end, the same algorithm is applied, but from the opening balances of each organisation. 
+The [Org.vwStatement](https://github.com/tradecontrol/tc-nodecore/blob/master/src/tcNodeDb/Org/Views/vwStatement.sql) matches invoices to payments using [cash polarity](tc_functions.md#cash-polarity). Invoices with a positive polarity are deducted from the organisation's statement (because they owe you) and added when negative (because you owe them). Payments are the other way around. Because the entry is based on polarity rather than invoice type, debit and credit notes are treated in the same way.  Whenever a payment is received without a corresponding cash code, the algorithm matches the amount to invoices outstanding on a FIFO basis and sets them to partial or totally paid. Adopting the belt and braces approach by [running a rebuild](https://github.com/tradecontrol/tc-nodecore/blob/master/src/tcNodeDb/App/Stored%20Procedures/proc_SystemRebuild.sql) from Cash Statements at period-end, the same algorithm is applied, but from the opening balances of each organisation. 
 
 Therefore, any incorrect obligations will show up in the current set of unpaid or partially paid invoices. These can be easily reviewed from within the Invoice Register and rectified by consulting the organisation's statement.
+
+#### Tax
+
+Tax is owned by the government and must be removed from asset evaluation. [Business tax obligation](https://github.com/TradeControl/tc-office/blob/master/docs/tc_demo_balance_sheets.md#tax) is encapsulated in two further statements: vat and corporation tax. These are required for the P&L, irrespective of the balance sheet.
+
+- [Cash.vwTaxVatStatement](https://github.com/tradecontrol/tc-nodecore/blob/master/src/tcNodeDb/Cash/Views/vwTaxVatStatement.sql)
+
+The Vat Statement is unaffected by asset reporting. It states the outstanding balance at any given time (vat due minus payments). Its inclusion, therefore, takes out the vat content of debtors and creditors, leaving the asset value. Because VAT is presented quarterly, its audit is separate from the balance sheet. A VAT audit is largely about checking invoice classification and dealing with tax rate changes.
+
+- [Cash.vwTaxCorpStatement](https://github.com/tradecontrol/tc-nodecore/blob/master/src/tcNodeDb/Cash/Views/vwTaxCorpStatement.sql)
+
+Because the payment of corporation tax reduces current asset value, it is also added onto the balance sheet. Asset type cash accounts do not have associated invoices; therefore [Cash.vwTaxCorpTotalsByPeriod](https://github.com/tradecontrol/tc-nodecore/blob/master/src/tcNodeDb/Cash/Views/vwTaxCorpTotalsByPeriod.sql) uses the period-end balances instead. The cash codes used to calculate corporation tax are [dynamically configured](https://github.com/TradeControl/tc-office/blob/master/docs/tc_demo_balance_sheets.md#profit-and-loss), so asset categories must be added to the totals. Presuming the corporation tax rates are correctly set in the Tax page of the Administrator, this statement does not need to be audited.  
 
 ## Conclusion
 
