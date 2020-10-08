@@ -1,6 +1,6 @@
 ﻿# Balance Sheets
 
-On 8 September 2020, I uploaded [release 3.30.4](https://github.com/tradecontrol/blob/master/changelog.md) of the Trade Control balance sheet. This release can replicate the output of balance sheets from conventional double-entry accounting packages. It has been tested against actual submissions to HMRC and Companies House. Because the application is free and open source, you can test that out for yourself.
+On 8 September 2020, I uploaded [release 3.30.4](https://github.com/tradecontrol/tc-nodecore/blob/master/changelog.md) of the Trade Control balance sheet. This release can replicate the output of balance sheets from conventional double-entry accounting packages. It has been tested against actual submissions to HMRC and Companies House. Because the application is free and open source, you can test that out for yourself.
 
 Balance sheets have been generated in the same way for hundreds of years, being derived from double-entry accounts. I have applied a different method and here I explain how. Generating asset reporting from an underlying production system has several advantages. On the practical side, basic numeracy is the only qualification required to produce and audit your accounts, precluding the need for an accountant. On the theoretical side, isolating the code that translates trade into capital clarifies how our capitalist system works.
 

@@ -1,5 +1,7 @@
 # Bitcoin as Unit of Account
 
+[Trade Control Bitcoin Wallet](https://github.com/tradecontrol/tc-bitcoin)
+
 ## Commercial Wallets
 
 The recommended book, Mastering Bitcoin ^1^, explores Bitcoin usage through a user, called Alice, who acquires some coinage from a friend and buys a cup of coffee with it. The book is conveying the technical dimensions of the purchase, but I can use this now proverbial example to clarify the application of Bitcoin to the Trade Control project.
