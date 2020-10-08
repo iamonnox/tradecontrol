@@ -1,10 +1,10 @@
 ﻿# Balance Sheets
 
-[Trade Control](https://github.com/tradecontrol) is an Open Source, nascent production system with the implemented capacity to replace an accounting system. I have been concentrating on the financial dimension before moving on to developing control systems for stock, quality and production. Now, with [the inclusion of a balance sheet](https://github.com/TradeControl/tc-office/blob/master/docs/tc_demo_balance_sheets.md), Trade Control conforms to the technical and legal requirements of the capitalist system.
+On 8 September 2020, I uploaded [release 3.30.4](https://github.com/tradecontrol/blob/master/changelog.md) of the Trade Control balance sheet. This release can replicate the output of balance sheets from conventional double-entry accounting packages. It has been tested against actual submissions to HMRC and Companies House. Because the application is free and open source, you can test that out for yourself.
+
+Balance sheets have been generated in the same way for hundreds of years, being derived from double-entry accounts. I have applied a different method and here I explain how. Generating asset reporting from an underlying production system has several advantages. On the practical side, basic numeracy is the only qualification required to produce and audit your accounts, precluding the need for an accountant. On the theoretical side, isolating the code that translates trade into capital clarifies how our capitalist system works.
 
 The literature on capitalism is vast, but seldom are balance sheets even mentioned. This is a remarkable fact because capital is calculated on the balance sheet. Without balance sheets, financial markets would lose their purpose and the rich would lose access to much of their wealth. The concepts behind capitalism must be implemented functionally, and the calculation of capital is its central pillar. Therefore, to understand how it works, the balance sheet is the place to start. 
-
-Balance sheets have been generated in the same way for hundreds of years. I have applied a different method. Here I explain how. The reason why I have re-wired the root code of the capitalist system can be inferred from the conclusion.
 
 ## Demo
 
@@ -171,12 +171,15 @@ We are now able to construct the balance sheet from pre-existing trade statement
 
 - [Org.vwStatement](https://github.com/tradecontrol/tc-nodecore/blob/master/src/tcNodeDb/Org/Views/vwStatement.sql)
 - [Cash.vwAccountStatement](https://github.com/tradecontrol/tc-nodecore/blob/master/src/tcNodeDb/Cash/Views/vwAccountStatement.sql)
+- [Cash.vwTaxVatStatement](https://github.com/tradecontrol/tc-nodecore/blob/master/src/tcNodeDb/Cash/Views/vwTaxVatStatement.sql)
+- [Cash.vwTaxCorpStatement](https://github.com/tradecontrol/tc-nodecore/blob/master/src/tcNodeDb/Cash/Views/vwTaxCorpStatement.sql)
 
-From these statements we add three elements to the balance sheet: 
+From these statements we add four elements to the balance sheet: 
 
 1. Debtors and Creditors
 2. Bank and Cash
 3. Assets and Liabilities
+4. Tax Obligations
 
 #### Debtors and Creditors
 
@@ -188,7 +191,7 @@ The last balance in each month contains the asset value, but also tax. To subtra
 
 To obtain the asset value of debtors and creditors, the [asset charge](#asset-charge) routine is applied to each organisation statement. Where organisation polarity is negative, the balance is subtracted from the balance sheet creditor account; when positive it is added to the debtors. Because the Organisation Statement is from the perspective of the organisation, we must first apply the -1 multiplier. Finally, we summate the period-end balances of each organisation, grouped by polarity, assigning the asset type.
 
-[Cash.vwBalanceSheetOrgs](https://github.com/tradecontrol/tc-nodecore/blob/master/src/tcNodeDb/Cash/Views/vwBalanceSheetOrgs.sql)
+- [Cash.vwBalanceSheetOrgs](https://github.com/tradecontrol/tc-nodecore/blob/master/src/tcNodeDb/Cash/Views/vwBalanceSheetOrgs.sql)
 
 #### Bank and Cash
 
@@ -200,17 +203,30 @@ By law, balance sheets must record the fiat money held in your current and reser
 
 Firstly, we extract the cash accounts of type CASH. For each account, we locate the last balance in each period and summate them by Cash Code. That gives us the current funds (which is classed as CASH on the balance sheet) and reserves (classed as BANK). When the balance is negative, the bank is in overdraft and the cash mode is set to EXPENSE. It will then be listed as a liability at the bottom of the balance sheet. 
 
-[Cash.vwBalanceSheetAccounts](https://github.com/tradecontrol/tc-nodecore/blob/master/src/tcNodeDb/Cash/Views/vwBalanceSheetAccounts.sql)
+- [Cash.vwBalanceSheetAccounts](https://github.com/tradecontrol/tc-nodecore/blob/master/src/tcNodeDb/Cash/Views/vwBalanceSheetAccounts.sql)
 
 #### Assets and Liabilities
 
 [Assets and Liabilities](https://github.com/TradeControl/tc-office/blob/master/docs/tc_demo_balance_sheets.md#assets-and-liabilities), are identified by the cash account type ASSET.  Whether an account is an asset or liability in the traditional accounting sense can be derived from the polarity of the assigned cash code. An important advantage of my design is that assets and liabilities use the same data source as bank accounts. We just select the transactions where the account type is ASSET and output that the balance represents an asset-based cash account. If you compare the code of these two views, they are virtually identical. 
 
-[Cash.vwBalanceSheetAssets](https://github.com/tradecontrol/tc-nodecore/blob/master/src/tcNodeDb/Cash/Views/vwBalanceSheetAssets.sql)
+- [Cash.vwBalanceSheetAssets](https://github.com/tradecontrol/tc-nodecore/blob/master/src/tcNodeDb/Cash/Views/vwBalanceSheetAssets.sql)
+
+#### Tax
+
+Tax is owned by the government and must be removed from asset evaluation. [Business tax obligation](https://github.com/TradeControl/tc-office/blob/master/docs/tc_demo_balance_sheets.md#tax) is encapsulated in two statements for vat and corporation tax. These statements pre-date the balance sheet, because corporation tax is calculated from the P&L and vat is collected from the financial transactions of trade.  
+
+[Cash.vwTaxVatStatement](https://github.com/tradecontrol/tc-nodecore/blob/master/src/tcNodeDb/Cash/Views/vwTaxVatStatement.sql) gives the outstanding balance at any given time (vat due minus payments), but dates that are both offset and quarterly. For the balance sheet, we do not need to obtain the quarterly amount, we can just take the vat due in each period from [Cash.vwTaxVatSummary](https://github.com/tradecontrol/tc-nodecore/blob/master/src/tcNodeDb/Cash/Views/vwTaxVatSummary.sql). By including Vat on the balance sheet, we take out the tax content of debtors and creditors, leaving the asset value. Because VAT is presented quarterly, its audit is separate from the balance sheet. A VAT audit is largely about checking invoice classification and dealing with tax rate changes.
+
+- [Cash.vwBalanceSheetVat](https://github.com/tradecontrol/tc-nodecore/blob/master/src/tcNodeDb/Cash/Views/vwBalanceSheetVat.sql)
+
+
+Because the payment of corporation tax reduces current asset value, it must also be added to the balance sheet. Asset type cash accounts do not have associated invoices; therefore [Cash.vwTaxCorpTotalsByPeriod](https://github.com/tradecontrol/tc-nodecore/blob/master/src/tcNodeDb/Cash/Views/vwTaxCorpTotalsByPeriod.sql) uses the period-end balances instead. The cash codes used to calculate corporation tax are [dynamically configured](https://github.com/TradeControl/tc-office/blob/master/docs/tc_demo_balance_sheets.md#profit-and-loss), so asset categories must be added to the totals. Presuming the corporation tax rates are correctly set in the Tax page of the Administrator, this statement does not need to be audited.  
+
+- [Cash.vwBalanceSheetTax](https://github.com/tradecontrol/tc-nodecore/blob/master/src/tcNodeDb/Cash/Views/vwBalanceSheetTax.sql)
 
 #### The Balance Sheet
 
-To produce the full balance sheet, we union these three views and join the result to the [financial periods](https://github.com/tradecontrol/tc-nodecore/blob/master/src/tcNodeDb/Cash/Views/vwBalanceSheetPeriods.sql).  The result is ordered by polarity, liquidity, asset and period before applying the [asset charge](#asset-charge) algorithm.
+To produce the full balance sheet, we union these five views and join the result to the [financial periods](https://github.com/tradecontrol/tc-nodecore/blob/master/src/tcNodeDb/Cash/Views/vwBalanceSheetPeriods.sql).  The result is ordered by polarity, liquidity, asset and period before applying the [asset charge](#asset-charge) algorithm.
 
 [Cash.vwBalanceSheet](https://github.com/tradecontrol/tc-nodecore/blob/master/src/tcNodeDb/Cash/Views/vwBalanceSheet.sql)
 
@@ -235,6 +251,7 @@ private void LoadBalanceSheet(WSCashFlow ws)
     }
 }
 ```
+
 ### Correctness
 
 How do we know our balance sheet is correct? A Trial Balance is taken in DEBK prior to the generation of its balance sheet. When the sum of all debits equals the sum of all credits on the Trial Balance, the balance sheet can be constructed from the ledgers. We are unable to do that because we are not registering transactions as assets wherein every credit is countered by a debit.
@@ -244,7 +261,7 @@ In fact, we would only need to check two things:
 1. Are the current closing balances of the bank accounts equal to those on the corresponding cash accounts?
 2. Do the unpaid invoices reflect current obligations?
 
-The reason is simply that our balance sheet is constructed from two auditable sources and two derived tax statements.
+The reason is simply that our balance sheet is constructed from two auditable sources and two derived tax statements. Hence, basic numeracy is the only qualification required to check the veracity of this balance sheet.
 
 #### Cash Account Statement
 
@@ -265,18 +282,6 @@ Therefore, any anomalies or changes to the statement at any point in time would 
 The [Org.vwStatement](https://github.com/tradecontrol/tc-nodecore/blob/master/src/tcNodeDb/Org/Views/vwStatement.sql) matches invoices to payments using [cash polarity](tc_functions.md#cash-polarity). Invoices with a positive polarity are deducted from the organisation's statement (because they owe you) and added when negative (because you owe them). Payments are the other way around. Because the entry is based on polarity rather than invoice type, debit and credit notes are treated in the same way.  Whenever a payment is received without a corresponding cash code, the algorithm matches the amount to invoices outstanding on a FIFO basis and sets them to partial or totally paid. Adopting the belt and braces approach by [running a rebuild](https://github.com/tradecontrol/tc-nodecore/blob/master/src/tcNodeDb/App/Stored%20Procedures/proc_SystemRebuild.sql) from Cash Statements at period-end, the same algorithm is applied, but from the opening balances of each organisation. 
 
 Therefore, any incorrect obligations will show up in the current set of unpaid or partially paid invoices. These can be easily reviewed from within the Invoice Register and rectified by consulting the organisation's statement.
-
-#### Tax
-
-Tax is owned by the government and must be removed from asset evaluation. [Business tax obligation](https://github.com/TradeControl/tc-office/blob/master/docs/tc_demo_balance_sheets.md#tax) is encapsulated in two further statements: vat and corporation tax. These are required for the P&L, irrespective of the balance sheet.
-
-- [Cash.vwTaxVatStatement](https://github.com/tradecontrol/tc-nodecore/blob/master/src/tcNodeDb/Cash/Views/vwTaxVatStatement.sql)
-
-The Vat Statement is unaffected by asset reporting. It states the outstanding balance at any given time (vat due minus payments). Its inclusion, therefore, takes out the vat content of debtors and creditors, leaving the asset value. Because VAT is presented quarterly, its audit is separate from the balance sheet. A VAT audit is largely about checking invoice classification and dealing with tax rate changes.
-
-- [Cash.vwTaxCorpStatement](https://github.com/tradecontrol/tc-nodecore/blob/master/src/tcNodeDb/Cash/Views/vwTaxCorpStatement.sql)
-
-Because the payment of corporation tax reduces current asset value, it is also added onto the balance sheet. Asset type cash accounts do not have associated invoices; therefore [Cash.vwTaxCorpTotalsByPeriod](https://github.com/tradecontrol/tc-nodecore/blob/master/src/tcNodeDb/Cash/Views/vwTaxCorpTotalsByPeriod.sql) uses the period-end balances instead. The cash codes used to calculate corporation tax are [dynamically configured](https://github.com/TradeControl/tc-office/blob/master/docs/tc_demo_balance_sheets.md#profit-and-loss), so asset categories must be added to the totals. Presuming the corporation tax rates are correctly set in the Tax page of the Administrator, this statement does not need to be audited.  
 
 ## Conclusion
 

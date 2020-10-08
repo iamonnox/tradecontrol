@@ -12,20 +12,33 @@ Traditionally, functions are applied by science and engineering, whereas concept
 
 However, in technological production, concepts and functions do not compete. By our analogy, the one describes the rules of the game, the other how it is played.
 
-## Application
+## Documentation
+
+### Technological Production
 
 Trade Control models the financial and physical workflows of a business, and this has both a functional and conceptual dimension. For example, if your business manufactures a physical product there are certain things you will have to do in order to function; whatever your culture, your materials must be acquired and transformed into the required output by production. However, there is no functional reason why, in so doing, you must pay tax, incorporate as a legal entity and issue employment contracts. Tax, contract law and property are concepts. You engage with them because it is a commercial framework provided by a State with coercive powers and you believe in them, not because there is a functional imperative. In the following paper on the functional dimensions of technological production, I concentrate solely on the nature of those imperatives. I describe how our technology is engineered and present an alternative to the Turing Test wherein I include production in the assessment of AI.
 
 [Functional Description of Technological Production](tc_functions.md)
 
-## Acknowledgements
+### Commercial Bitcoin Wallet
 
-Darryl Hond
+On the 1 August 2020, I uploaded the first release of the [Trade Control Bitcoin Wallet](https://github.com/tradecontrol/tc-bitcoin) to commemorate the opening day of [the Hutton Inquiry](https://en.wikipedia.org/wiki/Hutton_Inquiry) at the Royal Courts of Justice, 1 August 2003.
 
-## License
+I have coded the wallet because Bitcoin can become humanity’s global Unit of Account (UOA). However, it is not because I think the New Jerusalem should be built on a cornerstone of gold, real or digital. You can understand why in the following short piece explaining the difference between commercial and consumer bank accounts and wallets.  
+
+[Commercial Wallets](tc_bitcoin.md)
+
+### The Balance Sheet
+
+[Trade Control](https://github.com/tradecontrol) is an Open Source, nascent production system with the implemented capacity to replace an accounting system. I have been concentrating on the financial dimension before moving on to developing control systems for stock, quality and production. Now, with [the inclusion of a balance sheet](https://github.com/TradeControl/tc-office/blob/master/docs/tc_demo_balance_sheets.md), Trade Control conforms to the technical and legal requirements of the capitalist system.
+
+[Balance Sheets](tc_balance_sheet.md)
+
+## Licence
 
 ![Creative Commons](https://i.creativecommons.org/l/by-nd/4.0/88x31.png) 
 
-[Creative Commons Attribution-NoDerivatives 4.0 International License](http://creativecommons.org/licenses/by-nd/4.0/)
+Licenced by Ian Monnox under a [Creative Commons Attribution-NoDerivatives 4.0 International License](http://creativecommons.org/licenses/by-nd/4.0/) 
+
 
 

@@ -419,4 +419,7 @@ This physicist, being the best, would know that he stood at the intersecting rem
 1. The Machine that Changed the World. Womack, Jones, Roos and Carpenter 1990.
 2. Computing Machinery and Intelligence. Alan Turing 1950.
 
+## Acknowledgements
+
+Darryl Hond
 

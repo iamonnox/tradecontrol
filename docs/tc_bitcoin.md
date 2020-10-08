@@ -1,9 +1,5 @@
 # Bitcoin as Unit of Account
 
-On the 1 August 2020, I uploaded the first release of the [Trade Control Bitcoin Wallet](https://github.com/tradecontrol/tc-bitcoin) to commemorate the opening day of [the Hutton Inquiry](https://en.wikipedia.org/wiki/Hutton_Inquiry) at the Royal Courts of Justice, 1 August 2003.
-
-I have coded the wallet because Bitcoin can become humanity’s global Unit of Account (UOA). However, it is not because I think the New Jerusalem should be built on a cornerstone of gold, real or digital. You can understand why in the following short piece explaining the difference between commercial and consumer accounts.  
-
 ## Commercial Wallets
 
 The recommended book, Mastering Bitcoin ^1^, explores Bitcoin usage through a user, called Alice, who acquires some coinage from a friend and buys a cup of coffee with it. The book is conveying the technical dimensions of the purchase, but I can use this now proverbial example to clarify the application of Bitcoin to the Trade Control project.
