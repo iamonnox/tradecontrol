@@ -1,6 +1,6 @@
 # Trade Control
 
-The ideas and history behind [Trade Control](https://github.com/tradecontrol) from the perspective of its creator. 
+The ideas and history behind [Trade Control](https://tradecontrol.github.io) from the perspective of its creator. 
 
 ## Code 
 
@@ -9,6 +9,12 @@ The T-SQL script archive for Trade Control is presented in a Visual Studio Sql p
 ### Installation
 
 Add the Sql Server related Individual Components to Visual Studio.
+
+## Beta Releases
+
+The beta was first released to GitHub 24 September 2019 and was completed in December 2020. Here are the change logs for the key components:
+
+[beta release change logs](docs/changelogs.md)
  
 ### Licence
 
@@ -17,27 +23,21 @@ The Trade Control script archive has been released by Ian Monnox under a
 
 ## Documentation
 
-### Book
-
-This repository contains the digital version of [Trade Control Functions](https://www.amazon.co.uk/dp/B0845RQDVD/ref=sr_1_2?keywords=flyleaf&qid=1579879852&s=handmade&sr=1-2), published by [Flyleaf](https://www.flyleaf.co.uk).
-
 ### Ideas
 
-The Trade Control project is rooted in a general theory of technological production.  If you are have no background in systems engineering, it would help if you [installed the app](https://github.com/tradecontrol/tc-nodecore) and [tried out the demos](https://github.com/tradecontrol/tc-office/blob/master/readme.md#demos).
+The Trade Control project is rooted in a general theory of technological production.  If you are have no background in systems engineering, it would help if you [installed the app](https://tradecontrol.github.io/tutorials/installing-sqlnode) and [worked through the tutorials](https://tradecontrol.github.io/tutorials/overview).
 
-[Intro](docs/tc_intro.md)
-
-[Functional Description of Technological Production](docs/tc_functions.md)
-
-[Bitcoin as Unit of Account](docs/tc_bitcoin.md)
-
-[The Balance Sheet](docs/tc_balance_sheet.md)
+[Documents](docs/tc_intro.md)
 
 ### History
 
-Trade Control was not originally an open source app, so for completeness this repository contains the code from its original release on 19 Mar 08 to the GitHub upload on 24 Sept 19. The evolution of the code is described in the following section: 
+Trade Control was not originally an open source app, so for completeness this repository contains the code from its original release on 19 Mar 08 to the GitHub beta upload on 24 Sept 19. The evolution of the code is described in the following section: 
 
 [Historical Development](docs/tc_history.md)
+
+### Book
+
+This repository contains the digital version of [Trade Control Functions](https://www.amazon.co.uk/dp/B0845RQDVD/ref=sr_1_2?keywords=flyleaf&qid=1579879852&s=handmade&sr=1-2), published by [Flyleaf](https://www.flyleaf.co.uk).
 
 ### Licence
 

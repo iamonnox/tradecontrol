@@ -1,6 +1,6 @@
 # Trade Control - Functions
 
-Providing insight into the functional dimensions of the schema design and business logic of [Trade Control](https://github.com/tradecontrol).
+Providing insight into the functional dimensions of the schema design and business logic of [Trade Control](https://github.com/tradecontrol/sqlnode).
 
 ## Licence
 
@@ -10,7 +10,7 @@ Trade Control Functions by Ian Monnox is licenced under a [Creative Commons Attr
 
 ## Exchange
 
-A central pillar of the design is the way in which [cash polarity](https://github.com/TradeControl/tc-office/blob/master/docs/tc_cash_codes.md) functions in acts of exchange. 
+A central pillar of the design is the way in which [cash polarity](https://tradecontrol.github.io/tutorials/cash-codes#cash-polarity) functions in acts of exchange. 
 
 By tradition, there are separate divisions for buying and selling, called Purchasing and Sales Departments respectively. This makes sense, because they involve very different kinds of people with different motivations. Software systems have then naturally evolved to serve the interests of these two groups, resulting in separate Customer Relations Management and/or Procurement modules. This practice creates different interfaces to each activity; and in so doing seals them off, both internally from each other, and externally from their customers and suppliers. To overcome the sealed interfaces problem, various formal procedures have evolved to communicate across the divide.
 
@@ -48,7 +48,7 @@ In row 1 the polarity of the cash for organisation A is negative and so money is
 
 ## Workflow 
 
-The Supply Chain in the above example is a sub-set, or instance, of Workflow. The Workflow implementation is explained in the demo [Modelling a Bill of Materials](https://github.com/tradecontrol/tc-office/blob/master/docs/tc_demo_manufacturing.md). Before proceeding, unless you are an engineer, it is recommended that you work through the demo to obtain a practical appreciation of what follows.  
+The Supply Chain in the above example is a sub-set, or instance, of Workflow. The Workflow implementation is explained in the demo [Modelling a Bill of Materials](https://tradecontrol.github.io/tutorials/manufacturing). Before proceeding, unless you are an engineer, it is recommended that you work through the demo to obtain a practical appreciation of what follows.  
 
 ### Production
 
@@ -183,7 +183,7 @@ The blue line is the production of component structure following the direction o
 
 In the section on [Assemblages](#assemblages) we imagined the entire structure and processes that make up a car modelled in a single Bill of Materials. In theory, you could render this model inside the Node, although in practice this is unrealistic; principally because of the fundamental nature of components, but also due to commercial techniques that exploit this. 
 
-The [Trade Control Network](https://github.com/tradecontrol/tc-network) is implemented in Ethereum.
+The [Trade Control Network](https://tradecontrol.github.io/network) is implemented in Ethereum.
 
 ### Consumer Networks
 
@@ -191,7 +191,7 @@ It is the recursive nature of component and material production that proliferate
 
 Looking back at **Figures 2** and **3**, we can do the same thing in the Secondary Industry. Rather than modelling vehicle structure, it could be conceived as a supply chain. Level 1 is the Assembly Plant, where everything is put together. Level 2 there are separate organisations specializing in each component, like engines. The same could be said for level 3, such as an engineering business making pistons.
 
-Many supply chains are dictated and distorted by Intellectual Property ownership, like patents. Functionally, however, multiple supply chains converge when components service more than one chain. For example, O Rings are widely used in mechanical engineering. It does not make sense for a manufacturer of washing machines to make their own O Rings. Such convergences act as a block on supply chain financing initiatives, which originated from lean thinking developed in the automotive industry during the nineties ^1^. It was an attractive idea to car manufacturers, because they could control financial allocation across all their subcontractors. For supply chain financing to work, all the available value must be concentrated in the root node, as lower levels take their share and pass on the remainder. But that is not often possible. Returning to [polarity](#cash-polarity), you could overcome the convergence problem by scheduling the entire chain. This is what the [sharpNode](tc_history.md#sharpnode) was initially designed to achieve, such that you can model the productive process both internally in [one node](https://github.com/tradecontrol/tc-nodecore) and [externally between many](https://github.com/tradecontrol/tc-network).
+Many supply chains are dictated and distorted by Intellectual Property ownership, like patents. Functionally, however, multiple supply chains converge when components service more than one chain. For example, O Rings are widely used in mechanical engineering. It does not make sense for a manufacturer of washing machines to make their own O Rings. Such convergences act as a block on supply chain financing initiatives, which originated from lean thinking developed in the automotive industry during the nineties ^1^. It was an attractive idea to car manufacturers, because they could control financial allocation across all their subcontractors. For supply chain financing to work, all the available value must be concentrated in the root node, as lower levels take their share and pass on the remainder. But that is not often possible. Returning to [polarity](#cash-polarity), you could overcome the convergence problem by scheduling the entire chain. This is what the [sharpNode](tc_history.md#sharpnode) was initially designed to achieve, such that you can model the productive process both internally in [one node](https://github.com/tradecontrol/sqlnode) and [externally between many](https://github.com/tradecontrol/network).
 
 #### Supply and Demand
 
@@ -203,7 +203,7 @@ If we map the [Cash Polarity Principle](#cash-polarity) onto [Workflow](#workflo
 
 The fiscal value is flowing down the Consumer Network, pulling the goods up the chain. The path it takes is determined by the Spatial Workflow that specifies technological structure. When the value has cascaded to the outer-most leaves, the materials, production value begins to flow up the supply chain. The path it takes is determined by the Temporal Workflow that specifies manufacturing process.
 
-In the section on [Assemblages](#assemblages) we saw how it was possible to model the entirety of the car's structure as if it were being made in one enormous factory. If you have completed the [BoM demo](https://github.com/tradecontrol/tc-office/blob/master/readme.md#demos), you will know that you can convert the spatial structure into a temporal process by simply ordering it. This action generates a schedule for required material arrivals and component production. Orders can be modified and re-scheduled, recalculating the costs and quantities of the entire Workflow. In [Components](#components) you learnt about the production of interfaces through abstraction, and how they concealed inner structure. Looking at **Figure 6**, the engine is no longer being made by the car manufacturer, but by a specialist. This branch of the Workflow is cut off (concealed) and transferred to the engine factory. What remains of that branch is a single order that specifies the engine model, its quantity and price. The polarity of the price is negative and therefore we know [the exact role](#cash-polarity) of that order in the supply chain. The engine factory will create a Workflow for engine manufacture. Its root node will be a mirror image of the car manufacturers order, with opposite polarity. The engine provider in **Figure 6** subcontracts the component production to several providers, so it repeats the actions of the car manufacture on its own Workflow, and it cascades on downstream.  Any change to the Temporal Workflow could then trigger a series of recursive events that ripple down the supply chain as if it were occupying a single domain.
+In the section on [Assemblages](#assemblages) we saw how it was possible to model the entirety of the car's structure as if it were being made in one enormous factory. If you have completed the [BoM demo](https://tradecontrol.github.io/tutorials/manufacturing), you will know that you can convert the spatial structure into a temporal process by simply ordering it. This action generates a schedule for required material arrivals and component production. Orders can be modified and re-scheduled, recalculating the costs and quantities of the entire Workflow. In [Components](#components) you learnt about the production of interfaces through abstraction, and how they concealed inner structure. Looking at **Figure 6**, the engine is no longer being made by the car manufacturer, but by a specialist. This branch of the Workflow is cut off (concealed) and transferred to the engine factory. What remains of that branch is a single order that specifies the engine model, its quantity and price. The polarity of the price is negative and therefore we know [the exact role](#cash-polarity) of that order in the supply chain. The engine factory will create a Workflow for engine manufacture. Its root node will be a mirror image of the car manufacturers order, with opposite polarity. The engine provider in **Figure 6** subcontracts the component production to several providers, so it repeats the actions of the car manufacture on its own Workflow, and it cascades on downstream.  Any change to the Temporal Workflow could then trigger a series of recursive events that ripple down the supply chain as if it were occupying a single domain.
 
 ### Production Networks
 
@@ -267,7 +267,7 @@ We of course have access to this information, because we are the users. Users pr
 
 ## Organisations
 
-In the originating [sharpNode](tc_history.md#sharpnode) schema design of 2002, organisations and their people are expressed as components in a projected namespace. This has been removed from Trade Control because it confused the users. Instead, an organisation's namespace has been implemented in the [HD Wallet for Bitcoin](https://github.com/tradecontrol/tc-bitcoin). 
+In the originating [sharpNode](tc_history.md#sharpnode) schema design of 2002, organisations and their people are expressed as components in a projected namespace. This has been removed from Trade Control because it confused the users. Instead, an organisation's namespace has been implemented in the [HD Wallet for Bitcoin](https://tradecontrol.github.io/bitcoin). 
 
 ### Namespaces
 
@@ -363,7 +363,7 @@ These are complicated words with disputed interpretations and usages that are bo
 
 > Technological object production supplies the User Interfaces projected by its subjects.
 
-So, there are three _jacere_ (Latin for _to throw_) in our definition: Ob, Sub and Pro. We need all three to model and process component production. The object is the Spatial Workflow, project is the Temporal Workflow, and subjects are Organisations. These are explicitly modelled by the [Trade Control Node](https://github.com/tradecontrol/tc-nodecore) in schemas **Activity**, **Org** and **Task** respectively. It is, however, possible to encapsulate all three _jacere_ inside a recursive component network, as was the case in the [sharpNode](tc_history.md#sharpnode) schema. User comprehension aside, there are good reasons for doing that. For example, we could easily reverse the sample usages above: (the subjective universe contains objects...) or (the subject of our discussion is the following object...).
+So, there are three _jacere_ (Latin for _to throw_) in our definition: Ob, Sub and Pro. We need all three to model and process component production. The object is the Spatial Workflow, project is the Temporal Workflow, and subjects are Organisations. These are explicitly modelled by the [Trade Control Node](https://github.com/tradecontrol/sqlnode) in schemas **Activity**, **Org** and **Task** respectively. It is, however, possible to encapsulate all three _jacere_ inside a recursive component network, as was the case in the [sharpNode](tc_history.md#sharpnode) schema. User comprehension aside, there are good reasons for doing that. For example, we could easily reverse the sample usages above: (the subjective universe contains objects...) or (the subject of our discussion is the following object...).
 
 Objects are generally considered to be either physical or psychical, with no third term. The former exists in the Objective Universe, whilst the latter exists in Subjective Minds. This dualism is not present in the above definition, and yet still we are able to functionally express their relation. In so doing, like the bell foundry, subjects too can be engineered by projecting interfaces onto themselves.
 
@@ -385,7 +385,7 @@ It is commonly understood that the body contains the subject. The body, however,
 
 Functional projection is the reason why a technological society cannot be adequately described by physics and maths, but equally why it is no more fictitious than a snail’s shell is a product of its belief system (or the stadium of your favourite football team). What kind of interfaces are we projecting, and what is the nature of our connection to them? These questions cannot be answered functionally. We will need concepts to reveal human desire and the kind of technological landscape it has evolved.
 
-## Turing Test v2
+## Intelligence Test
 
 The Turing Test for Artificial Intelligence was invented by England's greatest computer scientist, Alan Turing ^2^. At the time it was a leap forward in understanding and has set the benchmark for AI attainment ever since. However, it takes for granted that the technology has already been produced; and this will be to a human specified UI. Because it is a user-based specification, such devices can never be more than a clever machine (an extension to our plane of abstraction).
 

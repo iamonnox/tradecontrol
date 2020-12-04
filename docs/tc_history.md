@@ -1,6 +1,6 @@
 # History
 
-Code versioning is explained in the [Trade Control Node](https://github.com/tradecontrol/tc-nodecore/blob/master/readme.md#versioning) repository and something of its history in [Coding Practice](https://github.com/tradecontrol/tc-nodecore/blob/master/docs/tc_coding_practice.md). The scripts can be opened from the VS project or directly in SMS. Although meaningless, you could get to the open source release by installing the first [creation script](../src/scripts/v1/Create_Schema_1.01.sql) in 2008, then applying each upgrade script in version sequence and the conversion scripts between 2 and 3. 
+Something of the code's history is presented in [Coding Practice](https://github.com/tradecontrol/sqlnode/blob/master/docs/tc_coding_practice.md). The scripts can be opened from the VS project or directly in SMS. Although meaningless, you could get to the open source release by installing the first [creation script](../src/scripts/v1/Create_Schema_1.01.sql) in 2008, then applying each upgrade script in version sequence and the conversion scripts between 2 and 3. 
 
 > **Note**
 > 

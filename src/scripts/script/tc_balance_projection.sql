@@ -1,4 +1,5 @@
-
+CREATE PROCEDURE proc_AssetCharge
+AS
 DECLARE @tb AS TABLE (Id INT, Balance INT, IsSet BIT);
 
 	INSERT INTO @tb (Id, Balance, IsSet)
