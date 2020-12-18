@@ -6,13 +6,15 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{A2CF2C96-FEBE-4353-B319-D88FA5BF1FB2}"
 	ProjectSection(SolutionItems) = preProject
 		..\docs\changelogs.md = ..\docs\changelogs.md
-		..\docs\diagrams.docx = ..\docs\diagrams.docx
+		..\docs\diagrams_functions.docx = ..\docs\diagrams_functions.docx
+		..\docs\diagrams_profit_and_loss.docx = ..\docs\diagrams_profit_and_loss.docx
 		..\readme.md = ..\readme.md
 		..\docs\tc_balance_sheet.md = ..\docs\tc_balance_sheet.md
 		..\docs\tc_bitcoin.md = ..\docs\tc_bitcoin.md
 		..\docs\tc_functions.md = ..\docs\tc_functions.md
 		..\docs\tc_history.md = ..\docs\tc_history.md
 		..\docs\tc_intro.md = ..\docs\tc_intro.md
+		..\docs\tc_profit_and_loss.md = ..\docs\tc_profit_and_loss.md
 	EndProjectSection
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "scripts", "scripts\scripts.sqlproj", "{76882F5E-F463-4574-877A-12931A289B3A}"
@@ -32,6 +34,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "img", "img", "{0A1DCD54-7EE
 		..\img\functions_production_network.jpg = ..\img\functions_production_network.jpg
 		..\img\functions_workflow_bom_level_2.jpg = ..\img\functions_workflow_bom_level_2.jpg
 		..\img\functions_workflow_bom_level_3.jpg = ..\img\functions_workflow_bom_level_3.jpg
+		..\img\profit_and_loss_accounts.png = ..\img\profit_and_loss_accounts.png
+		..\img\profit_and_loss_extraction.png = ..\img\profit_and_loss_extraction.png
+		..\img\profit_and_loss_polarity.png = ..\img\profit_and_loss_polarity.png
 	EndProjectSection
 EndProject
 Global

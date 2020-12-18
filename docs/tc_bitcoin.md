@@ -1,5 +1,7 @@
 # Bitcoin as Unit of Account
 
+Published on 9 August 2020.
+
 [Trade Control Bitcoin Wallet](https://tradecontrol.github.io/bitcoin)
 
 ## Commercial Wallets

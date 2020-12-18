@@ -1,5 +1,7 @@
 ﻿# Balance Sheets
 
+Published on 14 August 2020.
+
 On 8 September 2020, I uploaded [release 3.30.4](changelogs.md#3.30.4) of the Trade Control balance sheet. This release can replicate the output of balance sheets from conventional double-entry accounting packages. It has been tested against actual submissions to HMRC and Companies House. Because the application is free and open source, you can test that out for yourself.
 
 Balance sheets have been generated in the same way for hundreds of years, being derived from double-entry accounts. I have applied a different method and here I explain how. Generating asset reporting from an underlying production system has several advantages. On the practical side, basic numeracy is the only qualification required to produce and audit your accounts, precluding the need for an accountant. On the theoretical side, isolating the code that translates trade into capital clarifies how our capitalist system works.
@@ -8,12 +10,7 @@ The literature on capitalism is vast, but seldom are balance sheets even mention
 
 ## Requirements
 
-- [A Trade Control node](https://tradecontrol.github.io/tutorials/sqlnode)
-- [Services Demo](https://tradecontrol.github.io/tutorials/services)
-
-## Demo
-
-To fully digest the following, it would help if you had carried out the [Balance Sheet Demo](https://tradecontrol.github.io/tutorials/balance-sheet), or even better, implemented Trade Control in your own business. If the latter, you would automatically obtain a balance sheet without needing an accountant. 
+To fully digest the following, it would help if you had carried out the [Balance Sheet Tutorial](https://tradecontrol.github.io/tutorials/balance-sheet), or even better, [implemented Trade Control](https://tradecontrol.github.io/tutorials/sqlnode) in your own business. If the latter, you would automatically obtain a balance sheet without needing an accountant. 
 
 > **Note:** 
 > 
@@ -21,7 +18,7 @@ To fully digest the following, it would help if you had carried out the [Balance
 
 ## Background
 
-It is a statutory requirement for every company to present a Profit and Loss Account (P&L) and Balance Sheet to the government authorities.
+It is a statutory requirement for every company to present a [Profit and Loss Account (P&L)](tc_profit_and_loss.md) and Balance Sheet to the government authorities.
 
 The purpose of the balance sheet is to report to shareholders the total capital value of their holdings. That is because shareholders may or may not have an involvement in the business, so they are treated separately (like the public stock market). HMRC, the UK tax collector, does not need a balance sheet, only a P&L, because that tells them the total profit over the financial year on which they can levy corporation tax. Hence Trade Control has always had a P&L to calculate the company tax position.
 

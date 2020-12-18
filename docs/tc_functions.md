@@ -1,6 +1,8 @@
 # Trade Control - Functions
 
-Providing insight into the functional dimensions of the schema design and business logic of [Trade Control](https://github.com/tradecontrol/sqlnode).
+Published on 25 November 2019.
+
+Providing insight into the functional dimensions of the schema design and business logic of [Trade Control](https://tradecontrol.github.io).
 
 ## Licence
 
