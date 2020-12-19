@@ -56,7 +56,7 @@ A loan is like a finite share, but the binding responsibility is relinquished on
 Serving this interests of the Owner conditions the presentation of the business’s productive resources, and this is most visible in the Balance Sheet.  Here is a simple example:
 
 | ASSETS  | £'000 | LIABILITIES  | £'000    |
-- | - | - | -
+| - | - | - | - |
 | Factory          | 1000     | Capital          | 800      |
 | Plant            | 450      | Net Profit       | 100      |
 | Vehicles         | 10       | Drawings         | (50)     |
@@ -119,20 +119,20 @@ If we remove the [asset charge algorithm](tc_balance_sheet.md#asset-charge) from
 The word _credit_ is the neuter past participle (_creditum_) of the Latin word _credere_ which means to trust. If you have a credit card, it means the banks give you rights to consume before receiving the money to back that consumption up. They trust that you will repay them, meaning that you have credit.  If you were to naïvely record that trust in your own neat and tidy books, you would enter the following into the purchase ledger:
 
 | Organisation  | Debit    | Credit   |
- - | - | -
+| - | - | - |
 | The Bank Ltd  | £0.00    | £1000.00 |
 
 This records that you are £1000.00 in credit with The Bank, who is the supplier of the credit (called the creditor). Because The Bank is selling you credit, you would then expect the bank to make a corresponding entry into their sales ledger:
 
 | Organisation  | Debit | Credit |
- - | - | -
+| - | - | - |
 | IAM  | £1000.00 | £0.00  |
 
 
 The Bank's entry records that IAM is £1000 in debt to them (called the debtor), for they trust that you will pay your credit off. According to DEBK practice, however, you are failing to record the effect of the transaction on your overall asset value. In DEBK, debits are gains, while credits are losses. Debits are entered on the LHS of the ledger accounts, credits on the RHS. To model the purchase of goods for £1K on credit in DEBK would involve the following four double-entry transactions:
 
 | Dr |  | Cr |
-- | - | -
+| - | - | - |
 | | **CREDIT CARD** | |
 | £1000 t1 | | £1000 t2 |
 | | **THE BANK** | |
