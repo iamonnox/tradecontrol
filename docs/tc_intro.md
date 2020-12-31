@@ -45,6 +45,12 @@ Trade Control is a nascent production system with the implemented capacity to re
 - [The Balance Sheet](tc_balance_sheet.md)
 - [The Profit and Loss Account](tc_profit_and_loss.md)
 
+### Assets
+
+Company Accounts report the asset value of a business entity to external owners. In the article on balance sheets I explain how I was able to derive the capital calculation from the production system, determining a business entity's asset value. The article on Profit and Loss explains how to calculate the amount of money that can be extracted from a productive entity without killing it off. At the same time, the Trade Control code demonstrates how the legal obligation of asset reporting is not required for the manufacture and sale of goods. So what is it for and where does it come from?
+
+- [Asset Accounting](tc_assets.md)
+ 
 ## Licence
 
 ![Creative Commons](https://i.creativecommons.org/l/by-nd/4.0/88x31.png) 
