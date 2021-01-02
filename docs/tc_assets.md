@@ -2,7 +2,7 @@
 
 Published on 31 December 2020.
 
-Just as the [capital calculation](tc_balance_sheet.md#capital) on the balance sheet is often not specified in explanations of capitalism, so too is [the edifice upon which it is built](tc_profit_and_loss.md#double-entry-book-keeping). Now I have removed that edifice and calculated capital from productive workflows, I can isolate the definition and evaluation of assets from their production. Previously, [I concluded](tc_balance_sheet.md#conclusion) that firstly, a production system works independently from the calculation of assets; and secondly, that the mentality behind the imposition of assets onto production is truly ancient. Here I explore those conclusions. 
+Previously, [I concluded](tc_balance_sheet.md#conclusion) that a production system works independently from the calculation of assets; and that the mentality behind asset production is ancient. Here I explore those conclusions. 
 
 ## Requirements
 
@@ -11,18 +11,6 @@ Just as the [capital calculation](tc_balance_sheet.md#capital) on the balance sh
 - [BoM tutorial](https://tradecontrol.github.io/tutorials/manufacturing)
 - [Balance Sheets](tc_balance_sheet.md)
 - [Profit and Loss](tc_profit_and_loss.md)
-
-## Production
-
-Everywhere there are [components](tc_functions.md#components). Layer upon layer, they connect and intersect; sometimes passively, like the table and chair where you sit; or vibrantly, machines inside machines, like the computer that presents you this text. All around you, wires, pipes, connectors, flows of electricity, flows of water and gas. Maybe you are in your kitchen surrounded by utensils, containers, switches, cookers, washing machines, fridges: interfaces waiting for you to connect, to create flow. It does not matter where you are, it is always the same. Always production manifests the world you inhabit and conditions the possibilities of use. Exploit the working classes, offload to China, it can never go away. Production is.
-
-I published my Theory of Production on 25 November 2019. Since that time, it has been received with deafening silence and ignored. Understandable though that may be, should you try to disprove it, you will need to model production in a way that does not conform to my theory. That is going to be difficult for two reasons.  
-
-Firstly, all the existing production systems conform - MS Dynamics, SAP, Epicore, Oracle Manufacturing and so forth. Every ERP/MRP system conforms. These are the systems that are used to orchestrate the manufacture of the components and materials that surround you. They conform, not because their creators have read my theory, but because it describes the reality with which they must engage. They are like cathedrals in virtual space, maintained and built by thousands of people. But their systems would have been designed differently had they read my theory in advance.
-
-Secondly, whilst Trade Control is more like a watch, maintained and built by one coder, it has the advantage of being a deliberate implementation of the theory. If you [modify the schema design](#node-schema), it no longer works. True, it is not yet a manufacturing system, but there are placeholders in the schema design for integrating manufacturing modules, and [I own the IPO]( https://tradecontrol.github.io/about-production#manufacturing) of a manufacturing system fully developed in a live environment. Still I get a lot for free, like works orders and [Bills of Materials]( https://tradecontrol.github.io/tutorials/manufacturing). [Business Intelligence]( https://tradecontrol.github.io/tutorials/powerbi) can change between CRM and Procurement with a simple flip in [cash polarity]( https://tradecontrol.github.io/tutorials/cash-codes#cash-polarity). I can plug each instance together to form a [global P2P trading platform]( https://tradecontrol.github.io/network) with [a single class](https://github.com/TradeControl/network/blob/master/src/tcNetwork/tcWeb3.cs). By mapping cash accounts onto a [commercial bitcoin wallet]( https://tradecontrol.github.io/bitcoin), I demonstrate how you are not reliant upon banks to trade. It can also [generate auditable accounts]( https://tradecontrol.github.io/tutorials/balance-sheet), so you no longer need the services of accountants either. You can verify these features yourself if you like, by following [the tutorials](https://tradecontrol.github.io/tutorials/overview), and studying [the Open Source code](https://github.com/tradecontrol).  But you would be mistaken in thinking this is what the project is all about. In fact, you can find that buried in my alternative [test for intelligence](tc_functions.md#intelligence-test).
- 
-If you wanted to overcome my intelligence test as well, you would need to demonstrate how your technology can produce itself by projecting the interfaces of its own completion. So far, such technology is found only in science fiction, but how can you make it science fact? 
 
 ## System Implementation
 
@@ -48,7 +36,7 @@ The mechanics are best understood by visualising the transition from production 
 
 ### Production Layer
 
-The Production Layer is illustrated in **Figure 1a** and is covered [by my paper on production](tc_functions.md). The data sources for the Asset Recording Layer are described in the [construction section](tc_balance_sheet.md#construction) of the balance sheet documentation. The [Trade Statement](https://github.com/TradeControl/office/blob/master/src/excel/xltCashFlow/Biz/DataLoader.cs) is the P&L without asset recording or the task-based accruals that controllers can optionally use for scheduling workflow financing. It is important to understand that the Production Layer is not connected to the Asset Recording Surface and can therefore work independently. Without the Production Layer, you will die. The other layers are grafted onto production in order to define ownership and distribute value.
+The Production Layer is illustrated in **Figure 1a** and is covered [by the paper on production](tc_functions.md). The data sources for the Asset Recording Layer are described in the [construction section](tc_balance_sheet.md#construction) of the balance sheet documentation. The [Trade Statement](https://github.com/TradeControl/office/blob/master/src/excel/xltCashFlow/Biz/DataLoader.cs) is the P&L without asset recording or the task-based accruals that controllers can optionally use for scheduling workflow financing. It is important to understand that the Production Layer is not connected to the Asset Recording Surface and can therefore work independently. Without the Production Layer, you will die. The other layers are grafted onto production in order to define ownership and distribute value.
 
 The corresponding code that reflects the value-chain inside the Production Layer is as follows:
 
@@ -62,7 +50,7 @@ The corresponding code that reflects the value-chain inside the Production Layer
 
 ### Recording Surface
 
-There are no assets inside a production system; there are only inputs, outputs and transformations. Therefore I derive the Asset Recording Surface from the Production Layer by applying an [asset charge](tc_balance_sheet.md#asset-charge) algorithm to the statements. Accounting systems do not have a Production Layer because their recording surface is constructed from the ledgers of Double-Entry Book-Keeping (DEBK). Each transaction is double entered to pre-record asset charge, enabling them to directly derive the balance sheet and P&L from their accounts. In this way, the recording surface conceals the Production Layer upon which it depends.  
+There are no assets inside a production system; there are only inputs, outputs and transformations. Therefore the Asset Recording Surface is derived from the Production Layer by applying an [asset charge](tc_balance_sheet.md#asset-charge) algorithm to the statements. Accounting systems do not have a Production Layer because their recording surface is constructed from the ledgers of [DEBK](tc_profit_and_loss.md#double-entry-book-keeping). Each transaction is double entered to pre-record asset charge, enabling them to directly derive the balance sheet and P&L from their accounts. In this way, the recording surface conceals the Production Layer upon which it depends.  
 
 To create a recording surface that serves the Asset Layer, we either apply asset charge directly, or extract the information required to do so:
 
@@ -77,24 +65,24 @@ To create a recording surface that serves the Asset Layer, we either apply asset
 
 ### Capital Layer
 
-The asset recording surface provides an abstract interface from which capital can be extracted. I have covered the mechanics of the capital calculation already in my article on [Balance Sheets](tc_balance_sheet.md). The Profit and Loss Account (P&L) in the Capital Layer must include movement in assets as well as the income and expenditure of trade. Looking at the Trade Statement of Trade Control, there are now two sections. The first is in the Production Layer and has therefore been present since the beginning. I added the second with the introduction of the Balance Sheet. Now, the profit is calculated as the difference between two capital values during a given accounting period. So, deducting last year’s capital from current year-end should equal the profit on the corresponding P&L. Here are the two sections on the Trade Statement, showing production then assets:
+The asset recording surface provides an abstract interface from which capital can be extracted. The mechanics of the capital calculation already covered in the article on [Balance Sheets](tc_balance_sheet.md). The Profit and Loss Account (P&L) in the Capital Layer must include movement in assets as well as the income and expenditure of trade. Looking at the Trade Statement of Trade Control, there are now two sections. The first is in the Production Layer and has therefore been present since the beginning. I added the second with the introduction of the Balance Sheet. Now, the profit is calculated as the difference between two capital values during a given accounting period. So, deducting last year’s capital from current year-end should equal the profit on the corresponding P&L. Here are the two sections on the Trade Statement, showing production then assets:
 
 ![Profit and Loss](../img/assets_profit_and_loss.png)
 
 ### Asset Layer
 
-Capital services the Asset Layer, which embodies a different mentality and ruleset to that required by production. The Asset Layer, therefore, marks the threshold over which the Trade Control model cannot pass. This layer is demarked by the business entity defined by Company Law. If you have read my Theory of Production, you will note that the Asset Layer is totally absent. I demonstrated why in version **3.28.5** (**Figure 1a**), by orchestrating the productive and commercial process without it. 
+Capital services the Asset Layer, which embodies a different mentality and ruleset to that required by production. The Asset Layer, therefore, marks the threshold over which the Trade Control model cannot pass. This layer is demarked by the [business entity](tc_profit_and_loss.md#business-entity) defined by Company Law. A functional description of production does not need to include the Asset Layer. This is demonstrated in version **3.28.5** (**Figure 1a**), which can orchestrate the productive and commercial process without it. 
 
 A functional explanation of technological production applies equally to the manufacture of particle accelerators and atomic bombs. Manufacture whatever you like, the process is the same. However, whilst these projects are carried out by the same people, clearly their nature is very different. How that difference can be defined is related to the Asset Layer by virtue of their shared mentality. 
 
-Interaction with the Asset Layer is generally sealed off to most by their employment contracts; whilst much of the services sector swim in its sea and are unaware of the source. Yet anyone can feel the visceral power of the Asset Layer by simply not paying their rent or mortgage; but it needs to be clearly defined. In the article on [Profit and Loss](tc_profit_and_loss.md#debt) I provide the following definition:
+Interaction with the Asset Layer is generally sealed off to most by their employment contracts; whilst much of the services sector swim in its sea and are unaware of the source. Yet anyone can feel the visceral power of the Asset Layer by simply not paying their rent or mortgage; but it needs to be clearly defined. The article on [Profit and Loss](tc_profit_and_loss.md#debt) provides the following definition:
 
 > An asset can be regarded as the territorialised root node of a [Spatial Workflow](tc_functions.md#object-structure) that expresses [a UI](tc_functions.md#interfaces)
 
 To unpack the definition, I explore the Asset Layer in four stages:
 
 1. Asset Layer development can be traced in two giant leaps - the Agricultural and Industrial Revolutions.
-2. Assets are an exploitation of biological abstraction. This is obvious when I relate human interface projection to natural systems.
+2. Assets are an exploitation of biological abstraction. This is obvious when human interface projection is applied to natural systems.
 3. Assets are evaluated in money and money is defined as an asset. To overcome this circularity, I redefine money in terms that are compatible with the Production Layer.
 4. The Trade Control node must legally service the Asset Layer. I show what that looks like.
 
@@ -106,13 +94,13 @@ When considering the two most important revolutions in human history, there is a
 
 The mentality behind the definition of a [Business Entity](tc_profit_and_loss.md#business-entity) in Company Law is identical to that behind land ownership. The connection between capitalism and agriculture has been known since the Industrial Revolution (IR). David Ricardo, who was born during the revolution, pointed out in his book *Principles of Political Economy and Taxation*, published in 1817, that the structure of the industrial factory was drawn from techniques learnt by wealthy landowners capitalising their land. Throughout the 18th century, hundreds of hated Enclosure Acts issued by Parliament transferred communal land into the possession of these wealthy landowners; land that will never be returned. According to Ricardo, the resulting three agrarian classes of owner, renter/farmer and labourer were the foundation for the industrial equivalents of Shareholder, Management/Machinery and Worker. Therefore, to see where this Asset Layer is coming from, we need to look back to the Agricultural Revolution that preceded it.
 
-The first ever farmer projects an abstract plane onto the open field, initialising the Agricultural Revolution (AR). His projected interface destroys its native ecological state by ploughing the soil and planting his crop. He tends to his territory, protects it and watches it grow. Then at seasons end, a fine harvest and festivities; crop failure and starvation; or something in between. So, this farmer wants to know one thing: how much has he harvested (P&L)? I depict this agrarian dynamic in **Figure 3**.
+The first ever farmer projects an abstract plane onto the open field, initialising the Agricultural Revolution (AR). His projected interface destroys its native ecological state by ploughing the soil and planting his crop. He tends to his territory, protects it and watches it grow. Then at seasons end, a fine harvest and festivities; crop failure and starvation; or something in between. So, this farmer wants to know one thing: how much has he harvested (P&L)? The agrarian process is depicted in **Figure 3**.
 
 ![Agricultural Revolution](../img/assets_agricultural_revolution.png)
 
 Ricardo understood that the Enclosure Acts changed this ten-thousand-year-old bucolic situation. Looking at **Figure 3**, if you were a farmer trying to purchase the land, you might think that its value is in the wealth it is able to generate. The value will be determined by productive output (supply) and how much the market is prepared to pay for the produce (demand). However, calculating land value does not mean much if it is commonly owned. Enclosure was not imposed by farmers trying to privately own the land they tilled, but merchants and aristocrats. Their corrupt MPs and lawyers created legislation for the state backed theft of the Commons from the British people and pushed it through Parliament. But instead of turning the peasants into serfs, they created artificial scarcity. Land, not crops, became the tradable commodity, the source of wealth, and the land was rented out.
 
-By the end of the IR, three quarters of all farmers were tenants. Tenant farmers organised food production in accordance with **Figure 4**, which was is same as before, only now they had to pay rent to their landlord who was nowhere to be seen. Increases in rent could only be paid for by increases in productive output.  
+By the end of the IR, three quarters of all farmers were tenants. Tenant farmers organised food production in accordance with **Figure 4**, which was the same as before, only now they had to pay rent to their landlord who was nowhere to be seen. Increases in rent could only be paid for by increases in productive output.  
 
 ![Land Capitalisation](../img/assets_land_capitalisation.png)
 
@@ -129,7 +117,7 @@ The increase in agricultural output during the Enclosures is commonly regarded a
 
 The Industrial Revolution is responsible for the technological landscape we have today. It took place in Britain during the second half of the eighteenth century. The causes were complex and still interestingly debated, at least in Britain.  Putting historical contingencies aside, we can nevertheless understand the fundamental nature of the revolution. 
 
-The [functional foundation](tc_functions.md) for technological production has already been provided. This is expressed in **Figure 5**, which presents an industrial factory to match my component definition. Like **Figure 3** there are inputs, transformations and outputs. However, the big difference between factory and farm is that productive units in the IR connect to Workflows. Each feedback loop is the consequence of component production, delivering new products and increased productivity.
+The functional foundation for industrial production is expressed in **Figure 5**, which presents a factory to match the [component definition](tc_functions.md#component-definition). Like **Figure 3** there are inputs, transformations and outputs. However, the big difference between factory and farm is that productive units in the IR connect to Workflows. Each feedback loop is the consequence of component production, delivering new products and increased productivity.
 
 ![Industrial Revolution](../img/assets_industrial_revolution.png)
 
@@ -215,7 +203,7 @@ Returning to **Figure 2**, it is the codes practical derivation of the Asset Rec
 
 This fact is demonstrated in the practice of High Frequency Trading, where HFT platforms guarantee that the time from order to acknowledgement is under 10 milliseconds (and less). Without the space and time to produce value which precedes a genuine trade, a HF transaction only needs to apply the cost of moving the allocation of rights to an asset from one party to another.
 
-The Asset Layer is a vast enterprise, for once a UIP is applied to the output of a productive workflow, owners can maximise exploitation by abstracting its interfaces, thereby deriving new meta-layers of connectivity (such as financial instruments and products). These extensions are non-foundational, and therefore I only example [a simple case](#cadastral) below. I am interested in those assets that are directly extrapolated from the Production Layer, because their extraction is mechanised in the Trade Control node algorithms. 
+The Asset Layer is a vast enterprise, for once a UIP is applied to the output of a productive workflow, owners can maximise exploitation by abstracting its interfaces, thereby deriving new meta-layers of connectivity (such as financial instruments and products). These extensions are non-foundational, and therefore I will only example [a simple case](#cadastral).
 
 **Figure 7** depicts the Asset Layer as it is presented to financial investors in the form of a cadastral: 
 
