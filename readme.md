@@ -10,9 +10,9 @@ The T-SQL script archive for Trade Control is presented in a Visual Studio Sql p
 
 Add the Sql Server related Individual Components to Visual Studio.
 
-## Beta Releases
+## Beta Release
 
-The beta was first released to GitHub 24 September 2019 and was completed in December 2020. Here are the change logs for the key components:
+The beta version was first released to GitHub 24 September 2019. The algorithms were completed in December 2020. The prototype interface was replaced in February 2021. Here are the change logs for the key components:
 
 [beta release change logs](docs/changelogs.md)
  

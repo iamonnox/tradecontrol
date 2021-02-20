@@ -240,7 +240,7 @@ Companies House is thus the modern equivalent of the cadastral of antiquity. The
 
 The cadastral reveals how capitalism is the application of an Agricultural Revolution mentality to the Industrial Revolution. It enabled the dynasties of the rich and powerful to perpetuate and maintain themselves throughout the transition. But it is also the reason why I must graft on the [asset extraction code](#recording-surface) if I want to obtain legal compliance - answering the question I posed previously in my article on [Profit and Loss](tc_profit_and_loss.md#conclusion).
 
-As the earth burns up like paper in fire, humanity desperately needs the rights to natural and human resources in the hands of scientists, engineers and innovators. But under the yoke of UIP, how can that be realistically achieved? Currently, all the rights are being systematically transferred into the hands of those few furthest removed from production - Moneymen, the State and the Kings of Commerce. 
+As the earth burns up like paper in fire, humanity desperately needs the rights to natural and human resources in the hands of scientists, engineers and innovators. But under the yoke of mankind's dominant powers, how can that be realistically achieved? Currently, all the rights are being systematically transferred into the hands of those few furthest removed from production - Moneymen, their State and the Kings of Commerce. 
 
 In that light, here is something to think about:
 

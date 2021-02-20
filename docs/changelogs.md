@@ -4,6 +4,8 @@ The following logs chronicle the beta release changes to the Trade Control app.
 
 ## Sql Node
 
+[repository](https://github.com/tradecontrol/sqlnode)
+
 ### 3.24.1
 
 [creation script](https://github.com/tradecontrol/sqlnode/blob/master/src/tcNode/scripts/tc_create_node.sql)
@@ -240,7 +242,7 @@ Simplified [Accounts Mode](https://tradecontrol.github.io/accounts) interface.
 - [x] fix [corporation tax financial year](https://github.com/tradecontrol/sqlnode/blob/master/src/tcNodeDb/Cash/Functions/fnTaxTypeDueDates.sql)
 - [x] improve [invoice status algorithm](https://github.com/tradecontrol/sqlnode/blob/master/src/tcNodeDb/Invoice/Views/vwStatusLive.sql) for handling income and expenditure on the same Org account.
 - [x] integrate period-end rebuild into [auto-period generation](https://github.com/tradecontrol/sqlnode/blob/master/src/tcNodeDb/Cash/Stored%20Procedures/proc_GeneratePeriods.sql)
-- [x] call the period-end procedure from [sysem rebuild](https://github.com/tradecontrol/sqlnode/blob/master/src/tcNodeDb/App/Stored%20Procedures/proc_SystemRebuild.sql)
+- [x] call the period-end procedure from [system rebuild](https://github.com/tradecontrol/sqlnode/blob/master/src/tcNodeDb/App/Stored%20Procedures/proc_SystemRebuild.sql)
 - [x] add a default cash code to [payments against invoices](https://github.com/tradecontrol/sqlnode/blob/master/src/tcNodeDb/Cash/Stored%20Procedures/proc_PaymentPostInvoiced.sql) 
 - [x] [view invoices](https://github.com/tradecontrol/sqlnode/blob/master/src/tcNodeDb/Invoice/Views/vwAccountsMode.sql) in Accounts Mode 
 - [x] table for Accounts Mode [invoice entry](https://github.com/tradecontrol/sqlnode/blob/master/src/tcNodeDb/Invoice/Tables/tbEntry.sql)
@@ -264,7 +266,26 @@ Simplified [Accounts Mode](https://tradecontrol.github.io/accounts) interface.
 - [x] fix [Cash.proc_PaymentPostInvoiced](https://github.com/tradecontrol/sqlnode/blob/master/src/tcNodeDb/Cash/Stored%20Procedures/proc_PaymentPostInvoiced.sql) - process partially paid invoices
 - [x] [App.proc_BasicSetup](https://github.com/tradecontrol/sqlnode/blob/master/src/tcNodeDb/App/Stored%20Procedures/proc_BasicSetup.sql) - bring the default P&L categories into alignment with conventional accounts 
 
+### 3.33.1
+
+Backend support for Office Themes. 
+
+[sql](https://github.com/tradecontrol/sqlnode/blob/master/src/tcNode/scripts/tc_upgrade_3_33_1.sql)
+
+- [x] [Usr.tbInterface](https://github.com/tradecontrol/sqlnode/blob/master/src/tcNodeDb/Usr/Tables/tbInterface.sql) - interface selection table: MIS/Accounts mode
+- [x] [Usr.tbMenu](https://github.com/tradecontrol/sqlnode/blob/master/src/tcNodeDb/Usr/Tables/tbMenu.sql) - assign interface mode to individual menus 
+- [x] [Usr.tbMenuView](https://github.com/tradecontrol/sqlnode/blob/master/src/tcNodeDb/Usr/Tables/tbMenuView.sql) - store user view mode preferences: list/tree view
+- [x] [Usr.vwUserMenuList](https://github.com/tradecontrol/sqlnode/blob/master/src/tcNodeDb/Usr/Views/vwUserMenuList.sql) - construct menu lists
+- [x] [App.proc_NodeInitialisation](https://github.com/tradecontrol/sqlnode/blob/master/src/tcNodeDb/App/Stored%20Procedures/proc_NodeInitialisation.sql) - add new Accounts and MIS menus
+- [x] [App.proc_BasicSetup](https://github.com/tradecontrol/sqlnode/blob/master/src/tcNodeDb/App/Stored%20Procedures/proc_BasicSetup.sql) - assign tax types to Govt account
+- [x] include ennumerated type codes to support conditional formatting in select views
+- [x] replace Org.vwSales and Org.vwPurchases with [Org.vwTasks](https://github.com/tradecontrol/sqlnode/blob/master/src/tcNodeDb/Org/Views/vwTasks.sql)
+- [x] [Cash.vwBalanceSheetVat](https://github.com/tradecontrol/sqlnode/blob/master/src/tcNodeDb/Cash/Views/vwBalanceSheetVat.sql) - include tax claims
+- [x] [App.proc_DemoServices](https://github.com/tradecontrol/sqlnode/blob/master/src/tcNodeDb/App/Stored%20Procedures/proc_DemoServices.sql) - startup funds by directors loan for the [accounts tutorial](https://tradecontrol.github.io/tutorials/cash-book)
+
 ## Office 365
+
+[repository](https://github.com/tradecontrol/office)
 
 ### 3.9
 
@@ -350,7 +371,7 @@ Node version 3.29.4.
 
 ### 3.17
 
-Node Version 3.32.1 [Accounts Mode](https://tradecontrol.github.io/accounts) - a simplified interface for generating Company Accounts
+Node Version 3.32.1 - [Accounts Mode](https://tradecontrol.github.io/accounts) - a simplified interface for generating Company Accounts
 
 - [x] Sql Connect in MIS or Accounts Mode
 - [x] Accounts Mode Home menu
@@ -359,9 +380,17 @@ Node Version 3.32.1 [Accounts Mode](https://tradecontrol.github.io/accounts) - a
 - [x] Invoice item entry form for accounts
 - [x] Email pdf sales, credit and debit notes to recipients 
 
+### 3.18
+
+Node Version 3.33.1 - replace the prototype interface with [Office Themes](https://tradecontrol.github.io/tutorials/installing-local#office-client)
+
+- [x] New [App_Home form](https://tradecontrol.github.io/tutorials/cash-book#initialisation) showing outstanding income and expenditure in Accounts Mode, plus Jobs and Schedules in MIS.
+- [x] Replace App_HomeMenuTree with App_HomeMenuList as the default. (The list view is derived from the switchboard code found in the earliest versions of MS Access over 25 years ago).
+- [x] And finally, enable Office Themes in every form. 
+
 ## Network Log
 
-The following record logs changes to the full release of the [Trade Control Network](https://tradecontrol.github.io//network). Checked items are included in the latest master commit.
+[repository](https://tradecontrol.github.io//network). 
 
 ### 1.1.0
 
