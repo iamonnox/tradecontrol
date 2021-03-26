@@ -160,6 +160,13 @@ The AR was possible because humans can apply an abstract plane onto productive p
 
 UIP precedes territorialisation. For example, two warring parties each emit a UIP on a disputed territory. Violence ensues. Only the victor can territorialise the land. It is subsequently broken up into smaller plots and the process repeats forming social and political hierarchies of UIP abstraction (such as rented private property).
 
+Evidence for the antiquity of this mentality is ever-present in ancient literature. A good example is recorded in The Odyssey of Homer, our oldest author, writing during the seventh century BC. In Book 9, when the voyaging Odysseus alights upon an island of the Cyclops, he finds the earth in its native Darwinian state:
+
+> Now off their harbour there lies a wooded and fertile island…never disturbed by foot of man…it lies a wilderness untilled and unsown from year to year…for the Cyclops have no ships, nor yet shipwrights who could make ships for them…if they had had these they would have colonised the island, for it is a very good one, and would yield everything in good season. There are meadows that in some places come right down to the sea shore, well-watered and full of luscious grass; grapes would do there excellently; there is level land for ploughing, and it would always yield heavily at harvest time; for the soil is deep. (trans. Samuel Butler 1900) 
+
+When Odysseus projects mankind's abstract plane onto the entirety of the island, he also needs technological production - ships to get there, ploughs for the land, tools for building their wagons and roads, homes and storerooms, pots and pans, weapons to defend themselves, looms to weave the cloth upon their backs. On some level its artisans would have had a functional knowledge of [production](tc_functions.md#production) - how [materials](tc_functions.md#materials) are abstracted through the application of [transformational processes](tc_functions.md#transformation) into the [components](tc_functions.md#components) of structured [assemblages](tc_functions.md#assemblages) - for in the learning and exercise of their skill there is no option but to engage with this order of reality. However, its shipwrights and carpenters, potters and wheelwrights, masons and blacksmiths, all the hands that built the ancient world, would have been utterly subjugated by an overriding force field - the kind that gives mankind unlimited access to the immense riches of earth, whilst destroying the Darwinian state that brought those riches into being.
+
+
 ### Darwin's Square
 
 The easiest way to understand UIP and its relation to violence is Darwin's Square (DS). 

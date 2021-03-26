@@ -283,6 +283,20 @@ Backend support for Office Themes.
 - [x] [Cash.vwBalanceSheetVat](https://github.com/tradecontrol/sqlnode/blob/master/src/tcNodeDb/Cash/Views/vwBalanceSheetVat.sql) - include tax claims
 - [x] [App.proc_DemoServices](https://github.com/tradecontrol/sqlnode/blob/master/src/tcNodeDb/App/Stored%20Procedures/proc_DemoServices.sql) - startup funds by directors loan for the [accounts tutorial](https://tradecontrol.github.io/tutorials/cash-book)
 
+### 3.34.1
+
+Completion of the [costing system](tc_industrial_capitalism.md#gestalt-costing)
+
+- [x] [Task.tbCostSet](https://github.com/tradecontrol/sqlnode/blob/master/src/tcNodeDb/Task/Tables/tbCostSet.sql) - active set of user quotes for costing
+- [x] [Task.Task_tbTask_TriggerUpdate](https://github.com/tradecontrol/sqlnode/blob/master/src/tcNodeDb/Task/Tables/tbTask.sql) - remove tasks from cost set when set to ordered 
+- [x] [Task.vwQuotes](https://github.com/tradecontrol/sqlnode/blob/master/src/tcNodeDb/Task/Views/vwQuotes.sql) - quotes available for selection
+- [x] [Task.vwCostSet](https://github.com/tradecontrol/sqlnode/blob/master/src/tcNodeDb/Task/Views/vwCostSet.sql) - current user's set of quotes 
+- [x] [Task.proc_CostSetAdd](https://github.com/tradecontrol/sqlnode/blob/master/src/tcNodeDb/Task/Stored%20Procedures/proc_CostSetAdd.sql) - include task in the set
+- [x] [Cash.vwStatementBase](https://github.com/tradecontrol/sqlnode/blob/master/src/tcNodeDb/Cash/Views/vwStatementBase.sql) - split out the live company statement from the balance projection
+- [x] [Cash.vwStatement](https://github.com/tradecontrol/sqlnode/blob/master/src/tcNodeDb/Cash/Views/vwStatement.sql) - derive the company statement from the base dataset
+- [x] [Task.vwCostSetTasks](https://github.com/tradecontrol/sqlnode/blob/master/src/tcNodeDb/Cash/Views/vwCostSetTasks.sql) - get the associated purchases of the set 
+- [x] [Cash.vwStatementWhatIf](https://github.com/tradecontrol/sqlnode/blob/master/src/tcNodeDb/Cash/Views/vwStatementWhatIf.sql) - integrate the quotes, vat and company tax into the company statement 
+
 ## Office 365
 
 [repository](https://github.com/tradecontrol/office)
@@ -387,6 +401,12 @@ Node Version 3.33.1 - replace the prototype interface with [Office Themes](https
 - [x] New [App_Home form](https://tradecontrol.github.io/tutorials/cash-book#initialisation) showing outstanding income and expenditure in Accounts Mode, plus Jobs and Schedules in MIS.
 - [x] Replace App_HomeMenuTree with App_HomeMenuList as the default. (The list view is derived from the switchboard code found in the earliest versions of MS Access over 25 years ago).
 - [x] And finally, enable Office Themes in every form. 
+
+### 3.19
+
+Node Version 3.34.1 - complete the [costing system](tc_industrial_capitalism.md#gestalt-costing)
+
+- [x] Add [what-if analysis](https://tradecontrol.github.io/tutorials/manufacturing#job-costing) to the company statement
 
 ## Network Log
 

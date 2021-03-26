@@ -1,6 +1,6 @@
 # Intro
 
-[Trade Control](https://tradecontrol.github.io) is an Open Source business control system first released on 24 September 2019. It is an empirical implementation of the ideas I communicate here. Each stage of development has been accompanied by a tutorial that you can freely work through yourself to test for correctness. 
+[Trade Control](https://tradecontrol.online) is an Open Source business control system first released on 24 September 2019. It is an empirical implementation of the ideas I communicate here. Each stage of development has been accompanied by a tutorial that you can freely work through yourself to test for correctness. 
 
 The project embodies two key aspects associated with trade: the functional modelling of technological production and the conceptual implementation of commercial imperatives. Therefore, by way of background, I begin by distinguishing functions from concepts.
 
@@ -50,6 +50,12 @@ Trade Control is a nascent production system with the implemented capacity to re
 Company Accounts report the asset value of a business entity to external owners. In the article on balance sheets I explain how I was able to derive the capital calculation from the production system, determining a business entity's asset value. The article on Profit and Loss explains how to calculate the amount of money that can be extracted from a productive entity without killing it off. At the same time, the Trade Control code demonstrates how the legal obligation of asset reporting is not required for the manufacture and sale of goods. So what is it for and where does it come from?
 
 - [Asset Accounting](tc_assets.md)
+
+### Capitalism
+
+So far, I have only explored the external impact of capitalism on the system design. In the next article I show how [capital](tc_balance_sheet.md#capital) influences [production](tc_assets.md#production-layer), through the instruments of investment and cost accounting.
+
+- [Industrial Capitalism](tc_industrial_capitalism.md)
  
 ## Licence
 
