@@ -56,7 +56,11 @@ Company Accounts report the asset value of a business entity to external owners.
 So far, I have only explored the external impact of capitalism on the system design. In the next article I show how [capital](tc_balance_sheet.md#capital) influences [production](tc_assets.md#production-layer), through the instruments of investment and cost accounting.
 
 - [Industrial Capitalism](tc_industrial_capitalism.md)
- 
+
+Capitalism was crystalised during the Industrial Revolution, where capital drove industrial production. Today, capital drives asset acquisition. This is perfectly reflected in the technological interfaces to bitcoin. [My interface](tc_bitcoin.md) is [to production](tc_functions.md#production), whereas all other interfaces are [to assets](tc_assets.md#asset-layer). Here I explain why that is.
+
+- [Financial Capitalism](tc_financial_capitalism.md)
+
 ## Licence
 
 ![Creative Commons](https://i.creativecommons.org/l/by-nd/4.0/88x31.png) 
