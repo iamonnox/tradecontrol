@@ -61,6 +61,12 @@ Capitalism was crystalised during the Industrial Revolution, where capital drove
 
 - [Financial Capitalism](tc_financial_capitalism.md)
 
+## Commerce
+
+I have described the mechanism by which polarity shifts occur between production and assets, but why is it accepted? Commercial Law is how the polarity shift is enforced. Commercial lawyers draw up their contracts to define the trading relation between two parties. There are millions of these contracts that glue the whole thing together. Without them all trading relations would instantaneously fall apart.
+
+- [Commercial Law](tc_commerce.md)
+ 
 ## Licence
 
 ![Creative Commons](https://i.creativecommons.org/l/by-nd/4.0/88x31.png) 
