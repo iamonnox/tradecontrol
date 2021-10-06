@@ -76,7 +76,7 @@ Release 3.27.1 supports the first full release of the [Trade Control Network](ht
 
 [sql](https://github.com/tradecontrol/sqlnode/blob/master/src/tcNode/scripts/tc_upgrade_3_27_1.sql)
 
-- [x] [unit of charge](https://github.com/tradecontrol/sqlnode/blob/master/src/tcNodeDb/App/Tables/tbUoC.sql)
+- [x] [unit of charge](https://github.com/TradeControl/sqlnode/blob/master/src/tcNodeDb/App/Tables/tbUoc.sql)
 - [x] [activity code mirrors](https://github.com/tradecontrol/sqlnode/blob/master/src/tcNodeDb/Activity/Tables/tbMirror.sql)
 - [x] [task allocations](https://github.com/tradecontrol/sqlnode/blob/master/src/tcNodeDb/Task/Tables/tbAllocation.sql) and [SvD algorithm](https://github.com/tradecontrol/sqlnode/blob/master/src/tcNodeDb/Task/Views/vwAllocationSvD.sql) 
 - [x] [cash code mirrors](https://github.com/tradecontrol/sqlnode/blob/master/src/tcNodeDb/Cash/Tables/tbMirror.sql)

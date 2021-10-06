@@ -4,7 +4,7 @@
 
 ## Code
 
-The VS Sql Server project contains every T-SQL scripts from 2008 to the open source publication of the [sqlnode](https://github.com/tradecontrol/sqlnode). The project also contains the creation script of the original 2002 [sharpNode](src\scripts\sharpNode\sharp_node_2002_03.sql) from which the Trade Control schema design was derived.
+The VS Sql Server project contains every T-SQL scripts from 2008 to the open source publication of the [sqlnode](https://github.com/tradecontrol/sqlnode). The project also contains the creation script of the original 2002 [sharpNode](src/scripts/sharpNode/sharp_node_2002_03.sql) from which the Trade Control schema design was derived.
 
 ## Beta Release
 
