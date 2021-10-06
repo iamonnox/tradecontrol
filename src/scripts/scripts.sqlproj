@@ -1,0 +1,194 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>scripts</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{76882f5e-f463-4574-877a-12931a289b3a}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>scripts</RootNamespace>
+    <AssemblyName>scripts</AssemblyName>
+    <ModelCollation>1033, CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="v1" />
+    <Folder Include="v2" />
+    <Folder Include="v3" />
+    <Folder Include="v3\conversion" />
+    <Folder Include="sharpNode" />
+    <Folder Include="script" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="v1\Create_Schema_1.01.sql" />
+    <None Include="v1\Upgrade Schema 1.02.sql" />
+    <None Include="v1\Upgrade Schema 1.03.sql" />
+    <None Include="v1\Upgrade Schema 1.04 Tax.sql" />
+    <None Include="v1\Upgrade Schema 1.04.sql" />
+    <None Include="v1\Upgrade Schema 1.05 fix.sql" />
+    <None Include="v1\Upgrade Schema 1.05.sql" />
+    <None Include="v1\Upgrade Schema 1.06 GP.sql" />
+    <None Include="v1\Upgrade Schema 1.06.sql" />
+    <None Include="v1\Upgrade Schema 1.07.2.sql" />
+    <None Include="v1\Upgrade Schema 1.07.sql" />
+    <None Include="v1\Upgrade Schema 1.08.sql" />
+    <None Include="v1\Upgrade Schema 1.09 fix.sql" />
+    <None Include="v1\Upgrade Schema 1.09.sql" />
+    <None Include="v1\Upgrade Schema 1.10 fix.sql" />
+    <None Include="v1\Upgrade Schema 1.10.sql" />
+    <None Include="v1\Upgrade Schema 1.11.1.sql" />
+    <None Include="v1\Upgrade Schema 1.11.sql" />
+    <None Include="v1\Upgrade Schema 1.12.sql" />
+    <None Include="v1\Upgrade Schema 1.13.sql" />
+    <None Include="v1\Upgrade Schema 1.14.sql" />
+    <None Include="v1\Upgrade Schema 1.15.sql" />
+    <None Include="v1\Upgrade Schema 1.16.sql" />
+    <None Include="v1\Upgrade Schema 1.17.sql" />
+    <None Include="v1\Upgrade Schema 1.18.sql" />
+    <None Include="v1\Upgrade Schema 1.19.sql" />
+    <None Include="v1\Upgrade Schema 1.20.1.sql" />
+    <None Include="v1\Upgrade Schema 1.20.sql" />
+    <None Include="v1\Upgrade Schema 1.21.1.sql" />
+    <None Include="v1\Upgrade Schema 1.22.sql" />
+    <None Include="v2\Create Schema 2.01 decrypted.sql" />
+    <None Include="v2\Create Schema 2.01.1Tables.sql" />
+    <None Include="v2\Create Schema 2.01.2 Function Dependent Views.sql" />
+    <None Include="v2\Create Schema 2.01.3 View Dependent Functions.sql" />
+    <None Include="v2\Create Schema 2.01.4 Views.sql" />
+    <None Include="v2\Create Schema 2.01.5 Functions.sql" />
+    <None Include="v2\Create Schema 2.01.6 Procs.sql" />
+    <None Include="v2\Create Schema 2.01.7 Triggers.sql" />
+    <None Include="v2\Create Schema 2.01.8 Data.sql" />
+    <None Include="v2\Create Schema 2.01.sql" />
+    <None Include="v2\Create Schema 2.01b.sql" />
+    <None Include="v2\Upgrade Schema 2.02.sql" />
+    <None Include="v2\Upgrade Schema 2.03.sql" />
+    <None Include="v2\Upgrade Schema 2.04.sql" />
+    <None Include="v2\Upgrade Schema 2.05.sql" />
+    <None Include="v2\Upgrade Schema 2.06.sql" />
+    <None Include="v3\conversion\import data phase 1 - import data.sql" />
+    <None Include="v3\conversion\import data phase 2 - rest enum.sql" />
+    <None Include="v3\conversion\import data phase 3 - export tables.sql" />
+    <None Include="v3\conversion\import data phase 4 - export data.sql" />
+    <None Include="v3\conversion\import data phase 5 - t-sql.sql" />
+    <None Include="v3\conversion\import data phase 6 - sysdata mods.sql" />
+    <None Include="v3\conversion\import data phase 7 - userdata mods.sql" />
+    <None Include="v3\Create Constraints 3.01.sql" />
+    <None Include="v3\Create Procs 3.01.sql" />
+    <None Include="v3\Create Scalar Func 3.01.sql" />
+    <None Include="v3\Create Table Func 3.01.sql" />
+    <None Include="v3\Create Tables 3.01.sql" />
+    <None Include="v3\Create Triggers 3.01.sql" />
+    <None Include="v3\Create Views 3.01.sql" />
+    <None Include="v3\Upgrade 3.02.sql" />
+    <None Include="v3\Upgrade 3.03.sql" />
+    <None Include="v3\Upgrade 3.04.0.sql" />
+    <None Include="v3\Upgrade 3.04.1 rebuild optimisation.sql" />
+    <None Include="v3\Upgrade 3.05 error handling.sql" />
+    <None Include="v3\Upgrade 3.06 contact triggers.sql" />
+    <None Include="v3\Upgrade 3.06 scalar functions.sql" />
+    <None Include="v3\Upgrade 3.06.1 azure rowver.sql" />
+    <None Include="v3\Upgrade 3.06.2 cash flow forecast.sql" />
+    <None Include="v3\Upgrade 3.06.3 jobs status idx.sql" />
+    <None Include="v3\Upgrade 3.06.4 bug fixes.sql" />
+    <None Include="v3\Upgrade 3.07.0 corptax to cte.sql" />
+    <None Include="v3\Upgrade 3.07.0 vat to cte.sql" />
+    <None Include="v3\Upgrade 3.07.1 company statement.sql" />
+    <None Include="v3\Upgrade 3.07.2 view consolidation.sql" />
+    <None Include="v3\Upgrade 3.07.3 proc_FlowInitialise.sql" />
+    <None Include="v3\Upgrade 3.07.4 Task.vwProfit.sql" />
+    <None Include="v3\Upgrade 3.07.5 task qty.sql" />
+    <None Include="v3\Upgrade 3.08.1 dummy account.sql" />
+    <None Include="v3\Upgrade 3.09.1 org rebuild.sql" />
+    <None Include="v3\Upgrade 3.10.1 vat changes.sql" />
+    <None Include="v3\Upgrade 3.10.2 schedule task.sql" />
+    <None Include="v3\Upgrade 3.11.1 bug fixes.sql" />
+    <None Include="v3\Upgrade 3.11.2 vat totals.sql" />
+    <None Include="v3\Upgrade 3.12.1 accruals.sql" />
+    <None Include="v3\Upgrade 3.13.0 bug fixes.sql" />
+    <None Include="v3\Upgrade 3.13.1 nominal delete.sql" />
+    <None Include="v3\Upgrade 3.13.2 budgets.sql" />
+    <None Include="v3\Upgrade 3.13.3 IsEnabled.sql" />
+    <None Include="v3\Upgrade 3.13.4 Org balance.sql" />
+    <None Include="v3\Upgrade 3.13.5 payments.sql" />
+    <None Include="v3\Upgrade 3.13.6 company statement sort order.sql" />
+    <None Include="v3\Upgrade 3.14.0 bug fixes.sql" />
+    <None Include="v3\Upgrade 3.14.1 Org Statement.sql" />
+    <None Include="v3\Upgrade 3.15.0 bug fix.sql" />
+    <None Include="v3\Upgrade 3.15.1 pay balance.sql" />
+    <None Include="v3\Upgrade 3.16.1 P&amp;L.sql" />
+    <None Include="v3\Upgrade 3.16.2 bug fixes.sql" />
+    <None Include="v3\Upgrade 3.16.3 P&amp;L vat.sql" />
+    <None Include="v3\Upgrade 3.17.1 expected days.sql" />
+    <None Include="v3\Upgrade 3.17.2 pay tax.sql" />
+    <None Include="v3\Upgrade 3.17.3 vat audit.sql" />
+    <None Include="v3\Upgrade 3.17.4 bug fixes.sql" />
+    <None Include="v3\Upgrade 3.17.5 P&amp;L vat accruals.sql" />
+    <None Include="v3\Upgrade 3.18.1 company statement accruals.sql" />
+    <None Include="v3\Upgrade 3.18.2 company statement vat.sql" />
+    <None Include="v3\Upgrade 3.19.1 changes.sql" />
+    <None Include="v3\Upgrade 3.19.2 sync.sql" />
+    <None Include="v3\Upgrade 3.19.3 event log register.sql" />
+    <None Include="v3\Upgrade 3.20.1 activity PrintOrder.sql" />
+    <None Include="v3\Upgrade 3.20.2 bug fixes.sql" />
+    <None Include="v3\Upgrade 3.20.3 bug fixes.sql" />
+    <None Include="v3\Upgrade 3.20.4 menu item change.sql" />
+    <None Include="v3\Upgrade 3.21.1 vat config.sql" />
+    <None Include="v3\Upgrade 3.21.2 vat CS.sql" />
+    <None Include="v3\Upgrade 3.22.1 eu flag.sql" />
+    <None Include="v3\Upgrade 3.22.2 misc updates.sql" />
+    <None Include="v3\Upgrade 3.23.1 versioning.sql" />
+    <None Include="v3\Upgrade 3.22.3 rebuild.sql" />
+    <None Include="sharpNode\sharp_node_2002_03.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="sharpNode\sharpNode.bak" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="script\tc_balance_projection.sql" />
+  </ItemGroup>
+</Project>
